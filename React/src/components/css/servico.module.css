@@ -1,0 +1,61 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: white; /* fundo inicial */
+  overflow: hidden;
+  position: relative;
+}
+
+.expandir {
+  position: absolute;
+  inset: 0; /* ocupa tela toda */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.expandir::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: green;
+  border-radius: 50%;
+  transform: scale(0); /* começa pequeno */
+  transition: transform 1.5s;
+}
+
+.expandida::before {
+  transform: scale(15); /* cresce até cobrir toda a tela */
+}
+
+.circulo {
+  background: white;
+  border-radius: 50%;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* sombra elegante */
+  border: 2px solid #f0f0f0; /* borda bem leve */
+}
+
+.servico {
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  color: #111; /* preto quase puro */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.25), 
+               0 0 12px rgba(0, 128, 0, 0.25); /* glow leve verde + sombra suave */
+}
+
+

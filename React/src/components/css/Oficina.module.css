@@ -1,0 +1,201 @@
+/* ======== RESET ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f8f9fb;
+  --white: #fff;
+  --dark: #1e1e2f;
+  --gray: #707070;
+  --blue: #007bff;
+  --green: #00c896;
+  --shadow: 0 6px 16px rgba(0,0,0,0.1);
+  --radius: 14px;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.4;
+}
+
+/* ======== HEADER ======== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--dark);
+  padding: 12px 40px;
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.LogoImage {
+  width: 70px;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+.LogoImage:hover {
+  transform: scale(1.08);
+}
+
+.pesquisar {
+  width: 40%;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  transition: all .2s ease;
+}
+
+.pesquisar:focus {
+  box-shadow: 0 0 8px var(--blue);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.a {
+  text-decoration: none;
+  color: #f2f2f2;
+  font-weight: 500;
+  transition: color .2s ease;
+}
+
+.a:hover {
+  color: var(--blue);
+}
+
+/* ======== LOGIN / USER ======== */
+.loginRegistro, .containerName {
+  position: relative;
+}
+
+.pLoginRegistro, .nome {
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background .2s ease;
+}
+
+.pLoginRegistro:hover, .nome:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.caixinha, .acesso {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+  width: 220px;
+  animation: fadeIn .25s ease forwards;
+}
+
+.loginRegistro:hover .caixinha,
+.containerName:hover .acesso {
+  display: block;
+}
+.nome{
+  padding: 10px;
+}
+
+.caixinha a, .acesso a {
+  display: block;
+  padding: 8px 0;
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--dark);
+  transition: color .2s ease;
+}
+
+.caixinha a:hover, .acesso a:hover {
+  color: var(--blue);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* ======== MAIN ======== */
+.main {
+  flex: 1;
+  padding: 40px 60px;
+}
+
+/* Grid de produtos */
+.imagens {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+}
+
+.grade {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.grade:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.2);
+}
+
+.gradeItem {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.tInfo, .fInfo {
+  padding: 14px;
+}
+
+.tTitulo, .fTitulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.tPreco, .fPreco {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--green);
+}
+
+/* Títulos das seções */
+.hTornearia {
+  grid-column: 1 / -1;
+  font-size: 28px;
+  margin: 10px 0;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.nItem {
+  text-align: center;
+  font-size: 20px;
+  color: var(--gray);
+  margin-top: 50px;
+}

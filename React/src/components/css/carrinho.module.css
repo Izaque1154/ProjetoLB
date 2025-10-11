@@ -1,0 +1,337 @@
+/* ---------- Layout geral ---------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #333;
+  font-family: "Inter", sans-serif;
+}
+
+/* ---------- Header ---------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.LogoImage {
+  height: 60px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.LogoImage:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- Pesquisa ---------- */
+.search {
+  display: flex;
+  align-items: center;
+  background: #f1f3f5;
+  border-radius: 50px;
+  padding: 0.4rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.pesquisar {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  width: 200px;
+  color: #333;
+}
+
+.iconSearch {
+  color: #555;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-left: 0.4rem;
+  transition: color 0.2s;
+}
+
+.iconSearch:hover {
+  color: #000;
+}
+
+.search:focus-within {
+  background: #fff;
+  box-shadow: 0 0 0 2px #007aff40;
+}
+
+/* ---------- Navegação ---------- */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.a:hover {
+  background-color: #e9ecef;
+  color: #007aff;
+}
+
+/* ---------- Login/Registro ---------- */
+.loginRegistro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pLoginRegistro {
+  font-weight: 500;
+  cursor: pointer;
+  color: #007aff;
+}
+
+.caixinha {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 220px;
+  padding: 0.8rem;
+  z-index: 100;
+}
+
+.loginRegistro:hover .caixinha,
+.containerName:hover .caixinha {
+  display: block;
+}
+
+/* ---------- Nome de usuário ---------- */
+.containerName {
+  position: relative;
+  cursor: pointer;
+}
+
+.nome {
+  font-weight: 500;
+  color: #007aff;
+}
+
+.caixinha a {
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.caixinha a:hover {
+  background: #f1f3f5;
+}
+
+/* ---------- Main ---------- */
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* ---------- Produtos ---------- */
+.produtos {
+  flex: 3;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.Ph1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.Pitens {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Pcarrinho {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.Pcarrinho:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.Pimg img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Pinfo {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.Ptitulo {
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.Ptitulo:hover {
+  color: #007aff;
+}
+
+.Ppreco {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007aff;
+}
+
+.Pexcluir {
+  background: #ff4d4f;
+  border: none;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.Pexcluir:hover {
+  background: #d9363e;
+}
+
+/* ---------- Resumo ---------- */
+.resumo {
+  flex: 1.2;
+}
+
+.Rresumo {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  height: fit-content;
+}
+
+.Rh2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.RvalorCompra {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.RDproduto, .RDfrete, .RDtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Rtotal {
+  color: #007aff;
+}
+
+.Rcomprar {
+  width: 100%;
+  margin-top: 1rem;
+  background: #007aff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.Rcomprar:hover {
+  background: #005fcc;
+}
+
+/* ---------- Footer ---------- */
+.containerFoot {
+  text-align: center;
+  background: #fff;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 900px) {
+  .main {
+    flex-direction: column;
+  }
+  .resumo {
+    order: -1;
+  }
+  .pesquisar {
+    width: 120px;
+  }
+  .links {
+    display: none; /* pode trocar por menu hamburguer futuramente */
+  }
+}
+
+@media (max-width: 600px) {
+  .Ph1 {
+    font-size: 1.4rem;
+  }
+  .header {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .search {
+    width: 100%;
+  }
+}
+.nome{
+  padding: 10px;
+}
+.loginRegistro{
+  padding: 10px;
+}
+.caixinha{
+  top: 35px;
+}

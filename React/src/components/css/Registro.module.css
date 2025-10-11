@@ -1,0 +1,86 @@
+/* Container */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fdfdfd;
+  font-family: "Inter", sans-serif;
+}
+
+/* Formulário */
+.formulario {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: fadeIn 0.6s ease;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #111;
+  text-shadow: 0 0 8px rgba(37, 99, 235, 0.25);
+}
+
+/* Labels */
+.formulario label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: -0.4rem;
+}
+
+/* Inputs */
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="tel"],
+.formulario input[type="password"] {
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  background: #fafafa;
+}
+
+.formulario input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+  background: #fff;
+}
+
+/* Botão */
+.submit {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 0.7rem;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
+}
+
+.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.45);
+}
+
+/* Animação leve */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,174 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* -------- HEADER -------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d47a1;
+  padding: 15px 40px;
+  color: #fff;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+
+.logoImage {
+  height: 60px;
+  width: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.a:hover {
+  color: #ffca28;
+}
+
+/* -------- LOGIN / CONTA -------- */
+.loginRegistro {
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.pLoginRegistro {
+  font-weight: 600;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.caixinha {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #fff;
+  color: #333;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 220px;
+  z-index: 100;
+}
+
+.loginRegistro:hover .caixinha {
+  display: flex;
+}
+
+.lr {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.lr .a {
+  color: #0d47a1;
+  font-weight: 600;
+}
+.acesso {
+  display: grid;
+  grid-template-columns: 24px auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.acesso div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;          /* espaço entre ícone e texto */
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.acesso div:hover {
+  background: #f3f4f6;
+}
+
+.acesso label {
+  font-size: 1.2rem;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+}
+
+.acesso a {
+  color: #111;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.acesso a:hover {
+  color: #2563eb;
+}
+
+
+/* -------- MAIN -------- */
+.main {
+  flex: 1;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.titulo {
+  font-size: 2.5rem;
+  color: #0d47a1;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.subTitulo {
+  font-size: 1.5rem;
+  color: #0d47a1;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.paragrafo {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.containerLista {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px 0;
+}
+
+.lista {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.lista a {
+  color: #0d47a1;
+  text-decoration: none;
+}
+
+.lista a:hover {
+  text-decoration: underline;
+}
