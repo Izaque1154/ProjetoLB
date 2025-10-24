@@ -1,0 +1,81 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+}
+
+.caixa {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 50px 80px;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: white;
+  max-width: 600px;
+  width: 100%;
+}
+
+.caixa:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.45);
+}
+
+.h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* --------------------------- */
+/* 📱 RESPONSIVIDADE */
+/* --------------------------- */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .caixa {
+    padding: 40px 50px;
+  }
+
+  .h1 {
+    font-size: 1.6rem;
+  }
+
+  .h2 {
+    font-size: 1rem;
+  }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .caixa {
+    padding: 30px 25px;
+    border-radius: 16px;
+  }
+
+  .h1 {
+    font-size: 1.4rem;
+  }
+
+  .h2 {
+    font-size: 0.95rem;
+  }
+}

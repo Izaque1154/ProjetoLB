@@ -15,6 +15,7 @@ import { text } from "body-parser";
 import transporter from "./configEmail";
 import {Response, Request, NextFunction } from "express"
 import { template } from "handlebars";
+import { emitWarning } from "process";
 
 //Configurações
 dotenv.config();
@@ -55,8 +56,25 @@ async function middleware(req: Request, res: Response, next: NextFunction): Prom
         req.user = decoded;
         next();
     }catch(error) {
-        res.status(401).json({msg: "Token não encontrado"})
+        res.status(401).json({erro: "Token expirado"})
     }
+}
+
+async function middleware2(req: Request, res: Response, next: NextFunction): Promise<any> {
+    const token = req.body.token;
+
+    if(!token){
+        return res.status(401).json({erro: "Token não encontrado"})
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.SECRET as string) as TokenPayload
+        req.user = decoded
+        next();
+    }catch(erro) {
+        res.status(401).json({erro: "Token expirado"})
+    }
+
 }
 
     //Registrando usuário
@@ -65,7 +83,7 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
 
     try{
         if(senha !== confirmar) {
-            return res.status(400).json({ 'erro': 'As senhas não coincidem' });
+            return res.status(400).json({ erro: 'As senhas não coincidem' });
         };
         const hash: string = await bcrypt.hash(senha, 10);
         
@@ -73,7 +91,8 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
             nome,
             email,
             telefone,
-            senha: hash
+            senha: hash,
+            verificado: false
     });
     if (!process.env.SECRET){
         return console.log("variável de ambiente não definida");
@@ -91,19 +110,62 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
 
     const token = jwt.sign(payload, secret, options);
 
-    //Armazenando nos cookies
-    res.cookie("token", token,  {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 3600000
-    });
+        //Enviando email de confirmação
+    const enviar = {
+            from: "ia765350@gmail.com",
+            to: email,
+            subject: "Confirmação de conta",
+            template: "confirmarEmail",
+            context: {
+                name: nome,
+                token: token,
+            }
+        }
+    transporter.sendMail(enviar, (error, info) => {
+        if (error) {
+            console.log("Houve um erro ao enviar o email: ", error)
+        } else{
+            console.log("Email enviado com sucesso: ", info.response)
+        }
+    })
+    return res.status(201).json({ msg: "cadastro criado com sucesso" });
 
-    return res.status(201).json({ msg: "logado com sucesso" });
     }catch(error){
-        return res.status(500).json({ erro: "Erro ao criar o usuario: ", detalhes: error});
+        return res.status(500).json({ erro: "Erro ao criar o usuario", detalhes: error});
     };
 });
+    //Confirmar Registro
+app.post("/confirmarEmail", middleware2, async (req: Request, res:Response): Promise<any> =>{
+    const dados = req.user
+    const token = req.body.token
+
+    try{
+        if(!dados){
+            return res.status(500).json({erro: "Token expirado"})
+        }
+        const dado = await User.findOne({where: {id: dados.id}})
+        if(!dado){
+            return res.status(500).json({erro: "usuário não encontrado"})
+        }
+        if(dado.verificado === true){
+            return res.status(401).json({erro: "Usuário já verificado"})
+        }
+
+        await User.update({verificado: true}, {where: {email: dados.email, id: dados.id}})
+
+        //Armazenando nos cookies
+        res.cookie("token", token,  {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 3600000
+        });
+        return res.status(200).json({msg: "Conta verificada!"})
+    } catch(error){
+        return res.status(400).json({erro: "Houve um erro ao verificar a conta"})
+    }
+        
+})
 
     //Login
 app.post("/login", async (req: Request, res: Response):Promise<any> => {
@@ -117,7 +179,9 @@ app.post("/login", async (req: Request, res: Response):Promise<any> => {
         const hash = await bcrypt.compare(senha, usuario.senha);
         if(!hash){
             return res.status(404).json({erro: "Senha incorreta"});
-        };
+        } else if(usuario.verificado === false){
+            return res.status(500).json({erro: "Usuário não cadastrado"})
+        }
 
         //autenticando usuário
         const payload: jwtPayload = {

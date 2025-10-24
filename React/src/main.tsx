@@ -13,6 +13,8 @@ import RedefinirSenha from './components/redefinirSenha.tsx'
 import Peças from './components/detalhesPeças.tsx'
 import Servico from './components/servico.tsx'
 import Carrinho from './components/carrinho.tsx'
+import ConfirmarEmail from './components/confirmarEmail.tsx'
+import Verificar from './components/Verificar.tsx'
 import path from 'path'
 
 const router = createBrowserRouter(
@@ -60,12 +62,18 @@ const router = createBrowserRouter(
     {
       path: "/carrinho",
       element: <Carrinho/>
+    },
+    {
+      path: "/confirmarEmail",
+      element: <ConfirmarEmail/>
+    },
+    {
+      path: "/verificar",
+      element: <Verificar/>
     }
   ]
 )
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
 )

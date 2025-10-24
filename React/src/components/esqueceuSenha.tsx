@@ -2,6 +2,8 @@ import styles from "./css/esqueceuSenha.module.css"
 import { TbLock } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useState, useEffect } from "react";
+import { AiOutlineLike } from "react-icons/ai";
+import { MdError } from "react-icons/md";
 import axios from "axios"
 
 
@@ -9,6 +11,8 @@ function EsqueceuSenha() {
     const navigate = useNavigate();
     const [ email, setEmail ] = useState<string>("");
     const [ cooldown, setCooldown ] = useState(0);
+    const [erro, setErro] = useState<string>("")
+    const [enviado, setEnviado] = useState<string>("")
 
     useEffect(() => {
         if (cooldown > 0) {
@@ -22,6 +26,8 @@ function EsqueceuSenha() {
     }, [cooldown]);
 
     useEffect(() => {
+        setErro(styles.hideErro)
+        setEnviado(styles.hideEnviar)
         if (!localStorage.getItem("contador")){
             return
         } else if(Date.now() > Number(localStorage.getItem('timestamp'))){
@@ -49,10 +55,18 @@ function EsqueceuSenha() {
                 }
             })
 
-            console.log("Resposta: ", resposta.data)
+            console.log("Email enviado com sucesso")
+            setEnviado(styles.showEnviar)
+            setTimeout(() =>{
+                setEnviado(styles.hideEnviar)
+            }, 2500)
 
         } catch (erro) {
-            console.log("erro: ", erro)
+            console.log("erro ao redefinir senha")
+            setErro(styles.showErro)
+            setTimeout(() =>{
+                setErro(styles.hideErro)
+            }, 2500)
         }
         
     }
@@ -76,6 +90,14 @@ function EsqueceuSenha() {
 //JSX
     return(
         <div className={styles.container}>
+            <div className={erro}>
+                <div className={styles.warning}><MdError /></div>
+                <p className={styles.erroP}>Email não está cadastrado</p>
+            </div>
+            <div className={enviado}>
+                <div className={styles.warningEnviar}><AiOutlineLike /></div>
+                <p className={styles.enviarP}>Email enviado com sucesso</p>
+            </div>
             <header className={styles.header}>
                 <a href="/" ><img className={styles.img} src="/imagens/lb.jpg" alt="Logo LB-Cardans"/></a>
                 <nav className={styles.links}>
@@ -87,12 +109,11 @@ function EsqueceuSenha() {
                 <form className={styles.main} onSubmit={submit} autoComplete="off">
                     <p className={styles.p1}><strong>Problemas para entrar?</strong></p>
                     <p className={styles.p2}>Insira o seu email e enviaremos um link para você voltar a acessar a sua conta.</p>
-                    <input type="text" onChange={(e) => setEmail(e.target.value)} className={styles.input} id="email" placeholder="Insira seu email aqui" value={email} autoComplete="off"/>
+                    <input type="text" onChange={(e) => setEmail(e.target.value)} className={styles.input} id="email" placeholder="Insira seu email aqui" value={email} autoComplete="off" required/>
                     <input type="submit" id="submit" 
                         className={cooldown > 0 ? styles.cooldown : styles.submit} 
                         value={cooldown>0 ? `Aguarde ${cooldown}s` : "Redefinir senha"}/>
                     <button onClick={() =>  navigate("/login")}>Voltar ao Login</button>
-                    <button onClick={() => navigate("/redefinirSenha")}>{cooldown}</button>
                 </form>
             </div>
         </div>

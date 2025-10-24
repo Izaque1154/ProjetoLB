@@ -12,7 +12,8 @@ import sequelize from "./banco"
         telefone: string;
         senha: string;
         token: string|null;
-        expiracao: Date|null
+        expiracao: Date|null;
+        verificado: boolean
     }
     interface CarrinhoUsuario{
         id: number;
@@ -37,7 +38,8 @@ import sequelize from "./banco"
             public telefone!: string;
             public senha!: string;
             public token!: string|null;
-            public expiracao!: Date|null
+            public expiracao!: Date|null;
+            public verificado!: boolean;
         }
     
     //criando tabela usuarios
@@ -76,6 +78,11 @@ import sequelize from "./banco"
         expiracao: {
           type: DataTypes.DATE,
           allowNull: true
+        },
+        verificado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     }, 
     {

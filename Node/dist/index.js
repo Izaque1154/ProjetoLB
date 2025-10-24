@@ -50,7 +50,23 @@ function middleware(req, res, next) {
             next();
         }
         catch (error) {
-            res.status(401).json({ msg: "Token não encontrado" });
+            res.status(401).json({ erro: "Token expirado" });
+        }
+    });
+}
+function middleware2(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const token = req.body.token;
+        if (!token) {
+            return res.status(401).json({ erro: "Token não encontrado" });
+        }
+        try {
+            const decoded = jsonwebtoken_1.default.verify(token, process.env.SECRET);
+            req.user = decoded;
+            next();
+        }
+        catch (erro) {
+            res.status(401).json({ erro: "Token expirado" });
         }
     });
 }
@@ -59,7 +75,7 @@ app.post("/registrar", (req, res) => __awaiter(void 0, void 0, void 0, function*
     const { nome, email, telefone, senha, confirmar } = req.body;
     try {
         if (senha !== confirmar) {
-            return res.status(400).json({ 'erro': 'As senhas não coincidem' });
+            return res.status(400).json({ erro: 'As senhas não coincidem' });
         }
         ;
         const hash = yield bcrypt_1.default.hash(senha, 10);
@@ -67,7 +83,8 @@ app.post("/registrar", (req, res) => __awaiter(void 0, void 0, void 0, function*
             nome,
             email,
             telefone,
-            senha: hash
+            senha: hash,
+            verificado: false
         });
         if (!process.env.SECRET) {
             return console.log("variável de ambiente não definida");
@@ -84,6 +101,48 @@ app.post("/registrar", (req, res) => __awaiter(void 0, void 0, void 0, function*
             "algorithm": "HS256"
         };
         const token = jsonwebtoken_1.default.sign(payload, secret, options);
+        //Enviando email de confirmação
+        const enviar = {
+            from: "ia765350@gmail.com",
+            to: email,
+            subject: "Confirmação de conta",
+            template: "confirmarEmail",
+            context: {
+                name: nome,
+                token: token,
+            }
+        };
+        configEmail_1.default.sendMail(enviar, (error, info) => {
+            if (error) {
+                console.log("Houve um erro ao enviar o email: ", error);
+            }
+            else {
+                console.log("Email enviado com sucesso: ", info.response);
+            }
+        });
+        return res.status(201).json({ msg: "cadastro criado com sucesso" });
+    }
+    catch (error) {
+        return res.status(500).json({ erro: "Erro ao criar o usuario", detalhes: error });
+    }
+    ;
+}));
+//Confirmar Registro
+app.post("/confirmarEmail", middleware2, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const dados = req.user;
+    const token = req.body.token;
+    try {
+        if (!dados) {
+            return res.status(500).json({ erro: "Token expirado" });
+        }
+        const dado = yield tabelas_1.User.findOne({ where: { id: dados.id } });
+        if (!dado) {
+            return res.status(500).json({ erro: "usuário não encontrado" });
+        }
+        if (dado.verificado === true) {
+            return res.status(401).json({ erro: "Usuário já verificado" });
+        }
+        yield tabelas_1.User.update({ verificado: true }, { where: { email: dados.email, id: dados.id } });
         //Armazenando nos cookies
         res.cookie("token", token, {
             httpOnly: true,
@@ -91,12 +150,11 @@ app.post("/registrar", (req, res) => __awaiter(void 0, void 0, void 0, function*
             sameSite: 'lax',
             maxAge: 3600000
         });
-        return res.status(201).json({ msg: "logado com sucesso" });
+        return res.status(200).json({ msg: "Conta verificada!" });
     }
     catch (error) {
-        return res.status(500).json({ erro: "Erro ao criar o usuario: ", detalhes: error });
+        return res.status(400).json({ erro: "Houve um erro ao verificar a conta" });
     }
-    ;
 }));
 //Login
 app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -111,7 +169,9 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!hash) {
             return res.status(404).json({ erro: "Senha incorreta" });
         }
-        ;
+        else if (usuario.verificado === false) {
+            return res.status(500).json({ erro: "Usuário não cadastrado" });
+        }
         //autenticando usuário
         const payload = {
             id: usuario.id,

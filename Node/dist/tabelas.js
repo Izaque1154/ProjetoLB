@@ -48,6 +48,11 @@ Users.init({
     expiracao: {
         type: sequelize_1.DataTypes.DATE,
         allowNull: true
+    },
+    verificado: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {
     sequelize: banco_1.default,
