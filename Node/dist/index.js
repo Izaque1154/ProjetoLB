@@ -58,7 +58,7 @@ function middleware2(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         const token = req.body.token;
         if (!token) {
-            return res.status(401).json({ erro: "Token não encontrado" });
+            return res.status(401).json({ erro: "Token Expirado" });
         }
         try {
             const decoded = jsonwebtoken_1.default.verify(token, process.env.SECRET);
@@ -120,7 +120,7 @@ app.post("/registrar", (req, res) => __awaiter(void 0, void 0, void 0, function*
                 console.log("Email enviado com sucesso: ", info.response);
             }
         });
-        return res.status(201).json({ msg: "cadastro criado com sucesso" });
+        return res.status(201).json({ msg: "cadastro criado com sucesso", token: token });
     }
     catch (error) {
         return res.status(500).json({ erro: "Erro ao criar o usuario", detalhes: error });
@@ -187,7 +187,7 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'none',
+            sameSite: 'lax',
             maxAge: 3600000
         });
         return res.status(201).json({ msg: "Usuário logado com sucesso" });
@@ -208,7 +208,7 @@ app.post("/esqueceuSenha", (req, res) => __awaiter(void 0, void 0, void 0, funct
         const token = crypto_1.default.randomBytes(20).toString("hex");
         const now = new Date();
         now.setHours(now.getHours() + 1);
-        const usuario = yield tabelas_1.User.update({
+        yield tabelas_1.User.update({
             token: token, expiracao: now
         }, {
             where: { email: email }
@@ -248,7 +248,7 @@ app.put('/RedefinirSenha', (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.status(500).json({ erro: "senhas não coincidem!" });
     }
     try {
-        const now = new Date();
+        new Date();
         const hash = yield bcrypt_1.default.hash(senha, 10);
         const user = yield tabelas_1.User.findByPk(id);
         if (!user || !user.senha || !user.expiracao) {
@@ -285,7 +285,7 @@ app.post("/carrinho", middleware, (req, res) => __awaiter(void 0, void 0, void 0
     try {
         const resp = yield tabelas_2.default.findOne({ where: { peca: peca } });
         if (resp === null) {
-            const resposta = tabelas_2.default.create({
+            tabelas_2.default.create({
                 idUser: idUser,
                 peca: peca
             });
@@ -340,7 +340,7 @@ app.post("/excluir", middleware, (req, res) => __awaiter(void 0, void 0, void 0,
     }
     ;
     try {
-        const deletar = yield tabelas_2.default.destroy({ where: { peca: peca, idUser: idUser } });
+        yield tabelas_2.default.destroy({ where: { peca: peca, idUser: idUser } });
         return res.status(200).json({ msg: "item apagado" });
     }
     catch (erro) {
@@ -354,11 +354,43 @@ app.post("/comprado", middleware, (req, res) => __awaiter(void 0, void 0, void 0
     }
     ;
     try {
-        const deletar = yield tabelas_2.default.destroy({ where: { idUser: idUser } });
+        yield tabelas_2.default.destroy({ where: { idUser: idUser } });
         return res.status(200).json({ msg: "item apagado" });
     }
     catch (erro) {
         return res.status(400).json({ erro: "item não encontrado" });
+    }
+}));
+app.post("/reenviar", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const email = req.body.email;
+    const token = req.body.token;
+    try {
+        const dados = yield tabelas_1.User.findOne({ where: { email: email } });
+        if (!dados) {
+            return res.status(500).json({ erro: "Usuário não encontrado" });
+        }
+        //Enviando email de confirmação
+        const enviar = {
+            from: "ia765350@gmail.com",
+            to: email,
+            subject: "Confirmação de conta",
+            template: "confirmarEmail",
+            context: {
+                name: dados.nome,
+                token: token,
+            }
+        };
+        configEmail_1.default.sendMail(enviar, (error) => {
+            if (error) {
+                console.log("Houve um erro ao enviar o email: ", error);
+            }
+            else {
+                console.log("Email enviado com sucesso");
+            }
+        });
+    }
+    catch (erro) {
+        return res.status(400).json({ erro: "houve um erro" });
     }
 }));
 //Iniciando o server

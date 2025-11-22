@@ -2,33 +2,23 @@ import styles from "./css/carrinho.module.css"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import { BsCart4 } from "react-icons/bs";
-import { IoGitPullRequestSharp } from "react-icons/io5";
-import { FaFacebookMessenger } from "react-icons/fa";
-import { IoIosHelp } from "react-icons/io";
-import { GrConfigure } from "react-icons/gr";
-import { CiSearch } from "react-icons/ci";
+import { MdError } from "react-icons/md";
 
 function Carrinho(){
-    const [nome, setNome] = useState<string>("")
-    const [text, setText] = useState<string>("")
     const [soma, setSoma] = useState<number>(0)
+    const [alertExcluir, setAlertExcluir] = useState<string>("")
     const [itens, setItens] = useState<any[]>([])
     const [filtrados, setFiltrados] = useState<any[]>([])
 
     const navigate = useNavigate()
 
-      function chamar(e: React.ChangeEvent<HTMLInputElement>){
-        setText(e.target.value)
-        }
           useEffect(() =>{
-            axios.post("http://localhost:5000/perfil", {}, {withCredentials:true})
-            .then((res) => setNome(res.data.user.nome))
+            setAlertExcluir(styles.hideErro)
           }, [])
         useEffect(() => {
           axios.post("http://localhost:5000/buscarCarrinho", {}, {withCredentials:true})
           .then((res) => setItens(res.data.msg))
-          .catch((erro) => console.log("Nenhum item no carrinho"))
+          .catch(() => console.log("Nenhum item no carrinho"))
         }, [excluir])
         useEffect(() => {
           if (itens.length > 0) {
@@ -83,7 +73,10 @@ function Carrinho(){
       console.log(e)
       const res = await axios.post("http://localhost:5000/excluir", {peca: e}, {withCredentials: true})
       console.log(res)
-      return alert("Item excluído com sucesso")
+      setAlertExcluir(styles.showErro)
+      setTimeout(() =>{
+        setAlertExcluir(styles.hideErro)
+      }, 2500)
     }catch(erro){
       alert(erro)
     }
@@ -103,207 +96,70 @@ function Carrinho(){
     axios.post("http://localhost:5000/comprado", {}, {withCredentials: true})
     navigate("/servico", {state: "/carrinho"})
   }
-    const handleKeyDown = (e: any) => {
-    if (e.key === "Enter") {
-      handleLogin();
-    }
-  };
-  const handleLogin = () => {
-    navigate("/oficina", {state: text})
-  };
 
-    return(
-         <div className={styles.container}>
-            <header className={styles.header}>
-                <img src="/imagens/lb.jpg" alt="LB-Cardns" onClick={() => navigate("/")} className={styles.LogoImage} />
-                <div className={styles.search}>
-                  <input type="text" id="pesquisar" value={text} onChange={chamar} onKeyDown={handleKeyDown} className={styles.pesquisar} placeholder="Pesquisar" autoComplete="off" />
-                  <div className={styles.iconSearch} onClick={(() => handleLogin())}>
-                    <CiSearch />
+  return(
+    <div className={styles.container}>
+      <hr />
+      <div className={alertExcluir}>
+        <div className={styles.warning}><MdError /></div>
+        <p className={styles.erroP}>Item exlcuído</p>
+    </div>
+        <main className={styles.main}>
+          <div className={styles.produtos}>
+              <h1 className={styles.Ph1}>Produtos</h1>
+              <hr />
+              { 
+                !itens[0]?
+                  <div className={styles.Pitens}>
+                    <h2 className={styles.Ph2}>Nenhum item no carrinho</h2>
                   </div>
-                </div>
-                <nav className={styles.links}>
-                    <a onClick={() => navigate("/")} className={styles.a}>Home</a>
-                    <a onClick={() => navigate("/oficina")} className={styles.a}>Oficina</a>
-                    <a onClick={() => navigate("/contato")} className={styles.a}>Contato</a>
-                    <a onClick={() => navigate("/sobre")} className={styles.a}>Sobre</a>
-                    <a onClick={() => navigate("/carrinho")} className={styles.a}>Carrinho</a>
-            { nome ? 
-                <div className={styles.containerName}>
-                  <div className={styles.divNome}><a href="" className={styles.nome}>{nome}</a></div>
-                  <div className={styles.acesso}>
-                    <div className={styles.a}><a className={styles.login} onClick={() => navigate("/login")}>Login</a></div>
-                    <div className={styles.a}><a className={styles.registro} onClick={() => navigate("/registro")}>Registro</a></div>
-                    <hr />
-                    <div className={styles.carrinho}>
-                      <label className={styles.lCarrinho} onClick={() => navigate("/carrinho")}><BsCart4 /></label>                    
-                      <a href="" onClick={() => navigate("/carrinho")} className={styles.aCarrinho}>Carrinho</a>
-                    </div>
-                    <div className={styles.configuracoes}>
-                      <label className={styles.lconfiguracoes}><GrConfigure /></label>                    
-                      <a href="" className={styles.aConfiguracoes}>Configurações</a>
-                    </div>
-                    <div className={styles.pedidos}>
-                      <label className={styles.lpedidos}><IoGitPullRequestSharp /></label>                    
-                      <a href="" className={styles.aPedidos}>Meus pedidos</a>
-                    </div>
-                    <div className={styles.mensagens}>
-                      <label className={styles.lmensagens}><FaFacebookMessenger /></label>
-                      <a href="" className={styles.aMensagens}>Central de mensagens</a>
-                    </div>
-                    <div className={styles.suporte}>
-                      <label className={styles.lsuporte}><IoIosHelp /></label>
-                      <a href="" className={styles.aSuporte}>suporte</a>
-                    </div>
-                  </div>
-                </div>
-              :
-                <div className={styles.loginRegistro}>
-                  <div className={styles.pLoginRegistro}>Login/Registro</div> 
-                  <div className={styles.caixinha}>
-                    <div className={styles.a}><a className={styles.login} onClick={() => navigate("/login")}>Login</a></div>
-                    <div className={styles.a}><a className={styles.registro} onClick={() => navigate("/registro")}>Registro</a></div>
-                    <hr />
-                    <div className={styles.carrinho}>
-                      <label className={styles.lCarrinho} onClick={() => navigate("/carrinho")}><BsCart4 /></label>                    
-                      <a href="" onClick={() => navigate("/carrinho")} className={styles.aCarrinho}>Carrinho</a>
-                    </div>
-                    <div className={styles.configuracoes}>
-                      <label className={styles.lconfiguracoes}><GrConfigure /></label>                    
-                      <a href="" className={styles.aConfiguracoes}>Configurações</a>
-                    </div>
-                    <div className={styles.pedidos}>
-                      <label className={styles.lpedidos}><IoGitPullRequestSharp /></label>                    
-                      <a href="" className={styles.aPedidos}>Meus pedidos</a>
-                    </div>
-                    <div className={styles.mensagens}>
-                      <label className={styles.lmensagens}><FaFacebookMessenger /></label>
-                      <a href="" className={styles.aMensagens}>Central de mensagens</a>
-                    </div>
-                    <div className={styles.suporte}>
-                      <label className={styles.lsuporte}><IoIosHelp /></label>
-                      <a href="" className={styles.aSuporte}>suporte</a>
-                    </div>
-                  </div>
-                </div>
-            }
-                </nav>
-            </header>
-            <main className={styles.main}>
-              <div className={styles.produtos}>
-                  <h1 className={styles.Ph1}>Produtos</h1>
-                  <hr />
-                  { 
-                    !itens[0]?
-                      <div className={styles.Pitens}>
-                        <h2 className={styles.Ph2}>Nenhum item no carrinho</h2>
-                      </div>
-                    :
-                     <div className={styles.Pitens}>
-                        {
-                          filtrados.map((src, i) => (
-                            <div className={styles.Pcarrinho}>
-                                <div className={styles.Pcarrinho2}>
-                                  <div className={styles.Pimg}>
-                                    <img src={`/public/imagens/${src.tipo}/img${src.id}.jpg`} alt="Imagem Peça"  onClick={() => navigate(`/peça/${src.id}`)} />
-                                  </div>
-                                  <div className={styles.Pinfo}>
-                                    <div onClick={() => navigate(`/peça/${src.id}`)}>
-                                      <h3 className={styles.Ptitulo}  onClick={() => navigate(`/peça/${src.id}`)}>{src.titulo}</h3>
-                                      <p className={styles.Ppreco}>{src.preco}</p>
-                                      </div>
-                                    <button className={styles.Pexcluir} onClick={() => excluir(src.id)}>excluir</button>
-                                  </div>
-                                </div>
-                            </div>
-                          ))
-                        }
-                    </div>
-                  }
-              </div>  
-              <div className={styles.resumo}>
-                  <div className={styles.Rresumo}>
-                    <h2 className={styles.Rh2}>Resumo da compra</h2>
-                    <hr />
+                :
+                  <div className={styles.Pitens}>
                     {
-                      !itens[0] ?
-                        null
-                      :
-                        <div className={styles.Rconteudo}>
-                          <div className={styles.RvalorCompra}>
-                            <div className={styles.RDproduto}><h4 className={styles.Rproduto}>Produtos: </h4> <p className={styles.RPprodutos}>{itens.length}</p></div>
-                            <div className={styles.RDfrete}><h4 className={styles.Rfrete}>Frete</h4> <p className={styles.RPfrete}>Grátis</p></div>
-                            <div className={styles.RDtotal}><h2 className={styles.Rtotal}>Total</h2> <p className={styles.RPtotal}>R${soma.toFixed(2)}</p></div>
-                          </div>
-                          <div className={styles.Rbotao}>
-                            <button className={styles.Rcomprar} onClick={() => comprar()}>Continuar compra</button>
-                          </div>
+                      filtrados.map((src) => (
+                        <div className={styles.Pcarrinho}>
+                            <div className={styles.Pcarrinho2}>
+                              <div className={styles.Pimg}>
+                                <img src={`/public/imagens/${src.tipo}/img${src.id}.jpg`} alt="Imagem Peça"  onClick={() => navigate(`/peca/${src.id}`)} />
+                              </div>
+                              <div className={styles.Pinfo}>
+                                <div onClick={() => navigate(`/peca/${src.id}`)}>
+                                  <h3 className={styles.Ptitulo}>{src.titulo}</h3>
+                                  <p className={styles.Ppreco}>{src.preco}</p>
+                                  </div>
+                                <button className={styles.Pexcluir} onClick={() => excluir(src.id)}>excluir</button>
+                              </div>
+                            </div>
                         </div>
+                      ))
                     }
-                  </div>
+                </div>
+              }
+          </div>  
+          <div className={styles.resumo}>
+              <div className={styles.Rresumo}>
+                <h2 className={styles.Rh2}>Resumo da compra</h2>
+                <hr />
+                {
+                  !itens[0] ?
+                    null
+                  :
+                    <div className={styles.Rconteudo}>
+                      <div className={styles.RvalorCompra}>
+                        <div className={styles.RDproduto}><h4 className={styles.Rproduto}>Produtos: </h4> <p className={styles.RPprodutos}>{itens.length}</p></div>
+                        <div className={styles.RDfrete}><h4 className={styles.Rfrete}>Frete</h4> <p className={styles.RPfrete}>Grátis</p></div>
+                        <div className={styles.RDtotal}><h2 className={styles.Rtotal}>Total</h2> <p className={styles.RPtotal}>R${soma.toFixed(2)}</p></div>
+                      </div>
+                      <div className={styles.Rbotao}>
+                        <button className={styles.Rcomprar} onClick={() => comprar()}>Continuar compra</button>
+                      </div>
+                    </div>
+                }
               </div>
-            </main>
-             <footer className={styles.containerFoot}>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Sobre a</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/sobre")}>lb Cardans</li>
-                    <li className={styles.linkLista} onClick={() => navigate("/oficina")}>Oficina</li>
-                    <li className={styles.linkLista}>Tendências</li>
-                    <li className={styles.linkLista} onClick={() => navigate("/")}>Página Inicial</li>
-                    <li className={styles.linkLista}>Blog</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Outros Sites</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista}><a href="Sites/Website/website.html" className={styles.listaA}>Website</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Fogo do Doom/doom.html" className={styles.listaA}>Fogo do Doom</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Animation Loading/loading.html" className={styles.listaA}>Animation Loading</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Gerador/gerador.html" className={styles.listaA}>Gerador</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Notas com Estrelas/notas.html" className={styles.listaA}>Notas com Estrelas</a></li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Contato</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/contato")}>Contatos</li>
-                    <li className={styles.linkLista}>segurança</li>
-                    <li className={styles.linkLista}>vender</li>
-                    <li className={styles.linkLista}>solução de problemas</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Redes Sociais</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista}>X</li>
-                    <li className={styles.linkLista}>Facebook</li>
-                    <li className={styles.linkLista}>Instagram</li>
-                    <li className={styles.linkLista}>Youtube</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Minha conta</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/carrinho")}>Carrinho</li>
-                    <li className={styles.linkLista}>favoritos</li>
-                    <li className={styles.linkLista}>configurações</li>
-                    <li className={styles.linkLista}>Resumo</li>
-                  </ul>
-                </div>
-              </section>
-           </footer>
-        </div>
-    )
+          </div>
+        </main>
+    </div>
+  )
 }
 
 export default Carrinho

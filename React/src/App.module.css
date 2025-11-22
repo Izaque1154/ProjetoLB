@@ -1,384 +1,148 @@
-/* === Home.module.css === */
-
-/* === RESET GERAL === */
-* {
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.background{
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+.background2{
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-/* === CONTAINER GERAL === */
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: #f8fafc;
-}
-
-/* === HEADER === */
-.header {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-  background-color: #1e1e1e;
-  color: #fff;
-  position: relative;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logoImage {
-  width: 120px;
-  height: auto;
-  cursor: pointer;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-}
-
-.a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.a:hover {
-  color: #f39c12;
-}
-
-.containerName, .loginRegistro {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.divNome {
-  cursor: pointer;
-}
-
-.nome {
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-}
-
-.caixinha {
-  display: none;
+.slider{
   position: absolute;
-  top: 45px;
-  right: 0;
-  width: 220px;
-  background-color: #2c2c2c;
-  border-radius: 8px;
-  padding: 10px 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-  flex-direction: column;
-  gap: 10px;
-}
-.acesso{
-  display: none;
-  position: absolute;
-  top: 30px;
-  right: 0;
-  width: 220px;
-  background-color: #2c2c2c;
-  border-radius: 8px;
-  padding: 10px 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.containerName:hover .caixinha,
-.loginRegistro:hover .caixinha{
-  display: flex;
-}
-.containerName:hover .acesso,
-.loginRegistro:hover .acesso{
-  display: flex;
-}
-
-.login, .registro {
-  display: block;
+  height: 100vh;
   width: 100%;
-  padding: 8px 20px;
-  text-align: left;
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.login:hover, .registro:hover {
-  background-color: #3d3d3d;
-}
-
-.carrinho, .configuracoes, .pedidos, .mensagens, .suporte {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 20px;
+  z-index: -100;
+  overflow: hidden;
 }
 
-label {
-  font-size: 18px;
-  cursor: pointer;
-  color: #fff;
+.slider .img{
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  animation: slide 60s linear infinite;
 }
 
-hr {
-  border: 0;
-  border-top: 1px solid #555;
-  margin: 5px 0;
-}
+@keyframes slide{
+  22%{
+    position: relative;
+    right: 0%;
+  }
+  25%{
+    position: relative;
+    right:100%;
+  }
+  47%{
+    position: relative;
+    right: 100%;
+  }
+  50%{
+    position: relative;
+    right: 200%;
+  }
+  72%{
+    position: relative;
+    right: 200%;
+  }
+  75%{
+    position: relative;
+    right: 300%;
+  }
+  97%{
+    position: relative;
+    right: 300%;
+  }
+  100%{
+    position: relative;
+    right: 300%;
+  }
 
-.aCarrinho, .aConfiguracoes, .aPedidos, .aMensagens, .aSuporte {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-}
 
-.aCarrinho:hover, .aConfiguracoes:hover, .aPedidos:hover, .aMensagens:hover, .aSuporte:hover {
-  color: #f39c12;
 }
-
-/* === MAIN === */
-.containerMain {
-  flex: 1;
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
+/**/
+.button{
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%);
+  border-radius: 100px;
+  background: transparent;
+  border: solid 1px white;
+  font-size: 25px;
+  color: white;
+  transition: 0.5s;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(1px);
+}
+.button:hover{
+  border: solid 1px #006efd;
+  color: #006efd;
+  transition: 0.5s;
+}
+/*Footer*/
+.foot{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.hideContainerFooter{
+  display: none;
+  justify-content: space-around;
+  padding-top: 15px;
+  color: #444546;
+  background-color: white;
+}
+.showContainerFooter{
+  position: relative;
+  bottom: 0;
   display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding-top: 15px;
+  color: #cfcfcf;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  border-top: solid 1px white;
+}
+.listaSection{
+  display:flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  color: #333;
+  justify-content: center;
 }
-
-.h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #1e1e1e;
-  font-weight: 700;
-}
-
-.p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin-bottom: 30px;
-  color: #555;
-}
-
-.p b {
-  color: #f39c12;
-}
-
-.containerContato {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #1e1e1e;
-  background-color: #f5f5f5;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-/* === FOOTER === */
-.containerFoot {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 25px;
-  background-color: #1e1e1e;
-  color: #fff;
-  padding: 40px 50px;
-  border-top: 3px solid #f39c12;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.section {
-  display: flex;
-  flex-direction: column;
-}
-
-.listaSection {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.tituloLIsta {
-  font-size: 0.95rem;
-  color: #f39c12;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-}
-
-.itemLista {
+.linkLista{
+  text-decoration: none;
   list-style: none;
+}
+.listaA{
+  text-decoration: none;
+  color: #cfcfcf;
+}
+.listaA:hover{
+  color: rgb(255, 255, 255);
+}
+.itemLista{
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  justify-content: center;
+  align-items: center;
 }
-
-.linkLista {
-  color: #ddd;
-  font-size: 0.85rem;
+.linkLista:hover{
   cursor: pointer;
-  transition: color 0.2s, transform 0.2s;
+  color: rgb(255, 255, 255);
 }
-
-.linkLista:hover {
-  color: #f39c12;
-  transform: translateX(4px);
-}
-
-.listaA {
-  color: #ddd;
-  text-decoration: none;
-  font-size: 0.85rem;
-  transition: color 0.2s, transform 0.2s;
-}
-
-.listaA:hover {
-  color: #f39c12;
-  transform: translateX(4px);
-}
-
-/* === FOOTER FINAL (COPYRIGHT, ETC) === */
-.footerBottom {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-top: 30px;
-  padding-top: 12px;
-  border-top: 1px solid #333;
-}
-
-.footerBottom a {
-  color: #f39c12;
-  text-decoration: none;
-}
-
-.footerBottom a:hover {
-  color: #fff;
-}
-
-/* === RESPONSIVO === */
-@media (max-width: 768px) {
-  .containerFoot {
-    grid-template-columns: 1fr 1fr;
-    padding: 30px 25px;
-    gap: 20px;
-  }
-
-  .tituloLIsta {
-    font-size: 0.9rem;
-  }
-
-  .linkLista, .listaA {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .containerFoot {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .linkLista:hover,
-  .listaA:hover {
-    transform: none;
-  }
-}
-
-/* === RESPONSIVO === */
-@media (max-width: 768px) {
-  .containerFoot {
-    grid-template-columns: 1fr 1fr;
-    padding: 40px 30px;
-  }
-
-  .tituloLIsta {
-    font-size: 1rem;
-  }
-
-  .linkLista, .listaA {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .containerFoot {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .linkLista:hover,
-  .listaA:hover {
-    transform: none;
-  }
-}
-
-/* === RESPONSIVO === */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px 20px;
-  }
-
-  .nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .caixinha {
-    right: 10px;
-  }
-
-  .h1 {
-    font-size: 2rem;
-  }
-
-  .p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .containerContato {
-    font-size: 0.95rem;
-    padding: 12px 20px;
-  }
-}
-
-.nome{
-  padding: 10px;
-}
-.loginRegistro{
-  padding: 10px;
+.tituloLIsta{
+  margin-bottom: 15px;
+  font-weight: bold;
 }

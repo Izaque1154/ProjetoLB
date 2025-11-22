@@ -1,81 +1,85 @@
 .container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  font-family: "Poppins", sans-serif;
-  padding: 20px;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #022655, rgb(213, 240, 255));
 }
 
+/* Caixa principal */
 .caixa {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 50px 80px;
-  text-align: center;
-  transition: all 0.3s ease;
-  color: white;
-  max-width: 600px;
-  width: 100%;
+    width: 55%;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
+    border-radius: 60px;
+    box-shadow: 0 50px 15px -20px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-align: center;
 }
 
-.caixa:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.45);
-}
-
+/* Títulos */
 .h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
+    font-size: 45px;
+    margin-bottom: 10px;
 }
 
 .h2 {
-  font-size: 1.2rem;
-  font-weight: 400;
-  opacity: 0.9;
+    font-size: 28px;
+    margin-bottom: 25px;
 }
 
-/* --------------------------- */
-/* 📱 RESPONSIVIDADE */
-/* --------------------------- */
-
-/* Tablets */
-@media (max-width: 768px) {
-  .caixa {
-    padding: 40px 50px;
-  }
-
-  .h1 {
-    font-size: 1.6rem;
-  }
-
-  .h2 {
-    font-size: 1rem;
-  }
+/* Linha divisória */
+.hr {
+    width: 80%;
+    border: 0;
+    border-bottom: 1px solid white;
+    margin: 25px 0;
 }
 
-/* Celulares */
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
-  }
+/* Texto do reenviar */
+.reenviar {
+    margin-top: 20px;
+    width: 100%;
+}
 
-  .caixa {
-    padding: 30px 25px;
-    border-radius: 16px;
-  }
+.p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
 
-  .h1 {
-    font-size: 1.4rem;
-  }
+/* Botões */
+.button,
+.cooldown {
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
+    width: 100%;
+}
 
-  .h2 {
-    font-size: 0.95rem;
-  }
+/* Normal */
+.button {
+    background-color: white;
+    color: #022655;
+}
+
+.button:hover {
+    background-color: #d4eaff;
+    color: #022655;
+    transform: scale(1.03);
+}
+
+/* Cooldown */
+.cooldown {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #b5b5b5;
+    cursor: not-allowed;
 }

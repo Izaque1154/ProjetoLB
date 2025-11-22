@@ -1,7 +1,6 @@
 import styles from "./css/esqueceuSenha.module.css"
-import { TbLock } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-import { FormEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { MdError } from "react-icons/md";
 import axios from "axios"
@@ -49,7 +48,7 @@ function EsqueceuSenha() {
         try{
             const url = "http://localhost:5000/esqueceuSenha";
 
-            const resposta = await axios.post(url, {email: email}, {
+            await axios.post(url, {email: email}, {
                 "headers": {
                     "Content-Type": "application/json"
                 }
@@ -113,7 +112,7 @@ function EsqueceuSenha() {
                     <input type="submit" id="submit" 
                         className={cooldown > 0 ? styles.cooldown : styles.submit} 
                         value={cooldown>0 ? `Aguarde ${cooldown}s` : "Redefinir senha"}/>
-                    <button onClick={() =>  navigate("/login")}>Voltar ao Login</button>
+                    <button onClick={() =>  navigate("/login")} className={styles.button}>Voltar ao Login</button>
                 </form>
             </div>
         </div>

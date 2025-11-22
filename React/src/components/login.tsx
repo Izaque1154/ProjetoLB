@@ -15,18 +15,26 @@ function Login(){
 
     //UseEffect
     useEffect(() =>{
+        setformData(styles.noSubmit)
         setErro(styles.hideErro)
-        setformData(styles.submit)
     }, [])
+    useEffect(() => {
+        const validacao = senha.trim() != "" && email.trim() !== ""
+        if(validacao){
+            return setformData(styles.submit)
+        }
+        setformData(styles.noSubmit)
+    }, [senha, email])
 
     //Funções
     async function loginUser(e: React.FormEvent) {
         e.preventDefault();
-        if(formData === styles.noSubmit){
+        if(formData === undefined || formData === styles.noSubmit){
             return
         }
 
         try{
+            setCarregar(true)
             const url: string = "http://localhost:5000/login"
             const params = { email, senha }
 
@@ -34,11 +42,11 @@ function Login(){
                 withCredentials: true
             })
             console.log("Usuário autenticado ")
-            setCarregar(true)
             setTimeout(() =>{
                 navigate("/")
             }, 300)
         } catch(error) {
+            setCarregar(false)
             console.log("Houve um erro ao fazer o login")
             setErro(styles.showErro)
             setformData(styles.noSubmit)
@@ -59,14 +67,12 @@ function Login(){
             <form onSubmit={loginUser} autoComplete="off" className={styles.formulario}>
                 <div className={styles.voltar} onClick={() => navigate("/")}>X</div>
                 <h1 className={styles.titulo}>Login</h1>
-                <label className={styles.label1}>E-mail</label>
-                <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} id="Lemail" className={styles.email} required/>
-                <label className={styles.label2}>Senha</label>
-                <input type="password" onChange={(e) => setSenha(e.target.value)} value={senha}  id="Lpassword" className={styles.senha} required/>
+                <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} id="Lemail" className={styles.email} placeholder="Digite seu email" required/>
+                <input type="password" onChange={(e) => setSenha(e.target.value)} value={senha}  id="Lpassword" className={styles.senha} placeholder="Digite sua senha" required/>
                 <button id="submit" className={formData}>
                     {
                         !carregar ?
-                            <p>Enviar</p>
+                            <p className={styles.buttonP}>Enviar</p>
                         :
                             <div className={styles.loader}></div>
                     }

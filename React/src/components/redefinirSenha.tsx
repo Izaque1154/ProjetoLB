@@ -1,18 +1,16 @@
 import axios from "axios"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./css/redefinirSenha.module.css"
 import { useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { AiOutlineLike } from "react-icons/ai";
 import { MdError } from "react-icons/md";
-import { log } from "console";
 
 
 function RedefinirSenha() {
     const [senha, setSenha] = useState<string>("");
     const [confirmSenha, setConfirmSenha] = useState<string>("");
     const [showSenha, setShowSenha] = useState<string>("");
-    const [showConfirmar, setShowConfirmar] = useState<string>("");
     const [inputSenha, setInputSenha] = useState<string>("")
     const [enviado, setEnviado] = useState<string>("")
     const [erro, setErro] = useState<string>("")
@@ -74,7 +72,7 @@ function RedefinirSenha() {
             const url: string = `http://localhost:5000/RedefinirSenha`;
             const dados = {senha, confirmSenha, token, id}
 
-            const resposta = await axios.put(url, dados, {
+            await axios.put(url, dados, {
                 "headers": {
                     "Content-Type": "application/json"
                 }
@@ -83,6 +81,7 @@ function RedefinirSenha() {
             setEnviado(styles.showEnviar)
             setTimeout(() =>{
                 setEnviado(styles.hideEnviar)
+                window.location.reload()
             }, 2500)
         }catch(error){
             if (error instanceof AxiosError){

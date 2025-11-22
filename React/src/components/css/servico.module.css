@@ -1,61 +1,58 @@
 .main {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: white; /* fundo inicial */
-  overflow: hidden;
-  position: relative;
+  background: #fff; 
 }
+
 
 .expandir {
   position: absolute;
-  inset: 0; /* ocupa tela toda */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 0;
-}
-
-.expandir::before {
-  content: "";
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: green;
+  left: 50%;
+  top: 50%;
+  width: 260px;              
+  height: 260px;
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center center;
   border-radius: 50%;
-  transform: scale(0); /* começa pequeno */
-  transition: transform 1.5s;
+  background: linear-gradient(135deg, #8aff9b, #5aaf6f, #158b3b);
+  transition: 5s;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  pointer-events: none; 
 }
 
-.expandida::before {
-  transform: scale(15); /* cresce até cobrir toda a tela */
+
+.expandida {
+  transform: translate(-50%, -50%) scale(40);
+  border-radius: 0%;
 }
 
-.circulo {
-  background: white;
-  border-radius: 50%;
-  width: 220px;
-  height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.centro {
   position: relative;
-  z-index: 2;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* sombra elegante */
-  border: 2px solid #f0f0f0; /* borda bem leve */
+  z-index: 2;   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  pointer-events: auto;
 }
+
 
 .servico {
-  font-size: 26px;
-  font-weight: 600;
+  margin: 0;
+  font-size: 60px;
+  color: rgb(255, 251, 251); 
   text-align: center;
-  color: #111; /* preto quase puro */
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.25), 
-               0 0 12px rgba(0, 128, 0, 0.25); /* glow leve verde + sombra suave */
+  transition: 5s ease;
 }
-
-
+@media (max-width: 420px) {
+  .expandir { width: 180px; height: 180px; }
+  .expandida { transform: translate(-50%, -50%) scale(50); }
+  .servico { font-size: 1.2rem; }
+}

@@ -2,7 +2,6 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from 'cors';
-import axios from "axios";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "./tabelas";
@@ -10,12 +9,8 @@ import Carrinho from "./tabelas";
 import cookieParser from "cookie-parser";
 import { SignOptions } from "jsonwebtoken";
 import crypto from "crypto";
-import nodemailer from "nodemailer"
-import { text } from "body-parser";
 import transporter from "./configEmail";
 import {Response, Request, NextFunction } from "express"
-import { template } from "handlebars";
-import { emitWarning } from "process";
 
 //Configurações
 dotenv.config();
@@ -64,7 +59,7 @@ async function middleware2(req: Request, res: Response, next: NextFunction): Pro
     const token = req.body.token;
 
     if(!token){
-        return res.status(401).json({erro: "Token não encontrado"})
+        return res.status(401).json({erro: "Token Expirado"})
     }
 
     try{
@@ -128,7 +123,7 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
             console.log("Email enviado com sucesso: ", info.response)
         }
     })
-    return res.status(201).json({ msg: "cadastro criado com sucesso" });
+    return res.status(201).json({ msg: "cadastro criado com sucesso", token: token });
 
     }catch(error){
         return res.status(500).json({ erro: "Erro ao criar o usuario", detalhes: error});
@@ -199,7 +194,7 @@ app.post("/login", async (req: Request, res: Response):Promise<any> => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'none',
+            sameSite: 'lax',
             maxAge: 3600000
         });
 
@@ -227,7 +222,7 @@ app.post("/esqueceuSenha", async (req: Request, res: Response):Promise<any> => {
         const now = new Date();
         now.setHours(now.getHours() + 1);
 
-        const usuario = await User.update({
+        await User.update({
             token: token, expiracao: now
         }, {
             where: { email: email }
@@ -270,7 +265,7 @@ app.put('/RedefinirSenha', async (req: Request, res: Response): Promise<any> => 
         return res.status(500).json({erro: "senhas não coincidem!"})
     }
     try{
-        const now = new Date()
+        new Date()
         const hash: string = await bcrypt.hash(senha, 10);
 
         const user = await User.findByPk(id)
@@ -312,7 +307,7 @@ app.post("/carrinho", middleware, async(req: Request, res: Response): Promise<an
     try{
         const resp = await Carrinho.findOne({where: {peca: peca}})
         if(resp === null){
-            const resposta = Carrinho.create({
+            Carrinho.create({
                 idUser: idUser,
                 peca: peca
             })
@@ -364,7 +359,7 @@ app.post("/excluir", middleware, async(req: Request, res: Response): Promise<any
         return res.status(404).json({erro: "Token invalido"})
     };
     try{
-        const deletar = await Carrinho.destroy({where: {peca: peca, idUser: idUser}});
+        await Carrinho.destroy({where: {peca: peca, idUser: idUser}});
         return res.status(200).json({msg: "item apagado"})
     }catch(erro){
         return res.status(400).json({erro: "item não encontrado"})
@@ -377,10 +372,41 @@ app.post("/comprado", middleware, async(req: Request, res: Response): Promise<an
         return res.status(404).json({erro: "Token invalido"})
     };
     try{
-        const deletar = await Carrinho.destroy({where: {idUser: idUser}});
+        await Carrinho.destroy({where: {idUser: idUser}});
         return res.status(200).json({msg: "item apagado"})
     }catch(erro){
         return res.status(400).json({erro: "item não encontrado"})
+    }
+})
+app.post("/reenviar", async(req: Request, res: Response): Promise<any> =>{
+    const email = req.body.email
+    const token = req.body.token
+    
+    try{
+        const dados = await User.findOne({where: {email: email}})
+        if(!dados){
+            return res.status(500).json({erro: "Usuário não encontrado"})
+        }
+        //Enviando email de confirmação
+        const enviar = {
+                from: "ia765350@gmail.com",
+                to: email,
+                subject: "Confirmação de conta",
+                template: "confirmarEmail",
+                context: {
+                    name: dados.nome,
+                    token: token,
+                }
+            }
+        transporter.sendMail(enviar, (error) => {
+            if (error) {
+                console.log("Houve um erro ao enviar o email: ", error)
+            } else{
+                console.log("Email enviado com sucesso")
+            }
+        })
+    }catch(erro){
+        return res.status(400).json({erro: "houve um erro"})
     }
 })
 

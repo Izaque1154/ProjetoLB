@@ -2,11 +2,13 @@ import axios from "axios"
 import styles from "./css/confirmarEmail.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 function ConfirmarEmail() {
     const [condicao, setCondicao] = useState<boolean>()
     const [msg, setMsg] = useState<string>("")
     const [ searchParams ] = useSearchParams()
+    const navigate = useNavigate()
 
     useEffect(() =>{
         setCondicao(false)

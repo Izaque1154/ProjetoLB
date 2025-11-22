@@ -136,7 +136,7 @@ function Registro(){
             console.log("Usuário cadastrado")
             setCarregar(true)
             setTimeout(() =>{
-                navigate("/verificar")
+                navigate(`/verificar?email=${email}&token=${resposta.data.token}`)
             }, 300)
         }
         catch(err: any){
@@ -167,10 +167,10 @@ function Registro(){
                 <label className={styles.label}>E-Mail*</label>
                     <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" placeholder="Email" className={styles.input} required/>
                 <label className={styles.label}>Telefone*</label>
-                    <PatternFormat mask="_" format="(##) #####-####" value={telefone} onValueChange={(values) => setTelefone(values.value)} autoComplete="off" placeholder="(99) 99999-9999" className={telefone.length === 0 || telefone.length === 11? styles.input: styles.incorreto} required/>
+                    <PatternFormat mask="" format="(##) #####-####" value={telefone} onValueChange={(values) => setTelefone(values.value)} autoComplete="off" placeholder="(99) 99999-9999" className={telefone.length === 0 || telefone.length === 11? styles.input: styles.incorreto} required/>
                 <label className={styles.label}>Senha*</label>
                     <input type="password" id="password" value={senha} onChange={(e) => setSenha(e.target.value)} autoComplete="off" placeholder="Senha" className={inputSenha} required/>
-                    <p className={showSenha}>Senha não pode ser menor que 4 dígitos</p>     
+                    {showSenha === styles.show ? <p className={showSenha}>Senha não pode ser menor que 4 dígitos</p>: null}   
                 <label className={styles.label}>Confirmar Senha*</label>
                     <input type="password" id="confirmPassword" value={confirmar} onChange={(e) => setConfirmar(e.target.value)} autoComplete="off" placeholder="Confirmar Senha" className={senha === confirmar? styles.input: styles.incorreto} required/>
                 <button id="submit" className={!formData ? styles.noSubmit : styles.submit}>

@@ -1,52 +1,31 @@
 .container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  font-family: "Poppins", sans-serif;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #022655, rgb(213, 240, 255));
 }
 
-.caixa {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 40px 60px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Mensagem */
+.h2 {
+    font-size: 32px;
+    font-weight: 500;
 }
 
-.caixa:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.45);
-}
-
+/* Botão */
 .button {
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 12px 40px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+    padding: 14px 28px;
+    font-size: 22px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid white;
+    color: #022655;
+    cursor: pointer;
+    transition: 0.4s;
 }
 
 .button:hover {
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.h2 {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0;
-  letter-spacing: 0.5px;
+    transform: scale(1.05);
+    background-color: #d4eaff;
 }

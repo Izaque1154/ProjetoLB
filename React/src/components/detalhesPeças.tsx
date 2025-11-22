@@ -2,24 +2,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./css/detalhesPecas.module.css";
-import Servico from "./servico";
-import { BsCart4 } from "react-icons/bs";
-import { IoGitPullRequestSharp } from "react-icons/io5";
-import { FaFacebookMessenger } from "react-icons/fa";
-import { IoIosHelp } from "react-icons/io";
-import { GrConfigure } from "react-icons/gr";
+import { MdError } from "react-icons/md";
+import ScrollToTop from "./scroll";
 import { useNavigate } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 
-function Peças(){
+function Pecas(){
     const navigate = useNavigate()
     const [ imagem, setImagem ] = useState<string>("")
-    const [ nome, setNome ] = useState<string>("")
-    const [ text, setText ] = useState<string>("")
+    const [erro, setErro] = useState<string>("")
     const { id } = useParams()
-    const [itemCarrinho, setItemCarrinho] = useState<string>("")
-    useEffect(() => {
-    window.scrollTo(0, 0);
+    const [itemCarrinho, setItemCarrinho] = useState<boolean>()
+  useEffect(() => {
+      setErro(styles.hideErro)
   }, []);
   
 
@@ -792,109 +786,43 @@ const pecas = [
 ];
 
   useEffect(() =>{
-    axios.post("http://localhost:5000/perfil", {}, {withCredentials:true})
-    .then((res) => setNome(res.data.user.nome))
-    .catch((erro) => console.log(erro))
-
     axios.post("http://localhost:5000/itemCarrinho", {peca: id}, {withCredentials:true})
     .then((res) => setItemCarrinho(res.data.msg))
-    .catch((erro) => console.log("Nenhum item no carrinho"))
+    .catch(() => console.log("Nenhum item no carrinho"))
   }, [])
 
     async function carrinho(){
         try{
-            const res = await axios.post("http://localhost:5000/carrinho", {peca: id}, {withCredentials: true})
-            setItemCarrinho("item adicionando")
+            await axios.post("http://localhost:5000/carrinho", {peca: id}, {withCredentials: true})
+            setItemCarrinho(true)
         }catch(erro){
             console.log("erro ao buscar o carrinho: ", erro)
+            setErro(styles.showErro)
+            setTimeout(() =>{
+              setErro(styles.hideErro)
+            }, 2000)
         }
     }
-    const handleKeyDown = (e: any) => {
-      if (e.key === "Enter") {
-        handleLogin();
-      }
-    };
-    const handleLogin = () => {
-      navigate("/oficina", {state: text})
-    };
 
-    return(
+    async function contratar() {
+      try{
+        await axios.post("http://localhost:5000/perfil", {}, {withCredentials:true})
+        navigate("/servico", {state: `/peca/${id}`})
+      }catch(erro){
+      setErro(styles.showErro)
+            setTimeout(() =>{
+              setErro(styles.hideErro)
+            }, 2000)
+        }
+    }
+
+  return(
         <div className={styles.container}>
-            <header className={styles.header}>
-                <img src="/imagens/lb.jpg" alt="LB-Cardns" onClick={() => navigate("/")} className={styles.LogoImage} />
-                <div className={styles.search}>
-                  <input type="text" id="pesquisar" className={styles.pesquisar} value={text} onKeyDown={handleKeyDown} onChange={(e) => setText(e.target.value)} placeholder="Pesquisar" autoComplete="off" />
-                  <div className={styles.iconSearch} onClick={(() => handleLogin())}>
-                    <CiSearch />
-                  </div>
-                </div>
-                <nav className={styles.links}>
-                    <a href="" onClick={() => navigate("/")} className={styles.a}>Home</a>
-                    <a href="" onClick={() => navigate("/oficina")} className={styles.a}>Oficina</a>
-                    <a href="" onClick={() => navigate("/contato")} className={styles.a}>Contato</a>
-                    <a href="" onClick={() => navigate("/sobre")} className={styles.a}>Sobre</a>
-                    <a href="" onClick={() => navigate("/carrinho")} className={styles.a}>Carrinho</a>
-            { nome ? 
-                <div className={styles.containerName}>
-                  <div className={styles.divNome}><a href="" className={styles.nome}>{nome}</a></div>
-                  <div className={styles.acesso}>
-                    <div className={styles.a}><a className={styles.login} onClick={() => navigate("/login")}>Login</a></div>
-                    <div className={styles.a}><a className={styles.registro} onClick={() => navigate("/registro")}>Registro</a></div>
-                    <hr />
-                    <div className={styles.carrinho}>
-                      <label className={styles.lCarrinho} onClick={() => navigate("/carrinho")}><BsCart4 /></label>                    
-                      <a href="" onClick={() => navigate("/carrinho")} className={styles.aCarrinho}>Carrinho</a>
-                    </div>
-                    <div className={styles.configuracoes}>
-                      <label className={styles.lconfiguracoes}><GrConfigure /></label>                    
-                      <a href="" className={styles.aConfiguracoes}>Configurações</a>
-                    </div>
-                    <div className={styles.pedidos}>
-                      <label className={styles.lpedidos}><IoGitPullRequestSharp /></label>                    
-                      <a href="" className={styles.aPedidos}>Meus pedidos</a>
-                    </div>
-                    <div className={styles.mensagens}>
-                      <label className={styles.lmensagens}><FaFacebookMessenger /></label>
-                      <a href="" className={styles.aMensagens}>Central de mensagens</a>
-                    </div>
-                    <div className={styles.suporte}>
-                      <label className={styles.lsuporte}><IoIosHelp /></label>
-                      <a href="" className={styles.aSuporte}>suporte</a>
-                    </div>
-                  </div>
-                </div>
-              :
-                <div className={styles.loginRegistro}>
-                  <div className={styles.pLoginRegistro}>Login/Registro</div> 
-                  <div className={styles.caixinha}>
-                    <div className={styles.a}><a className={styles.login} onClick={() => navigate("/login")}>Login</a></div>
-                    <div className={styles.a}><a className={styles.registro} onClick={() => navigate("/registro")}>Registro</a></div>
-                    <hr />
-                    <div className={styles.carrinho}>
-                      <label className={styles.lCarrinho} onClick={() => navigate("/carrinho")}><BsCart4 /></label>                    
-                      <a href="" onClick={() => navigate("/carrinho")} className={styles.aCarrinho}>Carrinho</a>
-                    </div>
-                    <div className={styles.configuracoes}>
-                      <label className={styles.lconfiguracoes}><GrConfigure /></label>                    
-                      <a href="" className={styles.aConfiguracoes}>Configurações</a>
-                    </div>
-                    <div className={styles.pedidos}>
-                      <label className={styles.lpedidos}><IoGitPullRequestSharp /></label>                    
-                      <a href="" className={styles.aPedidos}>Meus pedidos</a>
-                    </div>
-                    <div className={styles.mensagens}>
-                      <label className={styles.lmensagens}><FaFacebookMessenger /></label>
-                      <a href="" className={styles.aMensagens}>Central de mensagens</a>
-                    </div>
-                    <div className={styles.suporte}>
-                      <label className={styles.lsuporte}><IoIosHelp /></label>
-                      <a href="" className={styles.aSuporte}>suporte</a>
-                    </div>
-                  </div>
-                </div>
-            }
-                </nav>
-            </header>
+           <div className={erro}>
+                <div className={styles.warning}><MdError /></div>
+                <p className={styles.erroP}>é necessário estar logado</p>
+            </div>
+          <ScrollToTop/>
             {pecas.map(p => (
                 p.id.toString() === id?.toString() ?
                 <main className={styles.main}>
@@ -956,84 +884,23 @@ const pecas = [
                                 <img src={!imagem ? `/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg` : imagem} alt="imagem peça" className={styles.img1} />
                             </div>
                             <div className={styles.containerE}>
-                                <h6 className={styles.Hestoque}>Estoque: </h6>
-                                <p className={styles.estoque}>{p.estoque}</p>
+                                <h6 className={styles.Hestoque}>Estoque: {p.estoque}</h6>
                             </div>
-                            <button className={styles.contratar} onClick={() => navigate("/servico", {state: `/peça/${id}`})}>Contratar</button>
+                            <button className={styles.contratar} onClick={() => contratar()}>Contratar</button>
                             {
                                 !itemCarrinho ?
                                     <button className={styles.carrinho} onClick={() => carrinho()}>Adicionar ao carrinho</button>
                                 :
-                                    <div><p>Item adicionando ao carrinho</p></div>
+                                    <div><p>Item adicionado ao carrinho</p></div>
                             }
-
                         </div>
                     </div>
                 </main>
                 :
                 null
             ))}
-            <footer className={styles.containerFoot}>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Sobre a</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/sobre")}>lb Cardans</li>
-                    <li className={styles.linkLista} onClick={() => navigate("/oficina")}>Oficina</li>
-                    <li className={styles.linkLista}>Tendências</li>
-                    <li className={styles.linkLista} onClick={() => navigate("/")}>Página Inicial</li>
-                    <li className={styles.linkLista}>Blog</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Outros Sites</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista}><a href="Sites/Website/website.html" className={styles.listaA}>Website</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Fogo do Doom/doom.html" className={styles.listaA}>Fogo do Doom</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Animation Loading/loading.html" className={styles.listaA}>Animation Loading</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Gerador/gerador.html" className={styles.listaA}>Gerador</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Notas com Estrelas/notas.html" className={styles.listaA}>Notas com Estrelas</a></li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Contato</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/contato")}>Contatos</li>
-                    <li className={styles.linkLista}>segurança</li>
-                    <li className={styles.linkLista}>vender</li>
-                    <li className={styles.linkLista}>solução de problemas</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Redes Sociais</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista}>X</li>
-                    <li className={styles.linkLista}>Facebook</li>
-                    <li className={styles.linkLista}>Instagram</li>
-                    <li className={styles.linkLista}>Youtube</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Minha conta</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/carrinho")}>Carrinho</li>
-                    <li className={styles.linkLista}>favoritos</li>
-                    <li className={styles.linkLista}>configurações</li>
-                    <li className={styles.linkLista}>Resumo</li>
-                  </ul>
-                </div>
-              </section>
-           </footer>
         </div>
     )
 }
 
-export default Peças
+export default Pecas

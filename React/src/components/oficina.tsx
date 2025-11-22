@@ -1,19 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 import styles from "./css/Oficina.module.css"
-import axios from 'axios';
 import { useLocation } from "react-router-dom";
-import { BsCart4 } from "react-icons/bs";
-import { IoGitPullRequestSharp } from "react-icons/io5";
-import { FaFacebookMessenger } from "react-icons/fa";
-import { IoIosHelp } from "react-icons/io";
-import { GrConfigure } from "react-icons/gr";
-import { CiSearch } from "react-icons/ci";
+
 
 
 function Oficina(){
-  const [nome, setNome] = useState<string>("")
-  const [text, setText] = useState<string>("")
   const [filtrados, setFiltrados] = useState<any[]>([])
   const navigate = useNavigate()
   const location = useLocation()
@@ -25,24 +17,21 @@ function Oficina(){
 }
 
   useEffect(() =>{
-    axios.post("http://localhost:5000/perfil", {}, {withCredentials:true})
-    .then((res) => setNome(res.data.user.nome))
     setFiltrados(info)
   }, [])
   useEffect(() =>{
-    setFiltrados(info.filter((item) =>{
-      return removerAcentos(item.titulo.toLowerCase()).includes(removerAcentos(text.toLowerCase()))
-    }))
-  }, [text])
-  
-  useEffect(() =>{
     if(!location){
-        return console.log("Não tem nada no location")
+        return
       } else if (!location.state){
+        setFiltrados(info)
         return 
     }
-    setText(location.state)
-    }, [])
+    setFiltrados(info.filter((item) =>{
+      return removerAcentos(item.titulo.toLowerCase()).includes(removerAcentos(location.state.toLowerCase()))
+    }))
+    console.log(filtrados)
+  }, [location])
+
 
    const maior: number = Math.max(...filtrados.map(p => p.id));
    const menor: number = Math.min(...filtrados.map(p => p.id));
@@ -89,96 +78,8 @@ function Oficina(){
     { id: 37, titulo: "Amortecedor Traseiro", preco: "457,79R$" },
     { id: 38, titulo: "Coxim do Amortecedor", preco: "119,90R$" },
   ]
-  function chamar(e: React.ChangeEvent<HTMLInputElement>){
-    setText(e.target.value)
-  }
-      const handleKeyDown = (e: any) => {
-    if (e.key === "Enter") {
-      handleLogin();
-    }
-  };
-  const handleLogin = () => {
-    navigate("/oficina", {state: text})
-  };
-
-    
     return(
         <div className={styles.container}>
-            <header className={styles.header}>
-                <img src="/imagens/lb.jpg" alt="LB-Cardns" onClick={() => navigate("/")} className={styles.LogoImage} />
-                <div className={styles.search}>
-                  <input type="text" id="pesquisar" value={text} onChange={chamar} className={styles.pesquisar} placeholder="Pesquisar" autoComplete="off" />
-                  <div className={styles.iconSearch} onClick={(() => handleLogin())}>
-                    <CiSearch />
-                  </div>
-                </div>
-                <nav className={styles.links}>
-                    <a href="" onClick={() => navigate("/")} className={styles.a}>Home</a>
-                    <a href="" onClick={() => navigate("/oficina")} className={styles.a}>Oficina</a>
-                    <a href="" onClick={() => navigate("/contato")} className={styles.a}>Contato</a>
-                    <a href="" onClick={() => navigate("/sobre")} className={styles.a}>Sobre</a>
-                    <a href="" onClick={() => navigate("/carrinho")} className={styles.a}>Carrinho</a>
-            { nome ? 
-                <div className={styles.containerName}>
-                  <div className={styles.divNome}><a href="" className={styles.nome}>{nome}</a></div>
-                  <div className={styles.acesso}>
-                    <div className={styles.a}><a className={styles.login} onClick={() => navigate("/login")}>Login</a></div>
-                    <div className={styles.a}><a className={styles.registro} onClick={() => navigate("/registro")}>Registro</a></div>
-                    <hr />
-                    <div className={styles.carrinho}>
-                      <label className={styles.lCarrinho} onClick={() => navigate("/carrinho")}><BsCart4 /></label>                    
-                      <a href="" onClick={() => navigate("/carrinho")} className={styles.aCarrinho}>Carrinho</a>
-                    </div>
-                    <div className={styles.configuracoes}>
-                      <label className={styles.lconfiguracoes}><GrConfigure /></label>                    
-                      <a href="" className={styles.aConfiguracoes}>Configurações</a>
-                    </div>
-                    <div className={styles.pedidos}>
-                      <label className={styles.lpedidos}><IoGitPullRequestSharp /></label>                    
-                      <a href="" className={styles.aPedidos}>Meus pedidos</a>
-                    </div>
-                    <div className={styles.mensagens}>
-                      <label className={styles.lmensagens}><FaFacebookMessenger /></label>
-                      <a href="" className={styles.aMensagens}>Central de mensagens</a>
-                    </div>
-                    <div className={styles.suporte}>
-                      <label className={styles.lsuporte}><IoIosHelp /></label>
-                      <a href="" className={styles.aSuporte}>suporte</a>
-                    </div>
-                  </div>
-                </div>
-              :
-                <div className={styles.loginRegistro}>
-                  <div className={styles.pLoginRegistro}>Login/Registro</div> 
-                  <div className={styles.caixinha}>
-                    <div className={styles.a}><a className={styles.login} onClick={() => navigate("/login")}>Login</a></div>
-                    <div className={styles.a}><a className={styles.registro} onClick={() => navigate("/registro")}>Registro</a></div>
-                    <hr />
-                    <div className={styles.carrinho}>
-                      <label className={styles.lCarrinho} onClick={() => navigate("/carrinho")}><BsCart4 /></label>                    
-                      <a href="" onClick={() => navigate("/carrinho")} className={styles.aCarrinho}>Carrinho</a>
-                    </div>
-                    <div className={styles.configuracoes}>
-                      <label className={styles.lconfiguracoes}><GrConfigure /></label>                    
-                      <a href="" className={styles.aConfiguracoes}>Configurações</a>
-                    </div>
-                    <div className={styles.pedidos}>
-                      <label className={styles.lpedidos}><IoGitPullRequestSharp /></label>                    
-                      <a href="" className={styles.aPedidos}>Meus pedidos</a>
-                    </div>
-                    <div className={styles.mensagens}>
-                      <label className={styles.lmensagens}><FaFacebookMessenger /></label>
-                      <a href="" className={styles.aMensagens}>Central de mensagens</a>
-                    </div>
-                    <div className={styles.suporte}>
-                      <label className={styles.lsuporte}><IoIosHelp /></label>
-                      <a href="" className={styles.aSuporte}>suporte</a>
-                    </div>
-                  </div>
-                </div>
-            }
-                </nav>
-            </header>
             <main className={styles.main}>
               {filtrados.length !== 0? 
                 <div className={styles.imagens}>
@@ -190,13 +91,14 @@ function Oficina(){
                     {
                         filtrados.map((src, i) => (
                             src.id < 21? 
-                              <div className={styles.grade} onClick={() => navigate(`/peça/${src.id}`)} key={i}>
+                              <div className={styles.grade} onClick={() => navigate(`/peca/${src.id}`)} key={i}>
                                   <div className={styles.tImagem}>
-                                      <img src={`/imagens/tornearia/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem} onClick={() => navigate(`/peça/${src.id}`)} />
+                                      <img src={`/imagens/tornearia/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem}/>
                                   </div>
                                   <div className={styles.tInfo}>
                                       <h5 className={styles.tTitulo}>{src.titulo}</h5>
-                                      <h5 className={styles.tPreco}>{src.preco}</h5>
+                                      <h6 className={styles.tPreco}>{src.preco}</h6>
+                                      <h6 className={styles.frete}>Frete Grátis</h6>
                                   </div>
                               </div>:
                             null
@@ -204,89 +106,29 @@ function Oficina(){
                     }
                     {
                       maior >=21 ?
-                      <h1 className={styles.Fh1}>Freio</h1>:
+                      <h1 className={styles.fh1}>Freio</h1>:
                       null
                     }
                     {
                         filtrados.map((src, i) => (
                             src.id >= 21?
-                        <div className={styles.grade} onClick={() => navigate(`/peça/${src.id}`)} key={i}>
-                                  <div className={styles.fImagem}>
-                                      <img src={`/imagens/freio/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem} onClick={() => navigate(`/peça/${src.id}`)} />
+                        <div className={styles.grade} onClick={() => navigate(`/peca/${src.id}`)} key={i}>
+                                  <div className={styles.tImagem}>
+                                      <img src={`/imagens/freio/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem}/>
                                   </div>
-                                  <div className={styles.fInfo}>
-                                      <h5 className={styles.fTitulo}>{src.titulo}</h5>
-                                      <h5 className={styles.fPreco}>{src.preco}</h5>
+                                  <div className={styles.tInfo}>
+                                      <h5 className={styles.tTitulo}>{src.titulo}</h5>
+                                      <h6 className={styles.tPreco}>{src.preco}</h6>
+                                      <h6 className={styles.frete}>Frete Grátis</h6>
                                   </div>
                               </div>:
                         null
                         ))
                     }
-                            
-
                 </div>:
                 <h1 className={styles.nItem}>Nenhum item encontrado</h1>
                   }
             </main>
-            <footer className={styles.containerFoot}>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Sobre a</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/sobre")}>lb Cardans</li>
-                    <li className={styles.linkLista} onClick={() => navigate("/oficina")}>Oficina</li>
-                    <li className={styles.linkLista}>Tendências</li>
-                    <li className={styles.linkLista} onClick={() => navigate("/")}>Página Inicial</li>
-                    <li className={styles.linkLista}>Blog</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Outros Sites</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista}><a href="Sites/Website/website.html" className={styles.listaA}>Website</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Fogo do Doom/doom.html" className={styles.listaA}>Fogo do Doom</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Animation Loading/loading.html" className={styles.listaA}>Animation Loading</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Gerador/gerador.html" className={styles.listaA}>Gerador</a></li>
-                    <li className={styles.linkLista}><a href="Sites/Notas com Estrelas/notas.html" className={styles.listaA}>Notas com Estrelas</a></li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Contato</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/contato")}>Contatos</li>
-                    <li className={styles.linkLista}>segurança</li>
-                    <li className={styles.linkLista}>vender</li>
-                    <li className={styles.linkLista}>solução de problemas</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Redes Sociais</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista}>X</li>
-                    <li className={styles.linkLista}>Facebook</li>
-                    <li className={styles.linkLista}>Instagram</li>
-                    <li className={styles.linkLista}>Youtube</li>
-                  </ul>
-                </div>
-              </section>
-              <section className={styles.section}>
-                <div className={styles.listaSection}>
-                  <h6 className={styles.tituloLIsta}>Minha conta</h6>
-                  <ul className={styles.itemLista}>
-                    <li className={styles.linkLista} onClick={() => navigate("/carrinho")}>Carrinho</li>
-                    <li className={styles.linkLista}>favoritos</li>
-                    <li className={styles.linkLista}>configurações</li>
-                    <li className={styles.linkLista}>Resumo</li>
-                  </ul>
-                </div>
-              </section>
-           </footer>
         </div>
     )
 }

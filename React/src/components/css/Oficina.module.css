@@ -1,379 +1,71 @@
-/* === Home.module.css === */
-
-/* === RESET GERAL === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+.container{
+    background: linear-gradient(0deg, #022655, rgb(255, 255, 255));
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
+.nItem{
+    height: 20%;
+    width: 50%;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    transform: translate(-30%);
+    padding: 10px;
 }
-
-/* === CONTAINER GERAL === */
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: #f8fafc;
+.imagens{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
-
-/* === HEADER === */
-.header {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-  background-color: #1e1e1e;
-  color: #fff;
-  position: relative;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
-
-.LogoImage {
-  width: 120px;
-  height: auto;
-  cursor: pointer;
-}
-
-.pesquisar {
-  width: 300px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin: 0 20px;
-  font-size: 14px;
-}
-
-.links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-}
-
-.a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.a:hover {
-  color: #f39c12;
-}
-
-.containerName, .loginRegistro {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.divNome {
-  cursor: pointer;
-}
-
-.nome {
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-}
-
-.caixinha, .acesso {
-  display: none;
-  position: absolute;
-  top: 45px;
-  right: 0;
-  width: 220px;
-  background-color: #2c2c2c;
-  border-radius: 8px;
-  padding: 10px 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.containerName:hover .acesso,
-.loginRegistro:hover .caixinha {
-  display: flex;
-}
-
-.login, .registro {
-  display: block;
-  width: 100%;
-  padding: 8px 20px;
-  text-align: left;
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.login:hover, .registro:hover {
-  background-color: #3d3d3d;
-}
-
-.carrinho, .configuracoes, .pedidos, .mensagens, .suporte {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 20px;
-}
-
-label {
-  font-size: 18px;
-  cursor: pointer;
-  color: #fff;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid #555;
-  margin: 5px 0;
-}
-
-.aCarrinho, .aConfiguracoes, .aPedidos, .aMensagens, .aSuporte {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.aCarrinho:hover, .aConfiguracoes:hover, .aPedidos:hover, .aMensagens:hover, .aSuporte:hover {
-  color: #f39c12;
-}
-
-/* === MAIN === */
-.main {
-  flex: 1; /* faz o main ocupar todo espaço disponível */
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  color: #333;
-}
-
-.imagens {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.grade {
-  width: 200px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.grade:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.tImagem img, .fImagem img {
-  width: 100%;
-  border-radius: 8px 8px 0 0;
-}
-
-.tInfo, .fInfo {
-  padding: 10px;
-}
-
-.tTitulo, .fTitulo {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e1e1e;
-}
-
-.tPreco, .fPreco {
-  font-size: 14px;
-  color: #f39c12;
-}
-
-.hTornearia, .Fh1 {
-  width: 100%;
-  text-align: left;
-  font-size: 2rem;
-  margin: 20px 0;
-  color: #1e1e1e;
-}
-
-.nItem {
-  font-size: 1.5rem;
-  color: #555;
-  margin-top: 40px;
-}
-
-/* === FOOTER === */
-.containerFoot {
-  margin-top: auto; /* empurra o footer para baixo */
-  width: 100%;
-  padding: 20px 0;
-  background-color: #1e1e1e;
-  color: #fff;
-  text-align: center;
-  font-size: 0.9rem;
-  border-top: 2px solid #f39c12;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
-}
-
-.containerFoot a {
-  color: #f39c12;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.containerFoot a:hover {
-  color: #fff;
-}
-
-/* === RESPONSIVO === */
-@media (max-width: 1024px) {
-  .imagens {
-    flex-wrap: wrap;
+.hTornearia{
+    display: flex;
     justify-content: center;
-  }
-
-  .grade {
-    width: 45%;
-  }
+    color: #000000;
+    margin: 30px;
 }
-
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px 20px;
-  }
-
-  .links {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .caixinha, .acesso {
-    right: 10px;
-  }
-
-  .main {
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  .grade {
-    width: 100%;
-  }
-
-  .hTornearia, .Fh1 {
-    font-size: 1.5rem;
-  }
+.fh1{
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    color: #000000;
 }
-.acesso{
-  top: 32px;
+.grade{
+    display: flex;
+    border-bottom: 1px solid gray;
+    background-color: aliceblue;
+    color: black;
+    width: 50%;
+    border-radius: 5px;
 }
-.nome{
-  padding: 15px;
+.tImagem{
+    margin: 10px;
 }
-.pLoginRegistro{
-  padding: 10px;
+.gradeItem{
+    height: 170px;
+    width: 170px;
+    border-radius: 10px;
 }
-.caixinha{
-  top:40;
+.tInfo{
+    margin-top: 10px;
+    margin-left: 20px;
 }
-/* === FOOTER === */
-.containerFoot {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 25px;
-  background-color: #1e1e1e;
-  color: #fff;
-  padding: 40px 50px;
-  border-top: 3px solid #f39c12;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+.tTitulo{
+    color: #525252;
+    font-size: 25px;
+    letter-spacing: 0.5px;
 }
-
-.section {
-  display: flex;
-  flex-direction: column;
+.tPreco{
+    margin-top: 20px;
+    font-weight: bold;
+    color: #525252;
+    font-size: 20px;
 }
-
-.listaSection {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.frete{
+    color: #00a650;
 }
-
-.tituloLIsta {
-  font-size: 0.95rem;
-  color: #f39c12;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-}
-
-.itemLista {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.linkLista {
-  color: #ddd;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: color 0.2s, transform 0.2s;
-}
-
-.linkLista:hover {
-  color: #f39c12;
-  transform: translateX(4px);
-}
-
-.listaA {
-  color: #ddd;
-  text-decoration: none;
-  font-size: 0.85rem;
-  transition: color 0.2s, transform 0.2s;
-}
-
-.listaA:hover {
-  color: #f39c12;
-  transform: translateX(4px);
-}
-
-/* === FOOTER FINAL (COPYRIGHT, ETC) === */
-.footerBottom {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-top: 30px;
-  padding-top: 12px;
-  border-top: 1px solid #333;
-}
-
-.footerBottom a {
-  color: #f39c12;
-  text-decoration: none;
-}
-
-.footerBottom a:hover {
-  color: #fff;
+.grade:hover{
+    cursor: pointer;
 }
