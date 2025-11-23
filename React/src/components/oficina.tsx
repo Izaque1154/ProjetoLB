@@ -93,7 +93,7 @@ function Oficina(){
                             src.id < 21? 
                               <div className={styles.grade} onClick={() => navigate(`/peca/${src.id}`)} key={i}>
                                   <div className={styles.tImagem}>
-                                      <img src={`${process.env.PUBLIC_URL}/imagens/tornearia/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem}/>
+                                      <img src={`${import.meta.env.BASE_URL}imagens/tornearia/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem}/>
                                   </div>
                                   <div className={styles.tInfo}>
                                       <h5 className={styles.tTitulo}>{src.titulo}</h5>
