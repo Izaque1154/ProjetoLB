@@ -1,5 +1,4 @@
 // router.tsx
-import { createBrowserRouter } from "react-router-dom";
 import Layout from "/Users/ia765/OneDrive/Documentos/Meus Projetos/LBCardans/React/src/App";
 import LayoutLimpo from "/Users/ia765/OneDrive/Documentos/Meus Projetos/LBCardans/React/src/AppLimpo"
 import Home from "./home";
@@ -15,8 +14,9 @@ import Servico from './servico.tsx'
 import Carrinho from './carrinho.tsx'
 import ConfirmarEmail from './confirmarEmail.tsx'
 import Verificar from './Verificar.tsx'
+import { createHashRouter } from 'react-router-dom';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <Layout />, 
     children: [
