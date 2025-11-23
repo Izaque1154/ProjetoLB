@@ -38,7 +38,7 @@ function Login(){
             const url: string = "http://localhost:5000/login"
             const params = { email, senha }
 
-            const resposta = await axios.post(url, params, {
+            await axios.post(url, params, {
                 withCredentials: true
             })
             console.log("Usuário autenticado ")
