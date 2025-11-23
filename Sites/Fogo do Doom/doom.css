@@ -1,0 +1,31 @@
+table{
+    border-collapse: collapse;/*bordas da tabela devem ser recolhidas em uma única borda ou separadas */
+    border: 1px solid #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+td{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: center;/* define o alinhamento vertical de um elemento */
+    font-family: monospace;
+    font-size: 18px;
+    position: relative;
+}
+.pixel-index{
+    font-size: 10px;
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #999;
+}
+td.pixel {
+    width: 10px;
+    height: 10px;
+    border: 0;
+}
