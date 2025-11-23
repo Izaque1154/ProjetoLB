@@ -22,10 +22,10 @@ function Pecas(){
          "fabricacaoPeca", "cuica", "catraca", "valvulaPedal", "valvulaManeco", "valvulaRele", "valvulaLimitadoraPressao", "valvulaEqualizadoraFreio", "cilindroMestreFreio",         // id: 28
          "servoFreioAr", "kitReparoCilindroMestre", "cuboRodaDianteiro", "cuboRodaTraseiro", "juntaHomocinetica", "kitRolamentoRoda", "bieletaSuspensao", "amortecedorDianteiro",        //
          "amortecedorTraseiro", "coximAmortecedor"]
-    const imagemEnter: string = `/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg`
-    const imagemEnter1: string = `/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img01.jpg`
-    const imagemEnter2: string = `/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img02.jpg`
-    const imagemEnter3: string = `/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img03.jpg`
+    const imagemEnter: string = `${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg`
+    const imagemEnter1: string = `${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img01.jpg`
+    const imagemEnter2: string = `${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img02.jpg`
+    const imagemEnter3: string = `${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img03.jpg`
 
 const pecas = [
   // === ITENS ORIGINAIS (mantidos) ===
@@ -859,22 +859,22 @@ const pecas = [
                             <div className={styles.imagens}>
                                 <ul className={styles.listaImagem}>
                                     <li className={styles.imagensLista}>
-                                        <img src={`/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img01.jpg`} onMouseEnter={() => {
+                                        <img src={`${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img01.jpg`} onMouseEnter={() => {
                                             setImagem(imagemEnter1)
                                         }} alt="imagem peça" className={styles.img} />
                                     </li>
                                     <li className={styles.imagensLista}>
-                                        <img src={`/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img02.jpg`} onMouseEnter={() => {
+                                        <img src={`${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img02.jpg`} onMouseEnter={() => {
                                             setImagem(imagemEnter2)
                                         }}  alt="imagem peça" className={styles.img} />
                                     </li>
                                     <li className={styles.imagensLista}>
-                                        <img src={`/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img03.jpg`} onMouseEnter={() => {
+                                        <img src={`${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img03.jpg`} onMouseEnter={() => {
                                             setImagem(imagemEnter3)
                                         }}  alt="imagem peça" className={styles.img} />
                                     </li>
                                     <li className={styles.imagensLista}>
-                                        <img src={`/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg`} onMouseEnter={() => {
+                                        <img src={`${process.env.PUBLIC_URL}/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg`} onMouseEnter={() => {
                                             setImagem(imagemEnter)
                                         }}  alt="imagem peça" className={styles.img} />
                                     </li>

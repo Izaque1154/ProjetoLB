@@ -39,7 +39,7 @@ function Header(){
 
     return(
       <header className={location.pathname === "/"?styles.header: styles.header2}>
-        <img src="/imagens/lb.jpg" alt="LB-Cardns" onClick={() => navigate("/")} className={styles.LogoImage} />
+        <img src={`${process.env.PUBLIC_URL}/imagens/lb.jpg`} alt="LB-Cardns" onClick={() => navigate("/")} className={styles.LogoImage} />
         <div className={styles.search}>
           <input type="text" id="pesquisar" value={text} onChange={chamar} className={styles.pesquisar} onKeyDownCapture={(e) => handleKeyDown(e)} placeholder="Pesquisar" autoComplete="off" />
           <div className={styles.iconSearch} onClick={(() => handleLogin())}>
