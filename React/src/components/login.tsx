@@ -77,8 +77,8 @@ function Login(){
                             <div className={styles.loader}></div>
                     }
                 </button>
-                <a href="/EsqueceuSenha" className={styles.link}>esqueceu sua senha?</a>
-                <a href="/registro" className={styles.link}>Ainda não tem uma conta? Faça o cadastro</a>
+                <a onClick={() => navigate("/esqueceuSenha")} className={styles.link}>esqueceu sua senha?</a>
+                <a onClick={() => navigate("/registro")} className={styles.link}>Ainda não tem uma conta? Faça o cadastro</a>
             </form>
         </div>
     )

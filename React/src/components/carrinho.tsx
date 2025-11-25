@@ -120,7 +120,7 @@ function Carrinho(){
                         <div className={styles.Pcarrinho}>
                             <div className={styles.Pcarrinho2}>
                               <div className={styles.Pimg}>
-                                <img src={`/public/imagens/${src.tipo}/img${src.id}.jpg`} alt="Imagem Peça"  onClick={() => navigate(`/peca/${src.id}`)} />
+                                <img src={`/public/imagens/${src.tipo}/img${src.id}.jpg`} alt="Imagem Peça"  onClick={() => navigate(`/peca/${src.id}`)} className={styles.img} />
                               </div>
                               <div className={styles.Pinfo}>
                                 <div onClick={() => navigate(`/peca/${src.id}`)}>

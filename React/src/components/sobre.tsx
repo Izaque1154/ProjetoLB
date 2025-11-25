@@ -37,9 +37,9 @@ function Sobre(){
                         Se você precisa de um <strong>orçamento</strong>, tem <strong>dúvidas</strong> ou quer saber mais sobre os nossos serviços, estamos prontos para te atender. <br />
                         Você pode entrar em contato com a <strong>LB-Cardns</strong> pelos seguintes canais: <br /> <br />
                         <ul className={styles.containerLista}>
-                            <li className={styles.lista}>📧 <strong>E-mail:</strong> <a href="/contato">abc123@gmail.com</a></li>
-                            <li className={styles.lista}>📞 <strong>Telefone:</strong> <a href="/contato"> (21) 99999-9999</a></li>
-                            <li className={styles.lista}>💬 <strong>WhatsApp:</strong> <a href="/contato">(21) 99999-9999</a></li>
+                            <li className={styles.lista}>📧 <strong>E-mail:</strong> <a href="/contato" className={styles.a}>abc123@gmail.com</a></li>
+                            <li className={styles.lista}>📞 <strong>Telefone:</strong> <a href="/contato" className={styles.a}> (21) 99999-9999</a></li>
+                            <li className={styles.lista}>💬 <strong>WhatsApp:</strong> <a href="/contato" className={styles.a}>(21) 99999-9999</a></li>
                         </ul>
                         <strong>Nosso atendimento é rápido e direto</strong> — fale com a gente e vamos encontrar a <strong>melhor solução para o seu cardan</strong>.
                     </p>

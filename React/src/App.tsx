@@ -18,10 +18,10 @@ export default function Layout() {
     {
       location.pathname ==="/"?
       <div className={styles.slider}>
-        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/redefinir.jp`} alt="ffff" className={styles.img}/></div>
-        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/of.jpg" alt="sfdh`} className={styles.img}/></div>
-        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/pixel.jpg`} alt="hfd" className={styles.img}/></div>
-        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/redefinir.jpg`} alt="hfd" className={styles.img}/></div>
+        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/redefinir.jpg`} alt="oficina1" className={styles.img}/></div>
+        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/of.jpg`} alt="oficina2" className={styles.img}/></div>
+        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/pixel.jpg`} alt="oficina3" className={styles.img}/></div>
+        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/redefinir.jpg`} alt="oficina4" className={styles.img}/></div>
       </div>
       :
       <div></div>

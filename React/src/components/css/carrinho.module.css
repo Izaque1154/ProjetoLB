@@ -1,20 +1,15 @@
-/* Container geral */
 .container {
   width: 100%;
   padding: 40px 0;
   display: flex;
   justify-content: center;
 }
-
-/* Área principal */
 .main {
   width: 90%;
   max-width: 1200px;
   display: flex;
   gap: 30px;
 }
-
-/* Lista de produtos */
 .produtos {
   flex: 2;
   background: #fff;
@@ -23,7 +18,6 @@
   border: 1px solid #e4e4e4;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
-
 .Ph1 {
   margin: 0;
   font-size: 24px;
@@ -37,16 +31,12 @@
   display: flex;
   justify-content: center;
 }
-
-/* Lista de itens */
 .Pitens {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
-
-/* Cada produto */
 .Pcarrinho {
   background: #fff;
   border: 1px solid #e6e6e6;
@@ -55,43 +45,36 @@
   display: flex;
   align-items: center;
 }
-
 .Pcarrinho2 {
   display: flex;
   gap: 12px;
   width: 100%;
 }
-
-/* Imagens */
-.Pimg img {
+.Pimg .img {
   width: 100px;
   height: 100px;
   object-fit: contain;
   cursor: pointer;
 }
 
-/* Informações */
 .Pinfo {
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .Ptitulo {
   margin: 0;
   font-size: 17px;
   font-weight: 500;
   cursor: pointer;
 }
-
 .Ppreco {
   margin: 4px 0;
   color: #39b54a;
   font-size: 18px;
   font-weight: 600;
 }
-
 /* Botão excluir */
 .Pexcluir {
   border: none;
@@ -103,14 +86,11 @@
 .Pexcluir:hover {
   text-decoration: underline;
 }
-
-/* Resumo (lado direito) */
 .resumo {
   flex: 1;
   position: sticky;
   top: 20px;
 }
-
 .Rresumo {
   background: #fff;
   border-radius: 8px;
@@ -118,7 +98,6 @@
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
-
 .Rh2 {
   margin: 0;
   font-size: 20px;
@@ -126,20 +105,16 @@
   display: flex;
   justify-content: center;
 }
-
-/* Conteúdo do resumo */
 .Rconteudo {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
-
 .RvalorCompra div {
   display: flex;
   justify-content: space-between;
 }
-
 /* Botão comprar */
 .Rcomprar {
   width: 100%;
