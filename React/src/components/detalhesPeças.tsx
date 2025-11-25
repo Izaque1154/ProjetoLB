@@ -881,7 +881,7 @@ const pecas = [
                                 </ul>
                             </div>
                             <div className={styles.pImagem}>
-                                <img src={!imagem ? `/imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg` : imagem} alt="imagem peça" className={styles.img1} />
+                                <img src={!imagem ? `${import.meta.env.BASE_URL}imagens/${Number(id) >= 21? "freio": "tornearia"}/${imgPecas[Number(id)]}/img${id}.jpg` : imagem} alt="imagem peça" className={styles.img1} />
                             </div>
                             <div className={styles.containerE}>
                                 <h6 className={styles.Hestoque}>Estoque: {p.estoque}</h6>

@@ -20,8 +20,8 @@ export default function Layout() {
       <div className={styles.slider}>
         <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/redefinir.jp`} alt="ffff" className={styles.img}/></div>
         <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/of.jpg" alt="sfdh`} className={styles.img}/></div>
-        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}/imagens/pixel.jpg`} alt="hfd" className={styles.img}/></div>
-        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}/imagens/redefinir.jpg`} alt="hfd" className={styles.img}/></div>
+        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/pixel.jpg`} alt="hfd" className={styles.img}/></div>
+        <div className={styles.divImg}><img src={`${import.meta.env.BASE_URL}imagens/redefinir.jpg`} alt="hfd" className={styles.img}/></div>
       </div>
       :
       <div></div>
