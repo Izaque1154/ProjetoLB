@@ -1,5 +1,8 @@
 .container{
     background: linear-gradient(0deg, #022655, rgb(255, 255, 255));
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 .nItem{
     height: 20%;
