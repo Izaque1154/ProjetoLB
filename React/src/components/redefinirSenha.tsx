@@ -69,7 +69,7 @@ function RedefinirSenha() {
             const id = searchParams.get("id");
             const token = searchParams.get("token");
 
-            const url: string = `http://localhost:5000/RedefinirSenha`;
+            const url: string = `https://backendlb-3uos.onrender.com/RedefinirSenha`;
             const dados = {senha, confirmSenha, token, id}
 
             await axios.put(url, dados, {

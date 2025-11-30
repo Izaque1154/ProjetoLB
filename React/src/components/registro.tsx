@@ -127,7 +127,7 @@ function Registro(){
             return;
         }
 
-        const url: string = "http://localhost:5000/registrar";
+        const url: string = "https://backendlb-3uos.onrender.com/registrar";
         const dados = {nome, email, telefone, senha, confirmar}
         try{
             const resposta = await axios.post(url, dados, {

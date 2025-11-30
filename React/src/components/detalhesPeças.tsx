@@ -786,14 +786,14 @@ const pecas = [
 ];
 
   useEffect(() =>{
-    axios.post("http://localhost:5000/itemCarrinho", {peca: id}, {withCredentials:true})
+    axios.post("https://backendlb-3uos.onrender.com/itemCarrinho", {peca: id}, {withCredentials:true})
     .then((res) => setItemCarrinho(res.data.msg))
     .catch(() => console.log("Nenhum item no carrinho"))
   }, [])
 
     async function carrinho(){
         try{
-            await axios.post("http://localhost:5000/carrinho", {peca: id}, {withCredentials: true})
+            await axios.post("https://backendlb-3uos.onrender.com/carrinho", {peca: id}, {withCredentials: true})
             setItemCarrinho(true)
         }catch(erro){
             console.log("erro ao buscar o carrinho: ", erro)
@@ -806,7 +806,7 @@ const pecas = [
 
     async function contratar() {
       try{
-        await axios.post("http://localhost:5000/perfil", {}, {withCredentials:true})
+        await axios.post("https://backendlb-3uos.onrender.com/perfil", {}, {withCredentials:true})
         navigate("/servico", {state: `/peca/${id}`})
       }catch(erro){
       setErro(styles.showErro)

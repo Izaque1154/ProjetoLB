@@ -16,7 +16,7 @@ function ConfirmarEmail() {
         const token = searchParams.get("token")
         console.log("token: ", token)
         try{
-            await axios.post("http://localhost:5000/confirmarEmail", {token: token}, {withCredentials: true})
+            await axios.post("https://backendlb-3uos.onrender.com/confirmarEmail", {token: token}, {withCredentials: true})
             console.log("Email confirmado")
             setCondicao(true)
             setMsg("Email confirmado")

@@ -5,14 +5,19 @@ import dotenv from "dotenv";
 //Conexão com o banco de ados
     //configurações
 dotenv.config()
-const senha = process.env.SENHA_BANCO
 const url = process.env.DATABASE_URL!
 
     //Conexão
-const sequelize = new Sequelize(url, "root", senha,{
-    host: "localhost",
-    dialect: "mysql",
-    logging: false
+const sequelize = new Sequelize(url!, {
+    dialect: "postgres",
+    protocol:"postgres",
+    logging: false,
+    dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 })
 
 sequelize.authenticate()
