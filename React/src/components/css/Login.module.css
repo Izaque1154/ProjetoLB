@@ -205,3 +205,6 @@
   flex-shrink: 0;
   box-shadow: 0 0 6px rgba(109, 42, 42, 0.4);
 }
+.link:hover {
+  cursor: pointer;
+}

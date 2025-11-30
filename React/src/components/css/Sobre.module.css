@@ -89,6 +89,9 @@
   color: var(--primary);
   font-weight: 600;
 }
+.lista .a:hover {
+  cursor: pointer;
+}
 
 @keyframes fadeIn {
   from {
