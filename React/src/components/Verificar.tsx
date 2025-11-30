@@ -44,7 +44,7 @@ function Verificar() {
             const data: string = String(Date.now() + 6000000)
             localStorage.setItem("timestamp2", data)
             console.log("Email enviado com sucesso")
-            await axios.post("https://backendlb-3uos.onrender.com/reenviar", {email: email, token: token})
+            await axios.post("https://dockerlb.onrender.com/reenviar", {email: email, token: token})
         }catch(erro){
             console.log("erro", erro)
         }

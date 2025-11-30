@@ -35,7 +35,7 @@ function Login(){
 
         try{
             setCarregar(true)
-            const url: string = "https://backendlb-3uos.onrender.com/login"
+            const url: string = "https://dockerlb.onrender.com/login"
             const params = { email, senha }
 
             await axios.post(url, params, {

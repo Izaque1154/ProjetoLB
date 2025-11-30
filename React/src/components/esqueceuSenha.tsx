@@ -46,7 +46,7 @@ function EsqueceuSenha() {
         }
 
         try{
-            const url = "https://backendlb-3uos.onrender.com/esqueceuSenha";
+            const url = "https://dockerlb.onrender.com/esqueceuSenha";
 
             await axios.post(url, {email: email}, {
                 "headers": {

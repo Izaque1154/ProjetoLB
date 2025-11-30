@@ -16,7 +16,7 @@ function Carrinho(){
             setAlertExcluir(styles.hideErro)
           }, [])
         useEffect(() => {
-          axios.post("https://backendlb-3uos.onrender.com/buscarCarrinho", {}, {withCredentials:true})
+          axios.post("https://dockerlb.onrender.com/buscarCarrinho", {}, {withCredentials:true})
           .then((res) => setItens(res.data.msg))
           .catch(() => console.log("Nenhum item no carrinho"))
         }, [excluir])
@@ -71,7 +71,7 @@ function Carrinho(){
   async function excluir(e: any): Promise<void>{
     try{
       console.log(e)
-      const res = await axios.post("https://backendlb-3uos.onrender.com/excluir", {peca: e}, {withCredentials: true})
+      const res = await axios.post("https://dockerlb.onrender.com/excluir", {peca: e}, {withCredentials: true})
       console.log(res)
       setAlertExcluir(styles.showErro)
       setTimeout(() =>{
@@ -93,7 +93,7 @@ function Carrinho(){
     setSoma(resultado)
   }
   async function comprar(){
-    axios.post("https://backendlb-3uos.onrender.com/comprado", {}, {withCredentials: true})
+    axios.post("https://dockerlb.onrender.com/comprado", {}, {withCredentials: true})
     navigate("/servico", {state: "/carrinho"})
   }
 

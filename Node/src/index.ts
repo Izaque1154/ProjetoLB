@@ -17,10 +17,11 @@ dotenv.config();
 const app: express.Application = express();
 app.use(cors({
   origin: "https://izaque1154.github.io",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
@@ -152,7 +153,7 @@ app.post("/confirmarEmail", middleware2, async (req: Request, res:Response): Pro
         res.cookie("token", token,  {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 3600000
         });
         return res.status(200).json({msg: "Conta verificada!"})
