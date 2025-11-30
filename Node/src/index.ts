@@ -16,7 +16,7 @@ import {Response, Request, NextFunction } from "express"
 dotenv.config();
 const app: express.Application = express();
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://backendlb-3uos.onrender.com",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true

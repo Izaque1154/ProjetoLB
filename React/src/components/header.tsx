@@ -17,7 +17,7 @@ function Header(){
     const location = useLocation()
     
     useEffect(() =>{
-    axios.post("http://localhost:5000/perfil", {}, {withCredentials:true})
+    axios.post("https://dockerlb.onrender.com/perfil", {}, {withCredentials:true})
     .then((res) => setNome(res.data.user.nome))
   }, [])
 
