@@ -7,7 +7,10 @@ dotenv.config()
 
 //Configura o transporter
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com", 
+    port: 587,
+    secure: false,
+    requireTLS: true,
     auth: {
         user: "ia765350@gmail.com",
         pass: process.env.SENHAEMAIL

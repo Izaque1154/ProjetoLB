@@ -21,7 +21,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
-app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
@@ -117,13 +116,20 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
                 token: token,
             }
         }
-    transporter.sendMail(enviar, (error, info) => {
+    await transporter.sendMail(enviar, (error, info) => {
         if (error) {
             console.log("Houve um erro ao enviar o email: ", error)
         } else{
             console.log("Email enviado com sucesso: ", info.response)
         }
     })
+    //Armazenando nos cookies
+        res.cookie("token", token,  {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'none',
+            maxAge: 3600000
+        });
     return res.status(201).json({ msg: "cadastro criado com sucesso", token: token });
 
     }catch(error){

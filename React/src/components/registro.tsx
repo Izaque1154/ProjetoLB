@@ -136,7 +136,7 @@ function Registro(){
             console.log("Usuário cadastrado")
             setCarregar(true)
             setTimeout(() =>{
-                navigate(`/verificar?email=${email}&token=${resposta.data.token}`)
+                setCarregar(false)
             }, 300)
         }
         catch(err: any){
