@@ -143,7 +143,7 @@ function Registro(){
             console.log("Houve um erro ao registrar o usuário")
             setErro(styles.showErro)
             setTimeout(() =>{
-                setErro(styles.hideErro)
+                navigate("/home")
             }, 2500)
         }
     }
