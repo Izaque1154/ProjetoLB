@@ -87,7 +87,7 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
             email,
             telefone,
             senha: hash,
-            verificado: false
+            verificado: true
     });
     if (!process.env.SECRET){
         return console.log("variável de ambiente não definida");
@@ -124,10 +124,10 @@ app.post("/registrar", async (req: Request, res: Response): Promise<any> => {
         }
     })
     //Armazenando nos cookies
-        res.cookie("token", token,  {
+        res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'none',
+            secure: true,      
+            sameSite: "none",
             maxAge: 3600000
         });
     return res.status(201).json({ msg: "cadastro criado com sucesso", token: token });
@@ -200,8 +200,8 @@ app.post("/login", async (req: Request, res: Response):Promise<any> => {
         //armazenando token nos cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
+            secure: true,      
+            sameSite: "none",
             maxAge: 3600000
         });
 

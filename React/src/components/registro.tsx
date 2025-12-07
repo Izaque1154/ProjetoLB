@@ -130,7 +130,7 @@ function Registro(){
         const url: string = "https://dockerlb.onrender.com/registrar";
         const dados = {nome, email, telefone, senha, confirmar}
         try{
-            const resposta = await axios.post(url, dados, {
+            await axios.post(url, dados, {
                 withCredentials: true
             })
             console.log("Usuário cadastrado")
