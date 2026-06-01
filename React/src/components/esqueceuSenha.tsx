@@ -46,7 +46,7 @@ function EsqueceuSenha() {
         }
 
         try{
-            const url = "https://dockerlb.onrender.com/esqueceuSenha";
+            const url = `${import.meta.env.VITE_API_URL}/esqueceuSenha`;
 
             await axios.post(url, {email: email}, {
                 "headers": {

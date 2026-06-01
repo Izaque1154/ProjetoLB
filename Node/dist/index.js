@@ -26,9 +26,10 @@ const configEmail_1 = __importDefault(require("./configEmail"));
 //Configurações
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+const isProd = process.env.NODE_ENV === "production";
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }));
@@ -146,8 +147,8 @@ app.post("/confirmarEmail", middleware2, (req, res) => __awaiter(void 0, void 0,
         //Armazenando nos cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
             maxAge: 3600000
         });
         return res.status(200).json({ msg: "Conta verificada!" });
@@ -186,8 +187,8 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         //armazenando token nos cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
             maxAge: 3600000
         });
         return res.status(201).json({ msg: "Usuário logado com sucesso" });

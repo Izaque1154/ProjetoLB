@@ -127,7 +127,7 @@ function Registro(){
             return;
         }
 
-        const url: string = "https://dockerlb.onrender.com/registrar";
+        const url: string = `${import.meta.env.VITE_API_URL}/registrar`;
         const dados = {nome, email, telefone, senha, confirmar}
         try{
             const resposta = await axios.post(url, dados, {
