@@ -17,7 +17,7 @@ function Header(){
     const location = useLocation()
     
     useEffect(() =>{
-    axios.post("https://dockerlb.onrender.com/perfil", {}, {withCredentials:true})
+    axios.post(`${import.meta.env.VITE_API_URL}/perfil`, {}, {withCredentials:true})
     .then((res) => setNome(res.data.user.nome))
   }, [])
 

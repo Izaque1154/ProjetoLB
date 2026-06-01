@@ -16,7 +16,7 @@ function ConfirmarEmail() {
         const token = searchParams.get("token")
         console.log("token: ", token)
         try{
-            await axios.post("https://dockerlb.onrender.com/confirmarEmail", {token: token}, {withCredentials: true})
+            await axios.post(`${import.meta.env.VITE_API_URL}/confirmarEmail`, {token: token}, {withCredentials: true})
             console.log("Email confirmado")
             setCondicao(true)
             setMsg("Email confirmado")

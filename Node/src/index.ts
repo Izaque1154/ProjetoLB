@@ -15,8 +15,9 @@ import {Response, Request, NextFunction } from "express"
 //Configurações
 dotenv.config();
 const app: express.Application = express();
+const isProd = process.env.NODE_ENV === "production";
 app.use(cors({
-  origin: "https://izaque1154.github.io",
+  origin: process.env.FRONTEND_URL,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
@@ -158,8 +159,8 @@ app.post("/confirmarEmail", middleware2, async (req: Request, res:Response): Pro
         //Armazenando nos cookies
         res.cookie("token", token,  {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'none',
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
             maxAge: 3600000
         });
         return res.status(200).json({msg: "Conta verificada!"})
@@ -200,8 +201,13 @@ app.post("/login", async (req: Request, res: Response):Promise<any> => {
         //armazenando token nos cookies
         res.cookie("token", token, {
             httpOnly: true,
+<<<<<<< HEAD
             secure: true,      
             sameSite: "none",
+=======
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
+>>>>>>> desenvolvimento
             maxAge: 3600000
         });
 

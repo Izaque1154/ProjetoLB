@@ -69,7 +69,7 @@ function RedefinirSenha() {
             const id = searchParams.get("id");
             const token = searchParams.get("token");
 
-            const url: string = `https://dockerlb.onrender.com/RedefinirSenha`;
+            const url: string = `${import.meta.env.VITE_API_URL}/RedefinirSenha`;
             const dados = {senha, confirmSenha, token, id}
 
             await axios.put(url, dados, {

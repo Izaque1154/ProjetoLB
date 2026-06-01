@@ -1,6 +1,6 @@
 // router.tsx
-import Layout from "/Users/ia765/OneDrive/Documentos/Meus Projetos/LBCardans/React/src/App";
-import LayoutLimpo from "/Users/ia765/OneDrive/Documentos/Meus Projetos/LBCardans/React/src/AppLimpo"
+import Layout from "../App";
+import LayoutLimpo from "../AppLimpo"
 import Home from "./home";
 import Sobre from "./sobre";
 import Contato from "./contato";
