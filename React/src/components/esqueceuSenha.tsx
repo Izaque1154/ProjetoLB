@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { MdError } from "react-icons/md";
-import axios from "axios"
+import api, { apiRoutes } from "../services/api"
 
 
 function EsqueceuSenha() {
@@ -46,9 +46,9 @@ function EsqueceuSenha() {
         }
 
         try{
-            const url = `${import.meta.env.VITE_API_URL}/esqueceuSenha`;
+            const url = apiRoutes.auth.esqueceuSenha;
 
-            await axios.post(url, {email: email}, {
+            await api.post(url, {email: email}, {
                 "headers": {
                     "Content-Type": "application/json"
                 }
@@ -98,10 +98,10 @@ function EsqueceuSenha() {
                 <p className={styles.enviarP}>Email enviado com sucesso</p>
             </div>
             <header className={styles.header}>
-                <a href="/" ><img className={styles.img} src="/imagens/lb.jpg" alt="Logo LB-Cardans"/></a>
+                <a onClick={() => navigate("/")}><img className={styles.img} src={`${import.meta.env.BASE_URL}imagens/lb.jpg`} alt="Logo LB-Cardans"/></a>
                 <nav className={styles.links}>
-                    <a href="/login" className={styles.a}>Login</a>
-                    <a href="/registro" className={styles.a}>Registro</a>
+                    <a onClick={() => navigate("/login")} className={styles.a}>Login</a>
+                    <a onClick={() => navigate("/registro")} className={styles.a}>Registro</a>
                 </nav>
             </header>
             <div>

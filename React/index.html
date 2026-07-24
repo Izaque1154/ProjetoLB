@@ -2,9 +2,22 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="%BASE_URL%imagens/lbLogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>LB-Cardans</title>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var redirect = params.get("redirect");
+
+        if (!redirect) {
+          return;
+        }
+
+        var base = "%BASE_URL%".replace(/\/$/, "");
+        window.history.replaceState(null, "", base + redirect);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

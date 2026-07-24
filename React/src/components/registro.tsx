@@ -1,6 +1,6 @@
 import styles from "./css/Registro.module.css"
 import { useEffect, useState } from "react"
-import axios from "axios"
+import api, { apiRoutes } from "../services/api"
 import { useNavigate } from "react-router-dom"
 import { MdError } from "react-icons/md";
 import { PatternFormat } from "react-number-format";
@@ -127,12 +127,10 @@ function Registro(){
             return;
         }
 
-        const url: string = `${import.meta.env.VITE_API_URL}/registrar`;
+        const url: string = apiRoutes.auth.registrar;
         const dados = {nome, email, telefone, senha, confirmar}
         try{
-            const resposta = await axios.post(url, dados, {
-                withCredentials: true
-            })
+            const resposta = await api.post(url, dados)
             console.log("Usuário cadastrado")
             setCarregar(true)
             setTimeout(() =>{

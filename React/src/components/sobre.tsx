@@ -20,7 +20,7 @@ function Sobre(){
                         Trabalhamos com a <strong>fabricação, manutenção e recuperação</strong> de cardans automotivos e industriais. <br />
                         Garantimos que cada peça atenda aos <strong>mais altos padrões de qualidade e segurança</strong>. <br />
                         Nosso compromisso é oferecer soluções <strong>precisas e duráveis</strong> para veículos leves, pesados e equipamentos que exigem <strong>desempenho mecânico confiável</strong>. <br />
-                        Quer ver alguns dos projetos e peças que já passaram por aqui? Dá uma olhada na nossa <a href="/oficina">oficina</a> — ela mostra um pouco do que somos capazes de fazer.
+                        Quer ver alguns dos projetos e peças que já passaram por aqui? Dá uma olhada na nossa <a onClick={() => navigate("/oficina")}>oficina</a> — ela mostra um pouco do que somos capazes de fazer.
                     </p>
                     <h2  className={styles.subTitulo}>🛠️ Como começou</h2>
                     <p className={styles.paragrafo}>

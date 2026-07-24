@@ -1,5 +1,5 @@
 import styles from "./css/Login.module.css"
-import axios from "axios"
+import api, { apiRoutes } from "../services/api"
 import { useState, useEffect } from "react"
 import { MdError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -35,12 +35,10 @@ function Login(){
 
         try{
             setCarregar(true)
-            const url: string = `${import.meta.env.VITE_API_URL}/login`
+            const url: string = apiRoutes.auth.login
             const params = { email, senha }
 
-            await axios.post(url, params, {
-                withCredentials: true
-            })
+            await api.post(url, params)
             console.log("Usuário autenticado ")
             setTimeout(() =>{
                 navigate("/")

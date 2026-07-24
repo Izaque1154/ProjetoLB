@@ -1,5 +1,5 @@
 import styles from "./css/verificar.module.css"
-import axios from "axios"
+import api, { apiRoutes } from "../services/api"
 import { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 
@@ -44,7 +44,7 @@ function Verificar() {
             const data: string = String(Date.now() + 6000000)
             localStorage.setItem("timestamp2", data)
             console.log("Email enviado com sucesso")
-            await axios.post(`${import.meta.env.VITE_API_URL}/reenviar`, {email: email, token: token})
+            await api.post(apiRoutes.auth.reenviar, {email: email, token: token})
         }catch(erro){
             console.log("erro", erro)
         }

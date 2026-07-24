@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 import styles from "./css/header.module.css"
-import axios from 'axios';
+import api, { apiRoutes } from "../services/api";
 import { BsCart4 } from "react-icons/bs";
 import { IoGitPullRequestSharp } from "react-icons/io5";
 import { FaFacebookMessenger } from "react-icons/fa";
@@ -17,8 +17,8 @@ function Header(){
     const location = useLocation()
     
     useEffect(() =>{
-    axios.post(`${import.meta.env.VITE_API_URL}/perfil`, {}, {withCredentials:true})
-    .then((res) => setNome(res.data.user.nome))
+    api.post(apiRoutes.auth.perfil, {})
+    .then((res) => setNome(res.data.nome))
   }, [])
 
     function chamar(e: React.ChangeEvent<HTMLInputElement>){

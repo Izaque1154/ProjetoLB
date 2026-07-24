@@ -69,42 +69,45 @@
 
 }
 .button{
-  position: relative;
   height: 50px;
   width: 50px;
-  left: 50%;
-  right: 50%;
-  transform: translate(-50%);
-  border-radius: 100px;
-  background: transparent;
+  flex-shrink: 0;
+  align-self: center;
+  border-radius: 50%;
   border: solid 1px white;
   font-size: 25px;
   color: white;
-  transition: 0.5s;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(1px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s, border-color 0.3s, background-color 0.3s;
 }
 .button:hover{
   border: solid 1px #006efd;
   color: #006efd;
-  transition: 0.5s;
 }
 /*Footer*/
 .foot{
   width: 100%;
   position: fixed;
   bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
-.hideContainerFooter{
-  display: none;
-  justify-content: space-around;
-  padding-top: 15px;
-  color: #444546;
-  background-color: white;
+.footOpen{
+  transform: translateY(0);
 }
-.showContainerFooter{
-  position: relative;
-  bottom: 0;
+.footClosed{
+  transform: translateY(calc(100% - 50px));
+}
+.containerFooter{
   display: flex;
   width: 100%;
   justify-content: space-around;
@@ -113,6 +116,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(6px);
   border-top: solid 1px white;
+  
 }
 .listaSection{
   display:flex;

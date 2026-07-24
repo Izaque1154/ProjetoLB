@@ -1,7 +1,7 @@
 import styles from "./css/carrinho.module.css"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import api, { apiRoutes } from "../services/api";
 import { MdError } from "react-icons/md";
 
 function Carrinho(){
@@ -16,7 +16,7 @@ function Carrinho(){
             setAlertExcluir(styles.hideErro)
           }, [])
         useEffect(() => {
-          axios.post(`${import.meta.env.VITE_API_URL}/buscarCarrinho`, {}, {withCredentials:true})
+          api.post(apiRoutes.cart.buscar, {})
           .then((res) => setItens(res.data.msg))
           .catch(() => console.log("Nenhum item no carrinho"))
         }, [excluir])
@@ -71,7 +71,7 @@ function Carrinho(){
   async function excluir(e: any): Promise<void>{
     try{
       console.log(e)
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/excluir`, {peca: e}, {withCredentials: true})
+      const res = await api.post(apiRoutes.cart.excluir, {peca: e})
       console.log(res)
       setAlertExcluir(styles.showErro)
       setTimeout(() =>{
@@ -93,7 +93,7 @@ function Carrinho(){
     setSoma(resultado)
   }
   async function comprar(){
-    axios.post(`${import.meta.env.VITE_API_URL}/comprado`, {}, {withCredentials: true})
+    api.post(apiRoutes.cart.comprar, {})
     navigate("/servico", {state: "/carrinho"})
   }
 
@@ -120,7 +120,7 @@ function Carrinho(){
                         <div className={styles.Pcarrinho}>
                             <div className={styles.Pcarrinho2}>
                               <div className={styles.Pimg}>
-                                <img src={`/public/imagens/${src.tipo}/img${src.id}.jpg`} alt="Imagem Peça"  onClick={() => navigate(`/peca/${src.id}`)} className={styles.img} />
+                                <img src={`${import.meta.env.BASE_URL}imagens/${src.tipo}/img${src.id}.jpg`} alt="Imagem Peça"  onClick={() => navigate(`/peca/${src.id}`)} className={styles.img} />
                               </div>
                               <div className={styles.Pinfo}>
                                 <div onClick={() => navigate(`/peca/${src.id}`)}>

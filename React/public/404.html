@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LB-Cardans</title>
+    <script>
+      (function () {
+        var base = "/ProjetoLB";
+        var path = window.location.pathname;
+        var route = path.indexOf(base) === 0 ? path.slice(base.length) : path;
+
+        if (!route || route === "/") {
+          route = "/";
+        }
+
+        window.location.replace(
+          base + "/?redirect=" + encodeURIComponent(route + window.location.search + window.location.hash),
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -22,7 +22,7 @@ function Oficina(){
   useEffect(() =>{
     if(!location){
         return
-      } else if (!location.state){
+      } else if (typeof location.state !== "string" || !location.state.trim()){
         setFiltrados(info)
         return 
     }

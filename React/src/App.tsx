@@ -31,9 +31,9 @@ export default function Layout() {
         <Outlet /> 
       </main>
     </div>
-    <div className={styles.foot}>
-      <button className={styles.button} onClick={() =>{setValidacao(!validacao)}}>{validacao? <RiArrowDownWideLine />: <MdOutlineKeyboardArrowUp />}</button>
-      <footer className={validacao? styles.hideContainerFooter: styles.showContainerFooter}>
+    <div className={`${styles.foot} ${validacao ? styles.footClosed : styles.footOpen}`}>
+      <button className={styles.button} onClick={() =>{setValidacao(!validacao)}}>{validacao? <MdOutlineKeyboardArrowUp />: <RiArrowDownWideLine />}</button>
+      <footer className={styles.containerFooter}>
         <hr className={styles.hr}/>
         <section className={styles.section}>
           <div className={styles.listaSection}>
@@ -47,16 +47,6 @@ export default function Layout() {
               <li className={styles.linkLista}>Blog</li>
             </ul>
           </div>
-        </section>
-        <section className={styles.section}>
-          <ul className={styles.itemLista}>
-            <h6 className={styles.tituloLIsta}>Outros Sites</h6>
-            <li className={styles.linkLista}><a href="Sites/Website/website.html" className={styles.listaA}>Website</a></li>
-            <li className={styles.linkLista}><a href="Sites/Fogo do Doom/doom.html" className={styles.listaA}>Fogo do Doom</a></li>
-            <li className={styles.linkLista}><a href="Sites/Animation Loading/loading.html" className={styles.listaA}>Animation Loading</a></li>
-            <li className={styles.linkLista}><a href="Sites/Gerador/gerador.html" className={styles.listaA}>Gerador</a></li>
-            <li className={styles.linkLista}><a href="Sites/Notas com Estrelas/notas.html" className={styles.listaA}>Notas com Estrelas</a></li>
-          </ul>
         </section>
         <section className={styles.section}>
           <ul className={styles.itemLista}>

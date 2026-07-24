@@ -1,4 +1,4 @@
-import axios from "axios"
+import api, { apiRoutes } from "../services/api"
 import styles from "./css/confirmarEmail.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
@@ -16,7 +16,7 @@ function ConfirmarEmail() {
         const token = searchParams.get("token")
         console.log("token: ", token)
         try{
-            await axios.post(`${import.meta.env.VITE_API_URL}/confirmarEmail`, {token: token}, {withCredentials: true})
+            await api.post(apiRoutes.auth.confirmarEmail, {token: token})
             console.log("Email confirmado")
             setCondicao(true)
             setMsg("Email confirmado")

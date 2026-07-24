@@ -11,10 +11,13 @@ function Servico(){
 
     useEffect(() => {
       setExpandir(true);
-      setTimeout(() =>{
-        navigate(location.state)
+      const origem = typeof location.state === "string" ? location.state : "/";
+      const timer = setTimeout(() =>{
+        navigate(origem)
       }, 2000)
-    }, []);
+
+      return () => clearTimeout(timer);
+    }, [location.state, navigate]);
 
   return(
     <div className={styles.main}>

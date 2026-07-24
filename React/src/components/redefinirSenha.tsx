@@ -1,4 +1,4 @@
-import axios from "axios"
+import api, { apiRoutes } from "../services/api"
 import { useEffect, useState } from "react"
 import styles from "./css/redefinirSenha.module.css"
 import { useSearchParams } from "react-router-dom";
@@ -69,10 +69,10 @@ function RedefinirSenha() {
             const id = searchParams.get("id");
             const token = searchParams.get("token");
 
-            const url: string = `${import.meta.env.VITE_API_URL}/RedefinirSenha`;
+            const url: string = apiRoutes.auth.redefinirSenha;
             const dados = {senha, confirmSenha, token, id}
 
-            await axios.put(url, dados, {
+            await api.put(url, dados, {
                 "headers": {
                     "Content-Type": "application/json"
                 }
