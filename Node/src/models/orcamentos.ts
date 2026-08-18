@@ -10,13 +10,15 @@ interface OrcamentoAttributes {
     telefone: string;
     veiculo: string;
     descricao: string;
+    urgencia?: string;
     status: string;
     respostaAdmin?: string | null;
     placa?: string | null;
     chassi?: string | null ;
+    foto?: string | null;
 }
 
-interface OrcamentoCreationAttributes extends Optional<OrcamentoAttributes, "id" | "produtoId" | "servicoId" | "respostaAdmin"> {}
+interface OrcamentoCreationAttributes extends Optional<OrcamentoAttributes, "id" | "produtoId" | "servicoId" | "respostaAdmin" | "foto"> {}
 
 class Orcamento extends Model<OrcamentoAttributes, OrcamentoCreationAttributes> implements OrcamentoAttributes {
     public id!: number;
@@ -27,10 +29,12 @@ class Orcamento extends Model<OrcamentoAttributes, OrcamentoCreationAttributes> 
     public telefone!: string;
     public veiculo!: string;
     public descricao!: string;
+    public urgencia!: string;
     public status!: string;
     public respostaAdmin!: string | null;
     public placa!: string | null;
     public chassi!: string | null;
+    public foto!: string | null;
 }
 
 Orcamento.init({
@@ -81,6 +85,10 @@ Orcamento.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    urgencia: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     status: {
         type: DataTypes.STRING,
         allowNull: false
@@ -96,12 +104,16 @@ Orcamento.init({
     chassi: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+    foto: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 },{
     sequelize,
     modelName: "Orcamento",
     tableName: "orcamentos",
-    timestamps: false
+    timestamps: true
 })
 
 export default Orcamento;

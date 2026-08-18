@@ -1,0 +1,16 @@
+//Dependências
+import middlewares from "../middlewares/middlewareAuth";
+import { Router } from "express";
+import { criarOrcamento } from "../controllers/budgetControllers";
+import { validateRegister } from "../middlewares/validate/registerSchema";
+import { validateLogin } from "../middlewares/validate/loginSchema";
+import { validateRedefinirSenha } from "../middlewares/validate/redefinirSchema";
+
+const router = Router();
+
+//Rotas
+router.post("/orcamento", middlewares.middleware, criarOrcamento);
+router.get("/confirmar/:token", );
+
+export default router;
+

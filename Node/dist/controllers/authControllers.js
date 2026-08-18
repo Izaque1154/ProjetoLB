@@ -83,7 +83,6 @@ exports.registrarUsuario = registrarUsuario;
 //Função para confirmar email
 const confirmarEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const dados = req.user;
-    const token = req.body.token;
     try {
         if (!dados) {
             return res.status(500).json({ erro: "Token expirado" });
@@ -95,10 +94,11 @@ const confirmarEmail = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (dado.verificado === true) {
             return res.status(401).json({ erro: "Usuário já verificado" });
         }
-        yield usuario_1.User.update({ verificado: true }, { where: { email: dados.email, id: dados.id } });
+        yield usuario_1.User.update({ verificado: true }, { where: { email: dado.email, id: dado.id } });
+        console.log(dado);
         ////////////////////////////////////////////////////////////
         //Criando token
-        const token = jsonwebtoken_1.default.sign({ id: 1, email: "bizin1237@gmail.com" }, process.env.SECRET, { "expiresIn": "1h", "algorithm": "HS256" });
+        const token = jsonwebtoken_1.default.sign({ id: dado.id, email: dado.email }, process.env.SECRET, { "expiresIn": "1h", "algorithm": "HS256" });
         //Armazenando no cookie
         res.cookie("token", token, {
             httpOnly: true,
@@ -137,7 +137,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         };
         const secret = process.env.SECRET;
         const options = {
-            "expiresIn": "1h",
+            "expiresIn": "24h",
             "algorithm": "HS256"
         };
         const token = jsonwebtoken_1.default.sign(payload, secret, options);
@@ -203,7 +203,6 @@ exports.esqueceuSenha = esqueceuSenha;
 //Redefinindo senha
 const redefinirSenha = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { senha, confirmSenha, token, id } = req.body;
-    console.log(senha, " ", confirmSenha, " ", token, " ", id);
     if (senha !== confirmSenha) {
         return res.status(500).json({ erro: "senhas não coincidem!" });
     }

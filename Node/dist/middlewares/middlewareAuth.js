@@ -34,22 +34,6 @@ function middleware(req, res, next) {
         }
     });
 }
-function middleware2(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const token = req.body.token;
-        if (!token) {
-            return res.status(401).json({ erro: "Token Expirado" });
-        }
-        try {
-            const decoded = jsonwebtoken_1.default.verify(token, process.env.SECRET);
-            req.user = decoded;
-            next();
-        }
-        catch (erro) {
-            res.status(401).json({ erro: "Token expirado" });
-        }
-    });
-}
 function middlewareAdmin(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         const token = req.cookies.token;
@@ -73,4 +57,4 @@ function middlewareAdmin(req, res, next) {
         }
     });
 }
-exports.default = { middleware, middleware2, middlewareAdmin };
+exports.default = { middleware, middlewareAdmin };

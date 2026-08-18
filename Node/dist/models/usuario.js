@@ -58,6 +58,6 @@ Users.init({
     sequelize: banco_1.default,
     modelName: "User",
     tableName: "usuarios",
-    timestamps: false
+    timestamps: true
 });
 exports.User = Users;

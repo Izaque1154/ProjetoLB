@@ -10,7 +10,7 @@ const router = Router();
 
 //Rotas
 router.post("/registrar", validateRegister, registrarUsuario);
-router.post("/confirmarEmail", middlewares.middleware2, confirmarEmail);
+router.post("/confirmarEmail", middlewares.middleware, confirmarEmail);
 router.post("/login", validateLogin, login);
 router.post("/esqueceuSenha", esqueceuSenha);
 router.put("/RedefinirSenha", validateRedefinirSenha, redefinirSenha);

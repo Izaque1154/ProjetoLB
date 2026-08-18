@@ -22,6 +22,7 @@ import Registro from "../components/registro";
 import Servico from "../components/servico";
 import Sobre from "../components/sobre";
 import Verificar from "../components/Verificar";
+import OrcamentoCliente from "../components/orcamento";
 
 const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter(
         {
           path: "/carrinho",
           element: <Carrinho />,
+        },
+        {
+          path: '/orçamento',
+          element: <OrcamentoCliente/>
         },
       ],
     },

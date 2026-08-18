@@ -5,7 +5,13 @@ import cookieParser from "cookie-parser";
 import sequelize from "./config/banco";
 import authRoutes from "./routes/authRoutes";
 import cartRoutes from "./routes/cartRoutes";
+import budgetRoutes from "./routes/budgetRoutes";
+import "./models/servicos";
+import "./models/orcamentos";
+import "./models/carrinho_itens";
+import './models/orcamentoItens'
 import { seedProdutos } from "./itens/itens";
+import { seedServicos } from "./itens/servicos";
 import { User } from "./models/usuario"
 import bcrypt from "bcrypt"
 
@@ -26,6 +32,7 @@ app.use(cookieParser());
 
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
+app.use('/budget', budgetRoutes);
 
 const port = process.env.PORT;
 
@@ -34,7 +41,7 @@ async function startServer() {
         await sequelize.authenticate();
         console.log("Conexao com o banco de dados bem-sucedida!");
 
-        await sequelize.sync({force: true});
+        await sequelize.sync({alter: true});
         console.log("Tabelas sincronizadas com sucesso!");
         //usuário admin
         const hash: string = await bcrypt.hash("123456", 10);
@@ -48,6 +55,10 @@ async function startServer() {
                 role: "admin"
             }
         })
+
+        await seedServicos();
+        console.log("Serviços sincronizados com sucesso!");
+
         await seedProdutos();
         console.log("Produtos sincronizados com sucesso!");
 

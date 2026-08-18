@@ -76,7 +76,7 @@ Produtos.init({
     sequelize,
     modelName: "Produtos",
     tableName: "produtos",
-    timestamps: false
+    timestamps: true
 });
 
 export const produtos = Produtos;

@@ -77,7 +77,7 @@ Users.init({
     sequelize,
     modelName: "User",
     tableName: "usuarios",
-    timestamps: false
+    timestamps: true
 });
 
 export const User = Users;

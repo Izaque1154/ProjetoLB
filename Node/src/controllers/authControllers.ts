@@ -32,7 +32,8 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<any
     if (!process.env.SECRET){
         return console.log("variável de ambiente não definida");
     };
-    //Autenticando o usuário
+    
+   //Autenticando o usuário
     const secret = process.env.SECRET as string;
     const payload: jwtPayload = {
         id: usuario.id,
@@ -73,7 +74,6 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<any
 //Função para confirmar email
 export const confirmarEmail = async (req: Request, res:Response): Promise<any> =>{
     const dados = req.user
-    const token = req.body.token
 
     try{
         if(!dados){
@@ -87,11 +87,12 @@ export const confirmarEmail = async (req: Request, res:Response): Promise<any> =
             return res.status(401).json({erro: "Usuário já verificado"})
         }
 
-        await User.update({verificado: true}, {where: {email: dados.email, id: dados.id}})
+        await User.update({verificado: true}, {where: {email: dado.email, id: dado.id}})
+        console.log(dado)
 
     ////////////////////////////////////////////////////////////
         //Criando token
-    const token = jwt.sign({id: 1, email: "bizin1237@gmail.com"}, process.env.SECRET as string, {"expiresIn": "1h","algorithm": "HS256"})
+    const token = jwt.sign({id: dado.id, email: dado.email}, process.env.SECRET as string, {"expiresIn": "1h","algorithm": "HS256"})
 
         //Armazenando no cookie
     res.cookie("token", token,  {
@@ -132,7 +133,7 @@ export const login = async (req: Request, res: Response):Promise<any> => {
         };
         const secret = process.env.SECRET as string;
         const options: SignOptions = {
-            "expiresIn": "1h",
+            "expiresIn": "24h",
             "algorithm": "HS256"
         } ;
         const token = jwt.sign(payload, secret, options);
@@ -207,7 +208,6 @@ export const esqueceuSenha = async (req: Request, res: Response):Promise<any> =>
 export const redefinirSenha = async (req: Request, res: Response): Promise<any> => {
 
     const{ senha, confirmSenha, token, id } = req.body;
-    console.log(senha, " ", confirmSenha," ", token," ", id);
 
     if (senha !== confirmSenha) {
         return res.status(500).json({erro: "senhas não coincidem!"});

@@ -50,10 +50,19 @@ function Header(){
         </div>
         <nav className={styles.links}>
             <a onClick={() => navigate("/")} className={styles.a}>Home</a>
-            <a onClick={() => navigate("/oficina")} className={styles.a}>Oficina</a>
+            <div>
+
+              <a className={styles.a}>Oficina</a>
+              <section>
+                <a onClick={() => navigate("/orçamento")}>Orçamentos</a>
+                <a onClick={() => navigate("/oficina")}>Peças</a>
+              </section>
+
+            </div>
             <a onClick={() => navigate("/contato")} className={styles.a}>Contato</a>
             <a onClick={() => navigate("/sobre")} className={styles.a}>Sobre</a>
             <a onClick={() => navigate("/carrinho")} className={styles.a}>Carrinho</a>
+
           <div className={styles.loginRegistro}>
             { nome ? 
                   <div className={styles.divNome}><a className={styles.a}>{nome}</a></div>

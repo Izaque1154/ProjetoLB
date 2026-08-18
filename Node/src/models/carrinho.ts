@@ -5,9 +5,9 @@ interface CarrinhoUsuario {
     id: number;
     idUser: number;
     peca: number;
-}
+};
 
-interface CarrinhoUsuarioAtributos extends Optional<CarrinhoUsuario, "id"> {}
+interface CarrinhoUsuarioAtributos extends Optional<CarrinhoUsuario, "id"> {};
 
 class Carrinho extends Model<CarrinhoUsuario, CarrinhoUsuarioAtributos> implements CarrinhoUsuario {
     public id!: number;
@@ -40,7 +40,7 @@ Carrinho.init({
     sequelize,
     modelName: "Carrinho",
     tableName: "carrinho",
-    timestamps: false
+    timestamps: true
 });
 
 export default Carrinho;

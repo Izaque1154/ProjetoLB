@@ -25,23 +25,6 @@ async function middleware(req: Request, res: Response, next: NextFunction): Prom
     }
 }
 
-async function middleware2(req: Request, res: Response, next: NextFunction): Promise<any> {
-    const token = req.body.token;
-
-    if(!token){
-        return res.status(401).json({erro: "Token Expirado"})
-    }
-
-    try{
-        const decoded = jwt.verify(token, process.env.SECRET as string) as TokenPayload
-        req.user = decoded
-        next();
-    }catch(erro) {
-        res.status(401).json({erro: "Token expirado"})
-    }
-
-}
-
 async function middlewareAdmin(req: Request, res: Response, next: NextFunction): Promise<any> {
     const token = req.cookies.token;
     if(!token){
@@ -64,4 +47,4 @@ async function middlewareAdmin(req: Request, res: Response, next: NextFunction):
 
 }
 
-export default {middleware, middleware2, middlewareAdmin}
+export default {middleware, middlewareAdmin}

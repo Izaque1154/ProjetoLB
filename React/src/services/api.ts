@@ -14,7 +14,7 @@ export const apiRoutes = {
         redefinirSenha: "/auth/RedefinirSenha",
         perfil: "/auth/perfil",
         reenviar: "/auth/reenviar",
-        admin: "/auth/admin"
+        admin: "/auth/admin",
     },
     cart: {
         adicionar: "/cart/carrinho",
@@ -23,6 +23,9 @@ export const apiRoutes = {
         excluir: "/cart/excluir",
         comprar: "/cart/comprar",
         produtos: "/cart/produtos"
+    },
+    budget: {
+        enviar: 'budget/orcamento',
     }
 }
 

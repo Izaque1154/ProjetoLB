@@ -21,15 +21,19 @@ function Home() {
           </p>
         </div>
         <div className={styles.section2}>
-            <div className={styles.sectionOficina}>
-              <button className={styles.oficina} onClick={()=> navigate("/oficina")}>Oficina</button>
-            </div>
-            <div className={styles.containerContato}>
-              <div className={styles.contato}><FaPhoneAlt /></div>
-              <div className={styles.contato}><FaWhatsapp /></div>
-              <div className={styles.contato}><SiGmail /></div>
-            </div>
+
+          <div className={styles.sectionOficina}>
+            <button className={styles.oficina} onClick={()=> navigate("/oficina")}>Oficina</button>
           </div>
+
+          <div className={styles.containerContato}>
+            <div className={styles.contato}><FaPhoneAlt /></div>
+            <div className={styles.contato}><FaWhatsapp /></div>
+            <div className={styles.contato}><SiGmail /></div>
+          </div>
+
+          <button onClick={() => navigate("/orçamento")} className="btn btn-primary">Fazer Orçamento</button>
+        </div>
       </main>
     </div>
   )

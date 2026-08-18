@@ -66,6 +66,6 @@ Produtos.init({
     sequelize: banco_1.default,
     modelName: "Produtos",
     tableName: "produtos",
-    timestamps: false
+    timestamps: true
 });
 exports.produtos = Produtos;

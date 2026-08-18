@@ -19,7 +19,13 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const banco_1 = __importDefault(require("./config/banco"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const cartRoutes_1 = __importDefault(require("./routes/cartRoutes"));
+const budgetRoutes_1 = __importDefault(require("./routes/budgetRoutes"));
+require("./models/servicos");
+require("./models/orcamentos");
+require("./models/carrinho_itens");
+require("./models/orcamentoItens");
 const itens_1 = require("./itens/itens");
+const servicos_1 = require("./itens/servicos");
 const usuario_1 = require("./models/usuario");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 dotenv_1.default.config();
@@ -35,13 +41,14 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 app.use("/auth", authRoutes_1.default);
 app.use("/cart", cartRoutes_1.default);
+app.use('/budget', budgetRoutes_1.default);
 const port = process.env.PORT;
 function startServer() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield banco_1.default.authenticate();
             console.log("Conexao com o banco de dados bem-sucedida!");
-            yield banco_1.default.sync({ force: true });
+            yield banco_1.default.sync({ alter: true });
             console.log("Tabelas sincronizadas com sucesso!");
             //usuário admin
             const hash = yield bcrypt_1.default.hash("123456", 10);
@@ -55,6 +62,8 @@ function startServer() {
                     role: "admin"
                 }
             });
+            yield (0, servicos_1.seedServicos)();
+            console.log("Serviços sincronizados com sucesso!");
             yield (0, itens_1.seedProdutos)();
             console.log("Produtos sincronizados com sucesso!");
             app.listen(port, () => {

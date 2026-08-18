@@ -55,7 +55,7 @@ Servico.init({
     sequelize,
     modelName: "Servico",
     tableName: "servicos",
-    timestamps: false
+    timestamps: true
 })
 
 export default Servico;

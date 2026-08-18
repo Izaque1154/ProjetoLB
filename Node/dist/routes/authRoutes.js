@@ -13,7 +13,7 @@ const redefinirSchema_1 = require("../middlewares/validate/redefinirSchema");
 const router = (0, express_1.Router)();
 //Rotas
 router.post("/registrar", registerSchema_1.validateRegister, authControllers_1.registrarUsuario);
-router.post("/confirmarEmail", middlewareAuth_1.default.middleware2, authControllers_1.confirmarEmail);
+router.post("/confirmarEmail", middlewareAuth_1.default.middleware, authControllers_1.confirmarEmail);
 router.post("/login", loginSchema_1.validateLogin, authControllers_1.login);
 router.post("/esqueceuSenha", authControllers_1.esqueceuSenha);
 router.put("/RedefinirSenha", redefinirSchema_1.validateRedefinirSenha, authControllers_1.redefinirSenha);
