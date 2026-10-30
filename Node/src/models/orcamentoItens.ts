@@ -1,26 +1,33 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "../config/banco";
 
-interface OrcamentoItensAttributes {
+export interface OrcamentoItensAttributes {
     id: number;
     orcamentoId: number;
-    produtoId: number;
-    servicoId: number;
+    produtoId: number | null;
+    servicoId: number | null;
     quantidade: number;
-    precoUnitario: number;
-    descricao: string;
+    precoUnitario: number | string;
+    descricao: string | null;
 }
 
-interface OrcamentoItensCreationAttributes extends Optional<OrcamentoItensAttributes, 'id'> {}
+interface OrcamentoItensCreationAttributes extends Optional<
+    OrcamentoItensAttributes,
+    "id" |
+    "produtoId" |
+    "servicoId" |
+    "descricao" 
+> {}
 
-class OrcamentoIten extends Model<OrcamentoItensAttributes, OrcamentoItensCreationAttributes>{
+class OrcamentoIten extends Model<OrcamentoItensAttributes, OrcamentoItensCreationAttributes>
+    implements OrcamentoItensAttributes {
     public id!: number;
     public orcamentoId!: number;
-    public produtoId!: number;
-    public servicoId!: number;
+    public produtoId!: number | null;
+    public servicoId!: number | null;
     public quantidade!: number;
-    public precoUnitario!: number;
-    public descricao!: string;
+    public precoUnitario!: number | string;
+    public descricao!: string | null;
 }
 
 OrcamentoIten.init({
@@ -39,11 +46,11 @@ OrcamentoIten.init({
             key: 'id'
         },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onDelete: "SET NULL",
     },
     produtoId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'produtos',
             key: 'id'
@@ -53,21 +60,29 @@ OrcamentoIten.init({
     },
     servicoId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'servicos',
             key: 'id'
         },
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
     },
     quantidade: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1,
+        validate: {
+            isInt: true,
+            min: 1
+        }
     },
     precoUnitario: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        validate: {
+            min: 0
+        }
     },
     descricao: {
         type: DataTypes.STRING,

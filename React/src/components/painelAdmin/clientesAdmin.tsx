@@ -27,6 +27,7 @@ import {
 } from "react-icons/fi";
 import styles from "../css/cssAdmin/clientesAdmin.module.css";
 
+// Tipos e contratos usados na gestão da carteira de clientes.
 type ClientType = "Pessoa física" | "Empresa";
 type ClientStatus = "Ativo" | "Potencial" | "Inativo";
 type RelationshipLevel = "VIP" | "Recorrente" | "Novo";
@@ -97,6 +98,7 @@ interface FollowUp {
   tone: FollowUpTone;
 }
 
+// Clientes de exemplo exibidos na listagem e no perfil detalhado.
 const clients: Client[] = [
   {
     id: "joao-silva",
@@ -119,16 +121,44 @@ const clients: Client[] = [
     approvedBudgetCount: 6,
     totalValue: 12840,
     preferredContact: "WhatsApp",
-    notes: "Prefere atendimento pela manhã e solicita confirmação antes de qualquer serviço adicional.",
+    notes:
+      "Prefere atendimento pela manhã e solicita confirmação antes de qualquer serviço adicional.",
     tags: ["Pickup", "Ranger", "Recorrente"],
     vehicles: [
-      { model: "Ford Ranger XLT", plate: "FRT-8A23", year: 2018, lastService: "21/05/2026", status: "Em dia" },
-      { model: "Chevrolet Onix", plate: "GHT-4B12", year: 2021, lastService: "08/02/2026", status: "Revisão próxima" },
+      {
+        model: "Ford Ranger XLT",
+        plate: "FRT-8A23",
+        year: 2018,
+        lastService: "21/05/2026",
+        status: "Em dia",
+      },
+      {
+        model: "Chevrolet Onix",
+        plate: "GHT-4B12",
+        year: 2021,
+        lastService: "08/02/2026",
+        status: "Revisão próxima",
+      },
     ],
     history: [
-      { title: "Orçamento respondido", date: "21/07/2026 14:35", description: "Reparo de cardan traseiro no valor de R$ 1.750,00.", type: "budget" },
-      { title: "Contato por WhatsApp", date: "21/07/2026 11:10", description: "Cliente enviou vídeo da vibração do veículo.", type: "contact" },
-      { title: "Serviço finalizado", date: "18/01/2026 16:20", description: "Troca de cruzeta e balanceamento concluídos.", type: "service" },
+      {
+        title: "Orçamento respondido",
+        date: "21/07/2026 14:35",
+        description: "Reparo de cardan traseiro no valor de R$ 1.750,00.",
+        type: "budget",
+      },
+      {
+        title: "Contato por WhatsApp",
+        date: "21/07/2026 11:10",
+        description: "Cliente enviou vídeo da vibração do veículo.",
+        type: "contact",
+      },
+      {
+        title: "Serviço finalizado",
+        date: "18/01/2026 16:20",
+        description: "Troca de cruzeta e balanceamento concluídos.",
+        type: "service",
+      },
     ],
   },
   {
@@ -152,17 +182,51 @@ const clients: Client[] = [
     approvedBudgetCount: 21,
     totalValue: 78450,
     preferredContact: "E-mail",
-    notes: "Cliente corporativo com faturamento mensal. Priorizar veículos parados e enviar laudo técnico junto ao orçamento.",
+    notes:
+      "Cliente corporativo com faturamento mensal. Priorizar veículos parados e enviar laudo técnico junto ao orçamento.",
     tags: ["Frota", "Linha pesada", "Faturamento"],
     vehicles: [
-      { model: "Mercedes-Benz Atego", plate: "FRO-2D18", year: 2020, lastService: "18/07/2026", status: "Em dia" },
-      { model: "Volvo FH 540", plate: "LOG-9E44", year: 2022, lastService: "02/06/2026", status: "Revisão próxima" },
-      { model: "Scania P310 6x2", plate: "ALC-7C30", year: 2019, lastService: "11/04/2026", status: "Atenção" },
+      {
+        model: "Mercedes-Benz Atego",
+        plate: "FRO-2D18",
+        year: 2020,
+        lastService: "18/07/2026",
+        status: "Em dia",
+      },
+      {
+        model: "Volvo FH 540",
+        plate: "LOG-9E44",
+        year: 2022,
+        lastService: "02/06/2026",
+        status: "Revisão próxima",
+      },
+      {
+        model: "Scania P310 6x2",
+        plate: "ALC-7C30",
+        year: 2019,
+        lastService: "11/04/2026",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Orçamento em análise", date: "23/07/2026 09:15", description: "Reparo do cardan dianteiro do Atego.", type: "budget" },
-      { title: "Ligação com a manutenção", date: "22/07/2026 17:40", description: "Confirmada prioridade para o veículo FRO-2D18.", type: "contact" },
-      { title: "Serviço entregue", date: "18/07/2026 15:05", description: "Balanceamento e troca de rolamento central.", type: "service" },
+      {
+        title: "Orçamento em análise",
+        date: "23/07/2026 09:15",
+        description: "Reparo do cardan dianteiro do Atego.",
+        type: "budget",
+      },
+      {
+        title: "Ligação com a manutenção",
+        date: "22/07/2026 17:40",
+        description: "Confirmada prioridade para o veículo FRO-2D18.",
+        type: "contact",
+      },
+      {
+        title: "Serviço entregue",
+        date: "18/07/2026 15:05",
+        description: "Balanceamento e troca de rolamento central.",
+        type: "service",
+      },
     ],
   },
   {
@@ -186,14 +250,31 @@ const clients: Client[] = [
     approvedBudgetCount: 1,
     totalValue: 860,
     preferredContact: "WhatsApp",
-    notes: "Primeiro atendimento realizado por indicação. Aguardando retorno sobre orçamento de balanceamento.",
+    notes:
+      "Primeiro atendimento realizado por indicação. Aguardando retorno sobre orçamento de balanceamento.",
     tags: ["Novo cliente", "Indicação", "S10"],
     vehicles: [
-      { model: "Chevrolet S10 LTZ", plate: "MCA-6F22", year: 2016, lastService: "Não realizado", status: "Atenção" },
+      {
+        model: "Chevrolet S10 LTZ",
+        plate: "MCA-6F22",
+        year: 2016,
+        lastService: "Não realizado",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Orçamento enviado", date: "22/07/2026 16:20", description: "Balanceamento de cardan no valor de R$ 860,00.", type: "budget" },
-      { title: "Cadastro realizado", date: "18/07/2026 10:32", description: "Cliente chegou por indicação de João da Silva.", type: "contact" },
+      {
+        title: "Orçamento enviado",
+        date: "22/07/2026 16:20",
+        description: "Balanceamento de cardan no valor de R$ 860,00.",
+        type: "budget",
+      },
+      {
+        title: "Cadastro realizado",
+        date: "18/07/2026 10:32",
+        description: "Cliente chegou por indicação de João da Silva.",
+        type: "contact",
+      },
     ],
   },
   {
@@ -217,16 +298,44 @@ const clients: Client[] = [
     approvedBudgetCount: 5,
     totalValue: 9360,
     preferredContact: "Telefone",
-    notes: "Utiliza o veículo para trabalho rural. Valoriza prazo de entrega e disponibilidade imediata.",
+    notes:
+      "Utiliza o veículo para trabalho rural. Valoriza prazo de entrega e disponibilidade imediata.",
     tags: ["Hilux", "Rural", "Recorrente"],
     vehicles: [
-      { model: "Toyota Hilux SRX", plate: "RPR-3A20", year: 2020, lastService: "20/05/2026", status: "Em dia" },
-      { model: "Toyota Bandeirante", plate: "BND-1C84", year: 1998, lastService: "14/12/2025", status: "Atenção" },
+      {
+        model: "Toyota Hilux SRX",
+        plate: "RPR-3A20",
+        year: 2020,
+        lastService: "20/05/2026",
+        status: "Em dia",
+      },
+      {
+        model: "Toyota Bandeirante",
+        plate: "BND-1C84",
+        year: 1998,
+        lastService: "14/12/2025",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Serviço aprovado", date: "21/07/2026 15:50", description: "Substituição de cruzeta autorizada.", type: "budget" },
-      { title: "Inspeção técnica", date: "20/07/2026 16:15", description: "Folga identificada na cruzeta traseira.", type: "service" },
-      { title: "Contato telefônico", date: "20/07/2026 09:40", description: "Agendada avaliação do veículo.", type: "contact" },
+      {
+        title: "Serviço aprovado",
+        date: "21/07/2026 15:50",
+        description: "Substituição de cruzeta autorizada.",
+        type: "budget",
+      },
+      {
+        title: "Inspeção técnica",
+        date: "20/07/2026 16:15",
+        description: "Folga identificada na cruzeta traseira.",
+        type: "service",
+      },
+      {
+        title: "Contato telefônico",
+        date: "20/07/2026 09:40",
+        description: "Agendada avaliação do veículo.",
+        type: "contact",
+      },
     ],
   },
   {
@@ -250,17 +359,51 @@ const clients: Client[] = [
     approvedBudgetCount: 26,
     totalValue: 129780,
     preferredContact: "E-mail",
-    notes: "Contrato de manutenção de frota. Orçamentos acima de R$ 5 mil exigem aprovação do gestor financeiro.",
+    notes:
+      "Contrato de manutenção de frota. Orçamentos acima de R$ 5 mil exigem aprovação do gestor financeiro.",
     tags: ["Frota", "Contrato", "Scania"],
     vehicles: [
-      { model: "Scania P310 6x2", plate: "ALF-1H09", year: 2019, lastService: "19/07/2026", status: "Em dia" },
-      { model: "Volvo VM 270", plate: "ALF-4J17", year: 2018, lastService: "28/05/2026", status: "Revisão próxima" },
-      { model: "Iveco Tector 240E", plate: "ALF-8K25", year: 2021, lastService: "11/03/2026", status: "Atenção" },
+      {
+        model: "Scania P310 6x2",
+        plate: "ALF-1H09",
+        year: 2019,
+        lastService: "19/07/2026",
+        status: "Em dia",
+      },
+      {
+        model: "Volvo VM 270",
+        plate: "ALF-4J17",
+        year: 2018,
+        lastService: "28/05/2026",
+        status: "Revisão próxima",
+      },
+      {
+        model: "Iveco Tector 240E",
+        plate: "ALF-8K25",
+        year: 2021,
+        lastService: "11/03/2026",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Documentos pendentes", date: "21/07/2026 11:35", description: "Solicitados dados completos do veículo ALF-4J17.", type: "contact" },
-      { title: "Orçamento preparado", date: "19/07/2026 15:10", description: "Reparo completo do cardan da Scania.", type: "budget" },
-      { title: "Veículo liberado", date: "19/07/2026 09:30", description: "Teste de rodagem concluído sem vibrações.", type: "service" },
+      {
+        title: "Documentos pendentes",
+        date: "21/07/2026 11:35",
+        description: "Solicitados dados completos do veículo ALF-4J17.",
+        type: "contact",
+      },
+      {
+        title: "Orçamento preparado",
+        date: "19/07/2026 15:10",
+        description: "Reparo completo do cardan da Scania.",
+        type: "budget",
+      },
+      {
+        title: "Veículo liberado",
+        date: "19/07/2026 09:30",
+        description: "Teste de rodagem concluído sem vibrações.",
+        type: "service",
+      },
     ],
   },
   {
@@ -284,14 +427,31 @@ const clients: Client[] = [
     approvedBudgetCount: 4,
     totalValue: 5240,
     preferredContact: "WhatsApp",
-    notes: "Solicita peças originais quando disponíveis. Costuma agendar serviços para sexta-feira.",
+    notes:
+      "Solicita peças originais quando disponíveis. Costuma agendar serviços para sexta-feira.",
     tags: ["Amarok", "Peça original", "WhatsApp"],
     vehicles: [
-      { model: "Volkswagen Amarok V6", plate: "ECA-5D19", year: 2019, lastService: "20/05/2026", status: "Revisão próxima" },
+      {
+        model: "Volkswagen Amarok V6",
+        plate: "ECA-5D19",
+        year: 2019,
+        lastService: "20/05/2026",
+        status: "Revisão próxima",
+      },
     ],
     history: [
-      { title: "Follow-up programado", date: "20/07/2026 11:22", description: "Retornar sobre garantia da flange substituída.", type: "contact" },
-      { title: "Serviço finalizado", date: "20/05/2026 17:10", description: "Reparo de flange e balanceamento.", type: "service" },
+      {
+        title: "Follow-up programado",
+        date: "20/07/2026 11:22",
+        description: "Retornar sobre garantia da flange substituída.",
+        type: "contact",
+      },
+      {
+        title: "Serviço finalizado",
+        date: "20/05/2026 17:10",
+        description: "Reparo de flange e balanceamento.",
+        type: "service",
+      },
     ],
   },
   {
@@ -315,15 +475,38 @@ const clients: Client[] = [
     approvedBudgetCount: 15,
     totalValue: 54620,
     preferredContact: "E-mail",
-    notes: "Atendimento remoto com envio de peças. Confirmar transportadora e prazo antes do faturamento.",
+    notes:
+      "Atendimento remoto com envio de peças. Confirmar transportadora e prazo antes do faturamento.",
     tags: ["Frota", "Interestadual", "Iveco"],
     vehicles: [
-      { model: "Iveco Daily 35S14", plate: "TPR-2G14", year: 2017, lastService: "19/05/2026", status: "Em dia" },
-      { model: "Iveco Tector 170E", plate: "TPR-7F28", year: 2020, lastService: "30/03/2026", status: "Revisão próxima" },
+      {
+        model: "Iveco Daily 35S14",
+        plate: "TPR-2G14",
+        year: 2017,
+        lastService: "19/05/2026",
+        status: "Em dia",
+      },
+      {
+        model: "Iveco Tector 170E",
+        plate: "TPR-7F28",
+        year: 2020,
+        lastService: "30/03/2026",
+        status: "Revisão próxima",
+      },
     ],
     history: [
-      { title: "Pedido despachado", date: "19/07/2026 17:30", description: "Rolamento e kit de reparo enviados para Maringá.", type: "service" },
-      { title: "Pagamento confirmado", date: "19/07/2026 13:05", description: "Orçamento de R$ 720,00 aprovado.", type: "budget" },
+      {
+        title: "Pedido despachado",
+        date: "19/07/2026 17:30",
+        description: "Rolamento e kit de reparo enviados para Maringá.",
+        type: "service",
+      },
+      {
+        title: "Pagamento confirmado",
+        date: "19/07/2026 13:05",
+        description: "Orçamento de R$ 720,00 aprovado.",
+        type: "budget",
+      },
     ],
   },
   {
@@ -347,14 +530,31 @@ const clients: Client[] = [
     approvedBudgetCount: 0,
     totalValue: 0,
     preferredContact: "WhatsApp",
-    notes: "Cadastro recente. Ainda é necessário confirmar placa e ano exato do veículo.",
+    notes:
+      "Cadastro recente. Ainda é necessário confirmar placa e ano exato do veículo.",
     tags: ["Novo cliente", "Frontier", "Dados pendentes"],
     vehicles: [
-      { model: "Nissan Frontier", plate: "Não informada", year: 2017, lastService: "Não realizado", status: "Atenção" },
+      {
+        model: "Nissan Frontier",
+        plate: "Não informada",
+        year: 2017,
+        lastService: "Não realizado",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Dados solicitados", date: "19/07/2026 11:05", description: "Solicitada placa e versão da Frontier.", type: "contact" },
-      { title: "Pré-orçamento criado", date: "19/07/2026 10:50", description: "Estimativa inicial para substituição de cruzeta.", type: "budget" },
+      {
+        title: "Dados solicitados",
+        date: "19/07/2026 11:05",
+        description: "Solicitada placa e versão da Frontier.",
+        type: "contact",
+      },
+      {
+        title: "Pré-orçamento criado",
+        date: "19/07/2026 10:50",
+        description: "Estimativa inicial para substituição de cruzeta.",
+        type: "budget",
+      },
     ],
   },
   {
@@ -378,15 +578,38 @@ const clients: Client[] = [
     approvedBudgetCount: 11,
     totalValue: 46800,
     preferredContact: "E-mail",
-    notes: "Sem movimentação há mais de 60 dias. Realizar contato comercial para reativação.",
+    notes:
+      "Sem movimentação há mais de 60 dias. Realizar contato comercial para reativação.",
     tags: ["Frota", "Reativação", "Volvo"],
     vehicles: [
-      { model: "Volvo FH 540 6x4", plate: "BRC-5A40", year: 2018, lastService: "18/05/2026", status: "Atenção" },
-      { model: "Scania R450", plate: "BRC-2B19", year: 2019, lastService: "12/02/2026", status: "Atenção" },
+      {
+        model: "Volvo FH 540 6x4",
+        plate: "BRC-5A40",
+        year: 2018,
+        lastService: "18/05/2026",
+        status: "Atenção",
+      },
+      {
+        model: "Scania R450",
+        plate: "BRC-2B19",
+        year: 2019,
+        lastService: "12/02/2026",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Orçamento sem retorno", date: "18/05/2026 10:20", description: "Reparo de cardan no valor de R$ 2.150,00.", type: "budget" },
-      { title: "E-mail enviado", date: "16/05/2026 14:15", description: "Proposta comercial encaminhada ao setor de compras.", type: "contact" },
+      {
+        title: "Orçamento sem retorno",
+        date: "18/05/2026 10:20",
+        description: "Reparo de cardan no valor de R$ 2.150,00.",
+        type: "budget",
+      },
+      {
+        title: "E-mail enviado",
+        date: "16/05/2026 14:15",
+        description: "Proposta comercial encaminhada ao setor de compras.",
+        type: "contact",
+      },
     ],
   },
   {
@@ -410,14 +633,31 @@ const clients: Client[] = [
     approvedBudgetCount: 5,
     totalValue: 7480,
     preferredContact: "Telefone",
-    notes: "Cliente com boa recorrência. Realizar contato preventivo sobre revisão anual.",
+    notes:
+      "Cliente com boa recorrência. Realizar contato preventivo sobre revisão anual.",
     tags: ["S10", "Preventiva", "Recorrente"],
     vehicles: [
-      { model: "Chevrolet S10 LT", plate: "JME-8H14", year: 2014, lastService: "18/05/2026", status: "Revisão próxima" },
+      {
+        model: "Chevrolet S10 LT",
+        plate: "JME-8H14",
+        year: 2014,
+        lastService: "18/05/2026",
+        status: "Revisão próxima",
+      },
     ],
     history: [
-      { title: "Serviço entregue", date: "18/05/2026 16:45", description: "Troca de rolamento central concluída.", type: "service" },
-      { title: "Orçamento aprovado", date: "18/05/2026 09:20", description: "Cliente aprovou serviço de R$ 420,00.", type: "budget" },
+      {
+        title: "Serviço entregue",
+        date: "18/05/2026 16:45",
+        description: "Troca de rolamento central concluída.",
+        type: "service",
+      },
+      {
+        title: "Orçamento aprovado",
+        date: "18/05/2026 09:20",
+        description: "Cliente aprovou serviço de R$ 420,00.",
+        type: "budget",
+      },
     ],
   },
   {
@@ -441,14 +681,31 @@ const clients: Client[] = [
     approvedBudgetCount: 33,
     totalValue: 88730,
     preferredContact: "WhatsApp",
-    notes: "Parceiro de oficina. Tabela comercial diferenciada e retirada de peças no balcão.",
+    notes:
+      "Parceiro de oficina. Tabela comercial diferenciada e retirada de peças no balcão.",
     tags: ["Parceiro", "Oficina", "Atacado"],
     vehicles: [
-      { model: "Veículos de clientes", plate: "Diversas", year: 2026, lastService: "17/05/2026", status: "Em dia" },
+      {
+        model: "Veículos de clientes",
+        plate: "Diversas",
+        year: 2026,
+        lastService: "17/05/2026",
+        status: "Em dia",
+      },
     ],
     history: [
-      { title: "Pedido de peças", date: "17/05/2026 14:10", description: "Separados dois kits de reparo e uma cruzeta.", type: "service" },
-      { title: "Condição comercial renovada", date: "02/05/2026 09:00", description: "Tabela de parceiro atualizada para o trimestre.", type: "contact" },
+      {
+        title: "Pedido de peças",
+        date: "17/05/2026 14:10",
+        description: "Separados dois kits de reparo e uma cruzeta.",
+        type: "service",
+      },
+      {
+        title: "Condição comercial renovada",
+        date: "02/05/2026 09:00",
+        description: "Tabela de parceiro atualizada para o trimestre.",
+        type: "contact",
+      },
     ],
   },
   {
@@ -472,33 +729,103 @@ const clients: Client[] = [
     approvedBudgetCount: 0,
     totalValue: 0,
     preferredContact: "WhatsApp",
-    notes: "Solicitou orçamento inicial, mas não retornou. Contato de reativação recomendado.",
+    notes:
+      "Solicitou orçamento inicial, mas não retornou. Contato de reativação recomendado.",
     tags: ["Sem retorno", "Primeiro orçamento"],
     vehicles: [
-      { model: "Mitsubishi L200 Triton", plate: "PHM-7D16", year: 2016, lastService: "Não realizado", status: "Atenção" },
+      {
+        model: "Mitsubishi L200 Triton",
+        plate: "PHM-7D16",
+        year: 2016,
+        lastService: "Não realizado",
+        status: "Atenção",
+      },
     ],
     history: [
-      { title: "Orçamento enviado", date: "12/01/2026 13:20", description: "Estimativa para reparo do eixo dianteiro.", type: "budget" },
-      { title: "Cadastro realizado", date: "12/01/2026 11:05", description: "Cliente entrou em contato pelo site.", type: "contact" },
+      {
+        title: "Orçamento enviado",
+        date: "12/01/2026 13:20",
+        description: "Estimativa para reparo do eixo dianteiro.",
+        type: "budget",
+      },
+      {
+        title: "Cadastro realizado",
+        date: "12/01/2026 11:05",
+        description: "Cliente entrou em contato pelo site.",
+        type: "contact",
+      },
     ],
   },
 ];
 
+// Conteúdo dos painéis de ações e acompanhamento.
 const quickActions: QuickAction[] = [
-  { icon: FiPlus, title: "Cadastrar cliente", description: "Adicionar pessoa ou empresa" },
-  { icon: FiFilePlus, title: "Criar orçamento", description: "Iniciar solicitação para um cliente" },
-  { icon: FiMessageCircle, title: "Registrar contato", description: "Salvar ligação, e-mail ou mensagem" },
-  { icon: FiDownload, title: "Exportar carteira", description: "Gerar relatório de clientes" },
+  {
+    icon: FiPlus,
+    title: "Cadastrar cliente",
+    description: "Adicionar pessoa ou empresa",
+  },
+  {
+    icon: FiFilePlus,
+    title: "Criar orçamento",
+    description: "Iniciar solicitação para um cliente",
+  },
+  {
+    icon: FiMessageCircle,
+    title: "Registrar contato",
+    description: "Salvar ligação, e-mail ou mensagem",
+  },
+  {
+    icon: FiDownload,
+    title: "Exportar carteira",
+    description: "Gerar relatório de clientes",
+  },
 ];
 
 const followUps: FollowUp[] = [
-  { clientId: "auto-log", icon: FiClock, title: "Confirmar aprovação", description: "Orçamento do Atego aguardando retorno", due: "Hoje", tone: "warning" },
-  { clientId: "frota-alfa", icon: FiAlertTriangle, title: "Dados pendentes", description: "Completar cadastro do veículo ALF-4J17", due: "Hoje", tone: "danger" },
-  { clientId: "eder-carvalho", icon: FiPhone, title: "Retorno de garantia", description: "Confirmar desempenho após o reparo", due: "Amanhã", tone: "info" },
-  { clientId: "brasil-cargas", icon: FiUserCheck, title: "Reativar cliente", description: "Sem movimentação há mais de 60 dias", due: "2 dias", tone: "warning" },
-  { clientId: "juliano-mendes", icon: FiCalendar, title: "Revisão preventiva", description: "Oferecer inspeção anual do cardan", due: "3 dias", tone: "info" },
+  {
+    clientId: "auto-log",
+    icon: FiClock,
+    title: "Confirmar aprovação",
+    description: "Orçamento do Atego aguardando retorno",
+    due: "Hoje",
+    tone: "warning",
+  },
+  {
+    clientId: "frota-alfa",
+    icon: FiAlertTriangle,
+    title: "Dados pendentes",
+    description: "Completar cadastro do veículo ALF-4J17",
+    due: "Hoje",
+    tone: "danger",
+  },
+  {
+    clientId: "eder-carvalho",
+    icon: FiPhone,
+    title: "Retorno de garantia",
+    description: "Confirmar desempenho após o reparo",
+    due: "Amanhã",
+    tone: "info",
+  },
+  {
+    clientId: "brasil-cargas",
+    icon: FiUserCheck,
+    title: "Reativar cliente",
+    description: "Sem movimentação há mais de 60 dias",
+    due: "2 dias",
+    tone: "warning",
+  },
+  {
+    clientId: "juliano-mendes",
+    icon: FiCalendar,
+    title: "Revisão preventiva",
+    description: "Oferecer inspeção anual do cardan",
+    due: "3 dias",
+    tone: "info",
+  },
 ];
 
+// Configurações de filtros e formatação de valores.
 const initialFilters: ClientFilters = {
   type: "todos",
   status: "todos",
@@ -517,6 +844,7 @@ const compactCurrencyFormatter = new Intl.NumberFormat("pt-BR", {
   maximumFractionDigits: 1,
 });
 
+// Auxiliares de apresentação para status, relacionamento e histórico.
 function getStatusClass(status: ClientStatus) {
   const classes: Record<ClientStatus, string> = {
     Ativo: styles.status_active,
@@ -554,46 +882,69 @@ function getHistoryIcon(type: ClientHistory["type"]) {
 }
 
 function ClientesAdmin() {
-  const [draftFilters, setDraftFilters] = useState<ClientFilters>(initialFilters);
-  const [activeFilters, setActiveFilters] = useState<ClientFilters>(initialFilters);
+  // Estado dos filtros, seleção e paginação.
+  const [draftFilters, setDraftFilters] =
+    useState<ClientFilters>(initialFilters);
+  const [activeFilters, setActiveFilters] =
+    useState<ClientFilters>(initialFilters);
   const [selectedClientId, setSelectedClientId] = useState(clients[0].id);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(7);
 
+  // Resumos e clientes calculados conforme os filtros ativos.
   const summary = useMemo(
-    () => clients.reduce(
-      (totals, client) => ({
-        active: totals.active + (client.status === "Ativo" ? 1 : 0),
-        companies: totals.companies + (client.type === "Empresa" ? 1 : 0),
-        revenue: totals.revenue + client.totalValue,
-      }),
-      { active: 0, companies: 0, revenue: 0 },
-    ),
+    () =>
+      clients.reduce(
+        (totals, client) => ({
+          active: totals.active + (client.status === "Ativo" ? 1 : 0),
+          companies: totals.companies + (client.type === "Empresa" ? 1 : 0),
+          revenue: totals.revenue + client.totalValue,
+        }),
+        { active: 0, companies: 0, revenue: 0 },
+      ),
     [],
   );
 
   const filteredClients = useMemo(() => {
-    const normalizedSearch = activeFilters.search.trim().toLocaleLowerCase("pt-BR");
+    const normalizedSearch = activeFilters.search
+      .trim()
+      .toLocaleLowerCase("pt-BR");
 
     return clients
       .filter((client) => {
-        const matchesType = activeFilters.type === "todos" || client.type === activeFilters.type;
-        const matchesStatus = activeFilters.status === "todos" || client.status === activeFilters.status;
-        const searchableText = `${client.name} ${client.document} ${client.email} ${client.city} ${client.tags.join(" ")} ${client.vehicles.map((vehicle) => vehicle.model).join(" ")}`.toLocaleLowerCase("pt-BR");
-        const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
+        const matchesType =
+          activeFilters.type === "todos" || client.type === activeFilters.type;
+        const matchesStatus =
+          activeFilters.status === "todos" ||
+          client.status === activeFilters.status;
+        const searchableText =
+          `${client.name} ${client.document} ${client.email} ${client.city} ${client.tags.join(" ")} ${client.vehicles.map((vehicle) => vehicle.model).join(" ")}`.toLocaleLowerCase(
+            "pt-BR",
+          );
+        const matchesSearch =
+          !normalizedSearch || searchableText.includes(normalizedSearch);
         return matchesType && matchesStatus && matchesSearch;
       })
-      .sort((clientA, clientB) => clientB.lastContactOrder - clientA.lastContactOrder);
+      .sort(
+        (clientA, clientB) =>
+          clientB.lastContactOrder - clientA.lastContactOrder,
+      );
   }, [activeFilters]);
 
+  // Paginação e informações derivadas do cliente selecionado.
   const pageCount = Math.max(1, Math.ceil(filteredClients.length / pageSize));
   const safeCurrentPage = Math.min(currentPage, pageCount);
   const pageStart = (safeCurrentPage - 1) * pageSize;
   const visibleClients = filteredClients.slice(pageStart, pageStart + pageSize);
-  const selectedClient = clients.find((client) => client.id === selectedClientId) ?? clients[0];
-  const approvalRate = selectedClient.budgetCount > 0
-    ? Math.round((selectedClient.approvedBudgetCount / selectedClient.budgetCount) * 100)
-    : 0;
+  const selectedClient =
+    clients.find((client) => client.id === selectedClientId) ?? clients[0];
+  const approvalRate =
+    selectedClient.budgetCount > 0
+      ? Math.round(
+          (selectedClient.approvedBudgetCount / selectedClient.budgetCount) *
+            100,
+        )
+      : 0;
   const statusCounts = {
     active: clients.filter((client) => client.status === "Ativo").length,
     potential: clients.filter((client) => client.status === "Potencial").length,
@@ -603,6 +954,7 @@ function ClientesAdmin() {
   const potentialPercentage = (statusCounts.potential / clients.length) * 100;
   const chartBackground = `conic-gradient(#1882ff 0 ${activePercentage}%, #27c875 ${activePercentage}% ${activePercentage + potentialPercentage}%, #6f7d8f ${activePercentage + potentialPercentage}% 100%)`;
 
+  // Ações de filtro, paginação e seleção.
   function handleFilterSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setActiveFilters(draftFilters);
@@ -625,42 +977,95 @@ function ClientesAdmin() {
     setCurrentPage(1);
   }
 
+  // Estrutura visual da página.
   return (
     <div className={styles.clients_page}>
-      <section className={styles.summary_grid} aria-label="Resumo da carteira de clientes">
+      {/* Indicadores gerais da carteira */}
+      <section
+        className={styles.summary_grid}
+        aria-label="Resumo da carteira de clientes"
+      >
         <article className={styles.summary_card}>
-          <span className={`${styles.summary_icon} ${styles.icon_blue}`}><FiUsers aria-hidden="true" /></span>
-          <div><strong>{clients.length}</strong><span>Clientes cadastrados</span><small>{summary.active} ativos na carteira</small></div>
+          <span className={`${styles.summary_icon} ${styles.icon_blue}`}>
+            <FiUsers aria-hidden="true" />
+          </span>
+          <div>
+            <strong>{clients.length}</strong>
+            <span>Clientes cadastrados</span>
+            <small>{summary.active} ativos na carteira</small>
+          </div>
         </article>
         <article className={styles.summary_card}>
-          <span className={`${styles.summary_icon} ${styles.icon_green}`}><FiUserCheck aria-hidden="true" /></span>
-          <div><strong>{summary.active}</strong><span>Relacionamentos ativos</span><small>{summary.companies} contas empresariais</small></div>
+          <span className={`${styles.summary_icon} ${styles.icon_green}`}>
+            <FiUserCheck aria-hidden="true" />
+          </span>
+          <div>
+            <strong>{summary.active}</strong>
+            <span>Relacionamentos ativos</span>
+            <small>{summary.companies} contas empresariais</small>
+          </div>
         </article>
         <article className={styles.summary_card}>
-          <span className={`${styles.summary_icon} ${styles.icon_amber}`}><FiClock aria-hidden="true" /></span>
-          <div><strong>{followUps.length}</strong><span>Follow-ups pendentes</span><small>2 ações para hoje</small></div>
+          <span className={`${styles.summary_icon} ${styles.icon_amber}`}>
+            <FiClock aria-hidden="true" />
+          </span>
+          <div>
+            <strong>{followUps.length}</strong>
+            <span>Follow-ups pendentes</span>
+            <small>2 ações para hoje</small>
+          </div>
         </article>
         <article className={styles.summary_card}>
-          <span className={`${styles.summary_icon} ${styles.icon_purple}`}><FiBriefcase aria-hidden="true" /></span>
-          <div><strong className={styles.compact_value}>{compactCurrencyFormatter.format(summary.revenue)}</strong><span>Valor em relacionamento</span><small>Histórico aprovado</small></div>
+          <span className={`${styles.summary_icon} ${styles.icon_purple}`}>
+            <FiBriefcase aria-hidden="true" />
+          </span>
+          <div>
+            <strong className={styles.compact_value}>
+              {compactCurrencyFormatter.format(summary.revenue)}
+            </strong>
+            <span>Valor em relacionamento</span>
+            <small>Histórico aprovado</small>
+          </div>
         </article>
       </section>
 
       <div className={styles.workspace_grid}>
         <div className={styles.main_column}>
-          <section className={`${styles.panel} ${styles.list_panel}`} aria-labelledby="client-list-title">
+          {/* Listagem, filtros e paginação dos clientes */}
+          <section
+            className={`${styles.panel} ${styles.list_panel}`}
+            aria-labelledby="client-list-title"
+          >
             <header className={styles.panel_header}>
-              <div><h2 id="client-list-title">Carteira de Clientes</h2><p>Consulte contatos, veículos e histórico comercial.</p></div>
+              <div>
+                <h2 id="client-list-title">Carteira de Clientes</h2>
+                <p>Consulte contatos, veículos e histórico comercial.</p>
+              </div>
               <div className={styles.header_actions}>
-                <button className={styles.secondary_button} type="button"><FiDownload aria-hidden="true" /><span>Exportar</span></button>
-                <button className={styles.primary_button} type="button"><FiPlus aria-hidden="true" /><span>Novo Cliente</span></button>
+                <button className={styles.secondary_button} type="button">
+                  <FiDownload aria-hidden="true" />
+                  <span>Exportar</span>
+                </button>
+                <button className={styles.primary_button} type="button">
+                  <FiPlus aria-hidden="true" />
+                  <span>Novo Cliente</span>
+                </button>
               </div>
             </header>
 
             <form className={styles.filter_form} onSubmit={handleFilterSubmit}>
               <label className={styles.select_control} htmlFor="client-type">
                 <span>Tipo:</span>
-                <select id="client-type" value={draftFilters.type} onChange={(event) => setDraftFilters((filters) => ({ ...filters, type: event.target.value as ClientFilters["type"] }))}>
+                <select
+                  id="client-type"
+                  value={draftFilters.type}
+                  onChange={(event) =>
+                    setDraftFilters((filters) => ({
+                      ...filters,
+                      type: event.target.value as ClientFilters["type"],
+                    }))
+                  }
+                >
                   <option value="todos">Todos</option>
                   <option value="Pessoa física">Pessoa física</option>
                   <option value="Empresa">Empresa</option>
@@ -668,7 +1073,16 @@ function ClientesAdmin() {
               </label>
               <label className={styles.select_control} htmlFor="client-status">
                 <span>Status:</span>
-                <select id="client-status" value={draftFilters.status} onChange={(event) => setDraftFilters((filters) => ({ ...filters, status: event.target.value as ClientFilters["status"] }))}>
+                <select
+                  id="client-status"
+                  value={draftFilters.status}
+                  onChange={(event) =>
+                    setDraftFilters((filters) => ({
+                      ...filters,
+                      status: event.target.value as ClientFilters["status"],
+                    }))
+                  }
+                >
                   <option value="todos">Todos</option>
                   <option value="Ativo">Ativos</option>
                   <option value="Potencial">Potenciais</option>
@@ -677,10 +1091,26 @@ function ClientesAdmin() {
               </label>
               <label className={styles.search_control} htmlFor="client-search">
                 <FiSearch aria-hidden="true" />
-                <span className={styles.visually_hidden}>Pesquisar clientes</span>
-                <input id="client-search" type="search" placeholder="Buscar por nome, documento, cidade ou veículo..." value={draftFilters.search} onChange={(event) => setDraftFilters((filters) => ({ ...filters, search: event.target.value }))} />
+                <span className={styles.visually_hidden}>
+                  Pesquisar clientes
+                </span>
+                <input
+                  id="client-search"
+                  type="search"
+                  placeholder="Buscar por nome, documento, cidade ou veículo..."
+                  value={draftFilters.search}
+                  onChange={(event) =>
+                    setDraftFilters((filters) => ({
+                      ...filters,
+                      search: event.target.value,
+                    }))
+                  }
+                />
               </label>
-              <button className={styles.filter_button} type="submit"><FiFilter aria-hidden="true" /><span>Filtrar</span></button>
+              <button className={styles.filter_button} type="submit">
+                <FiFilter aria-hidden="true" />
+                <span>Filtrar</span>
+              </button>
             </form>
 
             <div className={styles.table_scroll}>
@@ -700,30 +1130,88 @@ function ClientesAdmin() {
                 </thead>
                 <tbody>
                   {visibleClients.map((client) => (
-                    <tr className={client.id === selectedClient.id ? styles.selected_row : undefined} key={client.id}>
+                    <tr
+                      className={
+                        client.id === selectedClient.id
+                          ? styles.selected_row
+                          : undefined
+                      }
+                      key={client.id}
+                    >
                       <td>
                         <div className={styles.client_cell}>
-                          <span className={`${styles.avatar} ${styles[`avatar_${client.avatarTone}`]}`}>{client.initials}</span>
-                          <div><strong>{client.name}</strong><small>{client.type} · {client.document}</small></div>
+                          <span
+                            className={`${styles.avatar} ${styles[`avatar_${client.avatarTone}`]}`}
+                          >
+                            {client.initials}
+                          </span>
+                          <div>
+                            <strong>{client.name}</strong>
+                            <small>
+                              {client.type} · {client.document}
+                            </small>
+                          </div>
                         </div>
                       </td>
-                      <td><div className={styles.contact_cell}><span>{client.phone}</span><small>{client.email}</small></div></td>
-                      <td>{client.city} - {client.state}</td>
-                      <td className={styles.numeric_cell}>{client.vehicles.length}</td>
-                      <td><div className={styles.budget_cell}><strong>{client.approvedBudgetCount}/{client.budgetCount}</strong><small>aprovados</small></div></td>
-                      <td className={styles.numeric_cell}>{currencyFormatter.format(client.totalValue)}</td>
+                      <td>
+                        <div className={styles.contact_cell}>
+                          <span>{client.phone}</span>
+                          <small>{client.email}</small>
+                        </div>
+                      </td>
+                      <td>
+                        {client.city} - {client.state}
+                      </td>
+                      <td className={styles.numeric_cell}>
+                        {client.vehicles.length}
+                      </td>
+                      <td>
+                        <div className={styles.budget_cell}>
+                          <strong>
+                            {client.approvedBudgetCount}/{client.budgetCount}
+                          </strong>
+                          <small>aprovados</small>
+                        </div>
+                      </td>
+                      <td className={styles.numeric_cell}>
+                        {currencyFormatter.format(client.totalValue)}
+                      </td>
                       <td>{client.lastContact}</td>
-                      <td><span className={`${styles.status_badge} ${getStatusClass(client.status)}`}>{client.status}</span></td>
+                      <td>
+                        <span
+                          className={`${styles.status_badge} ${getStatusClass(client.status)}`}
+                        >
+                          {client.status}
+                        </span>
+                      </td>
                       <td>
                         <div className={styles.row_actions}>
-                          <button type="button" title="Visualizar cliente" aria-label={`Visualizar ${client.name}`} onClick={() => selectClient(client.id)}><FiEye aria-hidden="true" /></button>
-                          <button type="button" title="Editar cliente" aria-label={`Editar ${client.name}`} onClick={() => selectClient(client.id)}><FiEdit2 aria-hidden="true" /></button>
+                          <button
+                            type="button"
+                            title="Visualizar cliente"
+                            aria-label={`Visualizar ${client.name}`}
+                            onClick={() => selectClient(client.id)}
+                          >
+                            <FiEye aria-hidden="true" />
+                          </button>
+                          <button
+                            type="button"
+                            title="Editar cliente"
+                            aria-label={`Editar ${client.name}`}
+                            onClick={() => selectClient(client.id)}
+                          >
+                            <FiEdit2 aria-hidden="true" />
+                          </button>
                         </div>
                       </td>
                     </tr>
                   ))}
                   {visibleClients.length === 0 && (
-                    <tr><td className={styles.empty_state} colSpan={9}>Nenhum cliente encontrado para os filtros selecionados.</td></tr>
+                    <tr>
+                      <td className={styles.empty_state} colSpan={9}>
+                        Nenhum cliente encontrado para os filtros selecionados.
+                      </td>
+                    </tr>
                   )}
                 </tbody>
               </table>
@@ -735,16 +1223,64 @@ function ClientesAdmin() {
                   ? "Nenhum cliente encontrado"
                   : `Mostrando ${pageStart + 1} a ${Math.min(pageStart + pageSize, filteredClients.length)} de ${filteredClients.length} clientes`}
               </span>
-              <nav className={styles.pagination} aria-label="Paginação de clientes">
-                <button type="button" aria-label="Página anterior" disabled={safeCurrentPage === 1} onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}><FiChevronLeft aria-hidden="true" /></button>
-                {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
-                  <button className={page === safeCurrentPage ? styles.active_page : undefined} type="button" aria-current={page === safeCurrentPage ? "page" : undefined} onClick={() => setCurrentPage(page)} key={page}>{page}</button>
-                ))}
-                <button type="button" aria-label="Próxima página" disabled={safeCurrentPage === pageCount} onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))}><FiChevronRight aria-hidden="true" /></button>
+              <nav
+                className={styles.pagination}
+                aria-label="Paginação de clientes"
+              >
+                <button
+                  type="button"
+                  aria-label="Página anterior"
+                  disabled={safeCurrentPage === 1}
+                  onClick={() =>
+                    setCurrentPage((page) => Math.max(1, page - 1))
+                  }
+                >
+                  <FiChevronLeft aria-hidden="true" />
+                </button>
+                {Array.from({ length: pageCount }, (_, index) => index + 1).map(
+                  (page) => (
+                    <button
+                      className={
+                        page === safeCurrentPage
+                          ? styles.active_page
+                          : undefined
+                      }
+                      type="button"
+                      aria-current={
+                        page === safeCurrentPage ? "page" : undefined
+                      }
+                      onClick={() => setCurrentPage(page)}
+                      key={page}
+                    >
+                      {page}
+                    </button>
+                  ),
+                )}
+                <button
+                  type="button"
+                  aria-label="Próxima página"
+                  disabled={safeCurrentPage === pageCount}
+                  onClick={() =>
+                    setCurrentPage((page) => Math.min(pageCount, page + 1))
+                  }
+                >
+                  <FiChevronRight aria-hidden="true" />
+                </button>
               </nav>
-              <label className={styles.page_size_control} htmlFor="client-page-size">
-                <span className={styles.visually_hidden}>Clientes por página</span>
-                <select id="client-page-size" value={pageSize} onChange={(event) => handlePageSizeChange(Number(event.target.value))}>
+              <label
+                className={styles.page_size_control}
+                htmlFor="client-page-size"
+              >
+                <span className={styles.visually_hidden}>
+                  Clientes por página
+                </span>
+                <select
+                  id="client-page-size"
+                  value={pageSize}
+                  onChange={(event) =>
+                    handlePageSizeChange(Number(event.target.value))
+                  }
+                >
                   <option value={7}>7 por página</option>
                   <option value={14}>14 por página</option>
                   <option value={21}>21 por página</option>
@@ -753,76 +1289,216 @@ function ClientesAdmin() {
             </footer>
           </section>
 
-          <section className={`${styles.panel} ${styles.details_panel}`} aria-labelledby="client-details-title">
+          {/* Perfil completo do cliente selecionado */}
+          <section
+            className={`${styles.panel} ${styles.details_panel}`}
+            aria-labelledby="client-details-title"
+          >
             <header className={styles.section_header}>
-              <div className={styles.section_heading}><FiUser aria-hidden="true" /><h2 id="client-details-title">Perfil do Cliente Selecionado</h2></div>
+              <div className={styles.section_heading}>
+                <FiUser aria-hidden="true" />
+                <h2 id="client-details-title">Perfil do Cliente Selecionado</h2>
+              </div>
               <div className={styles.detail_actions}>
-                <button className={`${styles.icon_button} ${styles.whatsapp_button}`} type="button" title="Conversar pelo WhatsApp" aria-label={`Conversar com ${selectedClient.name} pelo WhatsApp`}><FiMessageCircle aria-hidden="true" /></button>
-                <button className={styles.icon_button} type="button" title="Enviar e-mail" aria-label={`Enviar e-mail para ${selectedClient.name}`}><FiMail aria-hidden="true" /></button>
-                <button className={styles.icon_button} type="button" title="Editar cliente" aria-label={`Editar ${selectedClient.name}`}><FiEdit2 aria-hidden="true" /></button>
+                <button
+                  className={`${styles.icon_button} ${styles.whatsapp_button}`}
+                  type="button"
+                  title="Conversar pelo WhatsApp"
+                  aria-label={`Conversar com ${selectedClient.name} pelo WhatsApp`}
+                >
+                  <FiMessageCircle aria-hidden="true" />
+                </button>
+                <button
+                  className={styles.icon_button}
+                  type="button"
+                  title="Enviar e-mail"
+                  aria-label={`Enviar e-mail para ${selectedClient.name}`}
+                >
+                  <FiMail aria-hidden="true" />
+                </button>
+                <button
+                  className={styles.icon_button}
+                  type="button"
+                  title="Editar cliente"
+                  aria-label={`Editar ${selectedClient.name}`}
+                >
+                  <FiEdit2 aria-hidden="true" />
+                </button>
               </div>
             </header>
 
             <div className={styles.client_details_grid}>
-              <section className={styles.profile_overview} aria-labelledby="selected-client-name">
+              <section
+                className={styles.profile_overview}
+                aria-labelledby="selected-client-name"
+              >
                 <div className={styles.profile_identity}>
-                  <span className={`${styles.profile_avatar} ${styles[`avatar_${selectedClient.avatarTone}`]}`}>{selectedClient.initials}</span>
+                  <span
+                    className={`${styles.profile_avatar} ${styles[`avatar_${selectedClient.avatarTone}`]}`}
+                  >
+                    {selectedClient.initials}
+                  </span>
                   <div>
-                    <div className={styles.profile_title_row}><h3 id="selected-client-name">{selectedClient.name}</h3><span className={`${styles.relationship_badge} ${getRelationshipClass(selectedClient.relationship)}`}>{selectedClient.relationship}</span></div>
-                    <span>{selectedClient.type} · Cliente desde {selectedClient.since}</span>
+                    <div className={styles.profile_title_row}>
+                      <h3 id="selected-client-name">{selectedClient.name}</h3>
+                      <span
+                        className={`${styles.relationship_badge} ${getRelationshipClass(selectedClient.relationship)}`}
+                      >
+                        {selectedClient.relationship}
+                      </span>
+                    </div>
+                    <span>
+                      {selectedClient.type} · Cliente desde{" "}
+                      {selectedClient.since}
+                    </span>
                   </div>
                 </div>
                 <dl className={styles.profile_meta}>
-                  <div><FiPhone aria-hidden="true" /><dt>Telefone</dt><dd>{selectedClient.phone}</dd></div>
-                  <div><FiMail aria-hidden="true" /><dt>E-mail</dt><dd>{selectedClient.email}</dd></div>
-                  <div><FiMapPin aria-hidden="true" /><dt>Endereço</dt><dd>{selectedClient.address}<br />{selectedClient.city} - {selectedClient.state}</dd></div>
+                  <div>
+                    <FiPhone aria-hidden="true" />
+                    <dt>Telefone</dt>
+                    <dd>{selectedClient.phone}</dd>
+                  </div>
+                  <div>
+                    <FiMail aria-hidden="true" />
+                    <dt>E-mail</dt>
+                    <dd>{selectedClient.email}</dd>
+                  </div>
+                  <div>
+                    <FiMapPin aria-hidden="true" />
+                    <dt>Endereço</dt>
+                    <dd>
+                      {selectedClient.address}
+                      <br />
+                      {selectedClient.city} - {selectedClient.state}
+                    </dd>
+                  </div>
                 </dl>
-                <div className={styles.tag_list}>{selectedClient.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                <div className={styles.tag_list}>
+                  {selectedClient.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
               </section>
 
-              <section className={styles.relationship_panel} aria-labelledby="relationship-title">
+              <section
+                className={styles.relationship_panel}
+                aria-labelledby="relationship-title"
+              >
                 <h3 id="relationship-title">Relacionamento Comercial</h3>
                 <div className={styles.metric_grid}>
-                  <div><strong>{selectedClient.budgetCount}</strong><span>Orçamentos</span></div>
-                  <div><strong>{selectedClient.approvedBudgetCount}</strong><span>Aprovados</span></div>
-                  <div><strong>{selectedClient.vehicles.length}</strong><span>Veículos</span></div>
-                  <div><strong>{currencyFormatter.format(selectedClient.totalValue)}</strong><span>Valor acumulado</span></div>
+                  <div>
+                    <strong>{selectedClient.budgetCount}</strong>
+                    <span>Orçamentos</span>
+                  </div>
+                  <div>
+                    <strong>{selectedClient.approvedBudgetCount}</strong>
+                    <span>Aprovados</span>
+                  </div>
+                  <div>
+                    <strong>{selectedClient.vehicles.length}</strong>
+                    <span>Veículos</span>
+                  </div>
+                  <div>
+                    <strong>
+                      {currencyFormatter.format(selectedClient.totalValue)}
+                    </strong>
+                    <span>Valor acumulado</span>
+                  </div>
                 </div>
                 <div className={styles.approval_block}>
-                  <div><span>Taxa de aprovação</span><strong>{approvalRate}%</strong></div>
-                  <span className={styles.approval_track}><span style={{ width: `${approvalRate}%` }} /></span>
+                  <div>
+                    <span>Taxa de aprovação</span>
+                    <strong>{approvalRate}%</strong>
+                  </div>
+                  <span className={styles.approval_track}>
+                    <span style={{ width: `${approvalRate}%` }} />
+                  </span>
                 </div>
                 <dl className={styles.relationship_meta}>
-                  <div><dt>Contato preferencial</dt><dd>{selectedClient.preferredContact}</dd></div>
-                  <div><dt>Último contato</dt><dd>{selectedClient.lastContact}</dd></div>
-                  <div><dt>Status</dt><dd><span className={`${styles.status_badge} ${getStatusClass(selectedClient.status)}`}>{selectedClient.status}</span></dd></div>
+                  <div>
+                    <dt>Contato preferencial</dt>
+                    <dd>{selectedClient.preferredContact}</dd>
+                  </div>
+                  <div>
+                    <dt>Último contato</dt>
+                    <dd>{selectedClient.lastContact}</dd>
+                  </div>
+                  <div>
+                    <dt>Status</dt>
+                    <dd>
+                      <span
+                        className={`${styles.status_badge} ${getStatusClass(selectedClient.status)}`}
+                      >
+                        {selectedClient.status}
+                      </span>
+                    </dd>
+                  </div>
                 </dl>
                 <p className={styles.client_notes}>{selectedClient.notes}</p>
               </section>
 
-              <section className={styles.vehicles_panel} aria-labelledby="vehicles-title">
-                <div className={styles.subsection_header}><h3 id="vehicles-title">Veículos Vinculados</h3><span>{selectedClient.vehicles.length}</span></div>
+              <section
+                className={styles.vehicles_panel}
+                aria-labelledby="vehicles-title"
+              >
+                <div className={styles.subsection_header}>
+                  <h3 id="vehicles-title">Veículos Vinculados</h3>
+                  <span>{selectedClient.vehicles.length}</span>
+                </div>
                 <div className={styles.vehicle_list}>
                   {selectedClient.vehicles.map((vehicle) => (
-                    <article className={styles.vehicle_item} key={`${vehicle.model}-${vehicle.plate}`}>
-                      <span className={styles.vehicle_icon}><FiTruck aria-hidden="true" /></span>
-                      <div><strong>{vehicle.model}</strong><small>{vehicle.plate} · {vehicle.year}</small><small>Último serviço: {vehicle.lastService}</small></div>
-                      <span className={`${styles.vehicle_badge} ${getVehicleStatusClass(vehicle.status)}`}>{vehicle.status}</span>
+                    <article
+                      className={styles.vehicle_item}
+                      key={`${vehicle.model}-${vehicle.plate}`}
+                    >
+                      <span className={styles.vehicle_icon}>
+                        <FiTruck aria-hidden="true" />
+                      </span>
+                      <div>
+                        <strong>{vehicle.model}</strong>
+                        <small>
+                          {vehicle.plate} · {vehicle.year}
+                        </small>
+                        <small>Último serviço: {vehicle.lastService}</small>
+                      </div>
+                      <span
+                        className={`${styles.vehicle_badge} ${getVehicleStatusClass(vehicle.status)}`}
+                      >
+                        {vehicle.status}
+                      </span>
                     </article>
                   ))}
                 </div>
-                <button className={styles.detail_link} type="button"><span>Gerenciar veículos</span><FiChevronRight aria-hidden="true" /></button>
+                <button className={styles.detail_link} type="button">
+                  <span>Gerenciar veículos</span>
+                  <FiChevronRight aria-hidden="true" />
+                </button>
               </section>
 
-              <section className={styles.history_panel} aria-labelledby="history-title">
-                <div className={styles.subsection_header}><h3 id="history-title">Histórico Recente</h3><FiCalendar aria-hidden="true" /></div>
+              <section
+                className={styles.history_panel}
+                aria-labelledby="history-title"
+              >
+                <div className={styles.subsection_header}>
+                  <h3 id="history-title">Histórico Recente</h3>
+                  <FiCalendar aria-hidden="true" />
+                </div>
                 <ol className={styles.history_list}>
                   {selectedClient.history.map((event) => {
                     const HistoryIcon = getHistoryIcon(event.type);
                     return (
                       <li key={`${event.title}-${event.date}`}>
-                        <span className={`${styles.history_icon} ${styles[`history_${event.type}`]}`}><HistoryIcon aria-hidden="true" /></span>
-                        <div><strong>{event.title}</strong><span>{event.date}</span><small>{event.description}</small></div>
+                        <span
+                          className={`${styles.history_icon} ${styles[`history_${event.type}`]}`}
+                        >
+                          <HistoryIcon aria-hidden="true" />
+                        </span>
+                        <div>
+                          <strong>{event.title}</strong>
+                          <span>{event.date}</span>
+                          <small>{event.description}</small>
+                        </div>
                       </li>
                     );
                   })}
@@ -832,17 +1508,39 @@ function ClientesAdmin() {
           </section>
         </div>
 
-        <aside className={styles.side_column} aria-label="Ações e acompanhamento de clientes">
-          <section className={styles.panel} aria-labelledby="client-actions-title">
-            <header className={styles.side_header}><FiZap aria-hidden="true" /><h2 id="client-actions-title">Ações Rápidas</h2></header>
+        {/* Ações rápidas e acompanhamento da carteira */}
+        <aside
+          className={styles.side_column}
+          aria-label="Ações e acompanhamento de clientes"
+        >
+          <section
+            className={styles.panel}
+            aria-labelledby="client-actions-title"
+          >
+            <header className={styles.side_header}>
+              <FiZap aria-hidden="true" />
+              <h2 id="client-actions-title">Ações Rápidas</h2>
+            </header>
             <div className={styles.quick_action_list}>
               {quickActions.map((action) => {
                 const ActionIcon = action.icon;
                 return (
-                  <button className={styles.quick_action_item} type="button" key={action.title}>
-                    <span className={styles.quick_action_icon}><ActionIcon aria-hidden="true" /></span>
-                    <span className={styles.quick_action_text}><strong>{action.title}</strong><small>{action.description}</small></span>
-                    <FiChevronRight className={styles.quick_action_arrow} aria-hidden="true" />
+                  <button
+                    className={styles.quick_action_item}
+                    type="button"
+                    key={action.title}
+                  >
+                    <span className={styles.quick_action_icon}>
+                      <ActionIcon aria-hidden="true" />
+                    </span>
+                    <span className={styles.quick_action_text}>
+                      <strong>{action.title}</strong>
+                      <small>{action.description}</small>
+                    </span>
+                    <FiChevronRight
+                      className={styles.quick_action_arrow}
+                      aria-hidden="true"
+                    />
                   </button>
                 );
               })}
@@ -850,35 +1548,86 @@ function ClientesAdmin() {
           </section>
 
           <section className={styles.panel} aria-labelledby="portfolio-title">
-            <header className={styles.side_header}><FiUsers aria-hidden="true" /><h2 id="portfolio-title">Carteira por Status</h2></header>
+            <header className={styles.side_header}>
+              <FiUsers aria-hidden="true" />
+              <h2 id="portfolio-title">Carteira por Status</h2>
+            </header>
             <div className={styles.portfolio_content}>
-              <div className={styles.portfolio_chart} style={{ background: chartBackground }}><div><strong>{clients.length}</strong><span>Total</span></div></div>
+              <div
+                className={styles.portfolio_chart}
+                style={{ background: chartBackground }}
+              >
+                <div>
+                  <strong>{clients.length}</strong>
+                  <span>Total</span>
+                </div>
+              </div>
               <div className={styles.portfolio_legend}>
-                <button type="button" onClick={() => filterByStatus("Ativo")}><span className={styles.legend_blue} /><strong>Ativos</strong><small>{statusCounts.active}</small></button>
-                <button type="button" onClick={() => filterByStatus("Potencial")}><span className={styles.legend_green} /><strong>Potenciais</strong><small>{statusCounts.potential}</small></button>
-                <button type="button" onClick={() => filterByStatus("Inativo")}><span className={styles.legend_gray} /><strong>Inativos</strong><small>{statusCounts.inactive}</small></button>
-                <button type="button" onClick={() => filterByStatus("todos")}><span className={styles.legend_all} /><strong>Ver todos</strong><small>{clients.length}</small></button>
+                <button type="button" onClick={() => filterByStatus("Ativo")}>
+                  <span className={styles.legend_blue} />
+                  <strong>Ativos</strong>
+                  <small>{statusCounts.active}</small>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => filterByStatus("Potencial")}
+                >
+                  <span className={styles.legend_green} />
+                  <strong>Potenciais</strong>
+                  <small>{statusCounts.potential}</small>
+                </button>
+                <button type="button" onClick={() => filterByStatus("Inativo")}>
+                  <span className={styles.legend_gray} />
+                  <strong>Inativos</strong>
+                  <small>{statusCounts.inactive}</small>
+                </button>
+                <button type="button" onClick={() => filterByStatus("todos")}>
+                  <span className={styles.legend_all} />
+                  <strong>Ver todos</strong>
+                  <small>{clients.length}</small>
+                </button>
               </div>
             </div>
           </section>
 
           <section className={styles.panel} aria-labelledby="follow-up-title">
-            <header className={styles.side_header}><FiClock aria-hidden="true" /><h2 id="follow-up-title">Próximos Contatos</h2><span className={styles.follow_up_count}>{followUps.length}</span></header>
+            <header className={styles.side_header}>
+              <FiClock aria-hidden="true" />
+              <h2 id="follow-up-title">Próximos Contatos</h2>
+              <span className={styles.follow_up_count}>{followUps.length}</span>
+            </header>
             <div className={styles.follow_up_list}>
               {followUps.map((followUp) => {
                 const FollowUpIcon = followUp.icon;
-                const client = clients.find((item) => item.id === followUp.clientId);
+                const client = clients.find(
+                  (item) => item.id === followUp.clientId,
+                );
                 if (!client) return null;
                 return (
-                  <button className={`${styles.follow_up_item} ${styles[`tone_${followUp.tone}`]}`} type="button" onClick={() => selectClient(client.id)} key={`${followUp.clientId}-${followUp.title}`}>
-                    <FollowUpIcon className={styles.follow_up_icon} aria-hidden="true" />
-                    <span className={styles.follow_up_content}><strong>{followUp.title}</strong><span>{client.name}</span><small>{followUp.description}</small></span>
+                  <button
+                    className={`${styles.follow_up_item} ${styles[`tone_${followUp.tone}`]}`}
+                    type="button"
+                    onClick={() => selectClient(client.id)}
+                    key={`${followUp.clientId}-${followUp.title}`}
+                  >
+                    <FollowUpIcon
+                      className={styles.follow_up_icon}
+                      aria-hidden="true"
+                    />
+                    <span className={styles.follow_up_content}>
+                      <strong>{followUp.title}</strong>
+                      <span>{client.name}</span>
+                      <small>{followUp.description}</small>
+                    </span>
                     <span className={styles.due_badge}>{followUp.due}</span>
                   </button>
                 );
               })}
             </div>
-            <button className={styles.view_all_button} type="button"><span>Ver agenda de contatos</span><FiChevronRight aria-hidden="true" /></button>
+            <button className={styles.view_all_button} type="button">
+              <span>Ver agenda de contatos</span>
+              <FiChevronRight aria-hidden="true" />
+            </button>
           </section>
         </aside>
       </div>

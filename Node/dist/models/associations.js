@@ -10,24 +10,40 @@ const produtos_1 = require("./produtos");
 const servicos_1 = __importDefault(require("./servicos"));
 const carrinho_itens_1 = __importDefault(require("./carrinho_itens"));
 const orcamentoItens_1 = __importDefault(require("./orcamentoItens"));
-//Orçamento
+const solicitacaoOrcamento_1 = __importDefault(require("./solicitacaoOrcamento"));
+// Solicitações de orçamento
+solicitacaoOrcamento_1.default.belongsTo(usuario_1.User, {
+    foreignKey: "usuarioId",
+    as: "usuario"
+});
+usuario_1.User.hasMany(solicitacaoOrcamento_1.default, {
+    foreignKey: "usuarioId",
+    as: "solicitacoes"
+});
+solicitacaoOrcamento_1.default.belongsTo(servicos_1.default, {
+    foreignKey: "servicoId",
+    as: "servico"
+});
+servicos_1.default.hasMany(solicitacaoOrcamento_1.default, {
+    foreignKey: "servicoId",
+    as: "solicitacoes"
+});
+// Uma solicitação pode gerar no máximo um orçamento.
+solicitacaoOrcamento_1.default.hasOne(orcamentos_1.default, {
+    foreignKey: "solicitacaoId",
+    as: "orcamento"
+});
+orcamentos_1.default.belongsTo(solicitacaoOrcamento_1.default, {
+    foreignKey: "solicitacaoId",
+    as: "solicitacao"
+});
 orcamentos_1.default.belongsTo(usuario_1.User, {
     foreignKey: "usuarioId",
-});
-orcamentos_1.default.belongsTo(produtos_1.produtos, {
-    foreignKey: "produtoId",
-});
-orcamentos_1.default.belongsTo(servicos_1.default, {
-    foreignKey: "servicoId"
+    as: "usuario"
 });
 usuario_1.User.hasMany(orcamentos_1.default, {
     foreignKey: "usuarioId",
-});
-produtos_1.produtos.hasMany(orcamentos_1.default, {
-    foreignKey: "produtoId",
-});
-servicos_1.default.hasMany(orcamentos_1.default, {
-    foreignKey: "servicoId",
+    as: "orcamentos"
 });
 //Carrinho
 usuario_1.User.hasOne(carrinho_1.default, {
@@ -52,16 +68,20 @@ carrinho_itens_1.default.belongsTo(produtos_1.produtos, {
 });
 //Oçamento Item
 orcamentoItens_1.default.belongsTo(orcamentos_1.default, {
-    foreignKey: 'orcamentoId'
+    foreignKey: 'orcamentoId',
+    as: 'orcamento'
 });
 orcamentoItens_1.default.belongsTo(produtos_1.produtos, {
-    foreignKey: 'produtoId'
+    foreignKey: 'produtoId',
+    as: 'produto'
 });
 orcamentoItens_1.default.belongsTo(servicos_1.default, {
-    foreignKey: 'servicoId'
+    foreignKey: 'servicoId',
+    as: 'servico'
 });
 orcamentos_1.default.hasMany(orcamentoItens_1.default, {
     foreignKey: 'orcamentoId',
+    as: 'itens'
 });
 produtos_1.produtos.hasMany(orcamentoItens_1.default, {
     foreignKey: 'produtoId'

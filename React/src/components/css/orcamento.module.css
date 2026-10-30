@@ -285,6 +285,25 @@
   transform: translateY(1px);
 }
 
+.submitButton:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.formFeedback {
+  margin: 10px 0 0;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.formFeedbackSuccess {
+  color: #56e69b;
+}
+
+.formFeedbackError {
+  color: #ff7c86;
+}
+
 .privacy {
   display: flex;
   gap: 7px;

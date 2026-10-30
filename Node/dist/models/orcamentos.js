@@ -15,68 +15,77 @@ Orcamento.init({
         primaryKey: true,
         autoIncrement: true
     },
+    solicitacaoId: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+        unique: true,
+        references: {
+            model: "solicitacoes_orcamento",
+            key: "id"
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT"
+    },
     usuarioId: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: "usuarios",
             key: "id"
-        }
-    },
-    produtoId: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: "produtos",
-            key: "id"
-        }
-    },
-    servicoId: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: "servicos",
-            key: "id"
-        }
-    },
-    nome: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    telefone: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
     },
     veiculo: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    descricao: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    urgencia: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    status: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    respostaAdmin: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING(150),
         allowNull: true
     },
     placa: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING(20),
         allowNull: true
     },
     chassi: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING(50),
         allowNull: true
     },
-    foto: {
-        type: sequelize_1.DataTypes.STRING,
+    quilometragem: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true
+    },
+    respostaAdmin: {
+        type: sequelize_1.DataTypes.TEXT,
+        allowNull: true
+    },
+    valorTotal: {
+        type: sequelize_1.DataTypes.DECIMAL(12, 2),
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+            min: 0
+        }
+    },
+    frete: {
+        type: sequelize_1.DataTypes.DECIMAL(12, 2),
+        allowNull: true,
+        defaultValue: 0,
+        validate: {
+            min: 0
+        }
+    },
+    desconto: {
+        type: sequelize_1.DataTypes.DECIMAL(12, 2),
+        allowNull: true,
+        defaultValue: 0,
+        validate: {
+            min: 0
+        }
+    },
+    prazoEntrega: {
+        type: sequelize_1.DataTypes.STRING(100),
+        allowNull: true
+    },
+    garantia: {
+        type: sequelize_1.DataTypes.STRING(100),
         allowNull: true
     }
 }, {

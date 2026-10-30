@@ -15,6 +15,7 @@ const registerSchema = zod_1.z.object({
     nome: zod_1.z.string().min(2).max(100),
     email: zod_1.z.email(),
     telefone: zod_1.z.string().min(10).max(15),
+    endereco: zod_1.z.string().trim().max(255).optional().nullable(),
     senha: zod_1.z.string().min(6),
     confirmar: zod_1.z.string().min(6)
 });

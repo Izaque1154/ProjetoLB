@@ -1,3 +1,4 @@
+// Dependências
 import type { ChangeEvent, FormEvent } from "react";
 import { useMemo, useState } from "react";
 import type { IconType } from "react-icons";
@@ -37,6 +38,7 @@ import {
 } from "react-icons/fi";
 import styles from "../css/cssAdmin/configuraçoesAdmin.module.css";
 
+// Tipos
 type SettingsSection =
   | "company"
   | "budgets"
@@ -147,6 +149,7 @@ interface Feedback {
   message: string;
 }
 
+// Definições e valores iniciais
 const sectionDefinitions: SectionDefinition[] = [
   {
     id: "company",
@@ -300,6 +303,7 @@ const accentOptions: Array<{
   { id: "violet", label: "Violeta", className: styles.swatch_violet },
 ];
 
+// Controle reutilizável para opções booleanas
 function ToggleRow({
   id,
   label,
@@ -338,6 +342,7 @@ function ToggleRow({
 }
 
 function ConfiguracoesAdmin() {
+  // Estado do formulário
   const [activeSection, setActiveSection] =
     useState<SettingsSection>("company");
   const [savedSettings, setSavedSettings] =
@@ -348,6 +353,7 @@ function ConfiguracoesAdmin() {
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Dados derivados do estado atual
   const hasChanges = useMemo(
     () => JSON.stringify(savedSettings) !== JSON.stringify(draftSettings),
     [draftSettings, savedSettings],
@@ -358,14 +364,11 @@ function ConfiguracoesAdmin() {
     sectionDefinitions[0];
   const CurrentSectionIcon = currentSection.icon;
 
+  // Atualização e validação das configurações
   function updateSetting<
     Section extends keyof SettingsState,
     Key extends keyof SettingsState[Section],
-  >(
-    section: Section,
-    key: Key,
-    value: SettingsState[Section][Key],
-  ) {
+  >(section: Section, key: Key, value: SettingsState[Section][Key]) {
     setDraftSettings((current) => ({
       ...current,
       [section]: {
@@ -418,6 +421,7 @@ function ConfiguracoesAdmin() {
     return nextErrors;
   }
 
+  // Ações do formulário
   function handleSave(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const validationErrors = validateSettings();
@@ -475,6 +479,7 @@ function ConfiguracoesAdmin() {
     reader.readAsDataURL(file);
   }
 
+  // Seção: empresa
   function renderCompanySettings() {
     const { company } = draftSettings;
 
@@ -576,7 +581,9 @@ function ConfiguracoesAdmin() {
               </span>
               <div>
                 <h3>Contato principal</h3>
-                <p>Canal usado nos documentos e mensagens enviadas ao cliente.</p>
+                <p>
+                  Canal usado nos documentos e mensagens enviadas ao cliente.
+                </p>
               </div>
             </div>
           </div>
@@ -704,6 +711,7 @@ function ConfiguracoesAdmin() {
     );
   }
 
+  // Seção: orçamentos
   function renderBudgetSettings() {
     const { budgets } = draftSettings;
     const budgetCode = `${budgets.prefix || "ORC"}-${String(
@@ -902,6 +910,7 @@ function ConfiguracoesAdmin() {
     );
   }
 
+  // Seção: notificações
   function renderNotificationSettings() {
     const { notifications } = draftSettings;
     const enabledChannels = [
@@ -920,7 +929,8 @@ function ConfiguracoesAdmin() {
               <p>Escolha por onde a equipe recebe os alertas operacionais.</p>
             </div>
             <span className={styles.group_badge}>
-              {enabledChannels} {enabledChannels === 1 ? "canal ativo" : "canais ativos"}
+              {enabledChannels}{" "}
+              {enabledChannels === 1 ? "canal ativo" : "canais ativos"}
             </span>
           </div>
 
@@ -981,9 +991,7 @@ function ConfiguracoesAdmin() {
 
             <label
               className={`${styles.channel_option} ${
-                notifications.browserChannel
-                  ? styles.channel_option_active
-                  : ""
+                notifications.browserChannel ? styles.channel_option_active : ""
               }`}
             >
               <input
@@ -1093,9 +1101,7 @@ function ConfiguracoesAdmin() {
                   )
                 }
                 disabled={!notifications.emailChannel}
-                aria-invalid={Boolean(
-                  errors["notifications.recipientEmail"],
-                )}
+                aria-invalid={Boolean(errors["notifications.recipientEmail"])}
               />
               {errors["notifications.recipientEmail"] && (
                 <small className={styles.field_error}>
@@ -1125,6 +1131,7 @@ function ConfiguracoesAdmin() {
     );
   }
 
+  // Seção: segurança
   function renderSecuritySettings() {
     const { security } = draftSettings;
     const securityLevel = [
@@ -1149,9 +1156,7 @@ function ConfiguracoesAdmin() {
                   ? "Proteção intermediária"
                   : "Proteção básica"}
             </h3>
-            <p>
-              {securityLevel} de 4 recursos essenciais estão habilitados.
-            </p>
+            <p>{securityLevel} de 4 recursos essenciais estão habilitados.</p>
           </div>
           <div className={styles.security_meter} aria-hidden="true">
             {[1, 2, 3, 4].map((step) => (
@@ -1275,11 +1280,7 @@ function ConfiguracoesAdmin() {
                   placeholder="192.168.1.10, 200.150.20.0/24"
                   value={security.allowedIps}
                   onChange={(event) =>
-                    updateSetting(
-                      "security",
-                      "allowedIps",
-                      event.target.value,
-                    )
+                    updateSetting("security", "allowedIps", event.target.value)
                   }
                 />
                 <small className={styles.field_hint}>
@@ -1305,6 +1306,7 @@ function ConfiguracoesAdmin() {
     );
   }
 
+  // Seção: integrações
   function renderIntegrationSettings() {
     const { integrations } = draftSettings;
     const connectedCount = Object.values(integrations).filter(Boolean).length;
@@ -1398,6 +1400,7 @@ function ConfiguracoesAdmin() {
     );
   }
 
+  // Seção: aparência
   function renderAppearanceSettings() {
     const { appearance } = draftSettings;
     const previewTheme =
@@ -1641,6 +1644,7 @@ function ConfiguracoesAdmin() {
     );
   }
 
+  // Seleciona o conteúdo da seção ativa
   function renderActiveSection() {
     switch (activeSection) {
       case "company":
@@ -1667,15 +1671,19 @@ function ConfiguracoesAdmin() {
         ? FiAlertCircle
         : FiRefreshCw;
 
+  // Renderização
   return (
     <div className={styles.settings_page}>
+      {/* Resumo e ações globais */}
       <section className={styles.settings_overview}>
         <div className={styles.overview_identity}>
           <span className={styles.overview_icon}>
             <FiSettings aria-hidden="true" />
           </span>
           <div>
-            <span className={styles.overview_eyebrow}>Workspace administrativo</span>
+            <span className={styles.overview_eyebrow}>
+              Workspace administrativo
+            </span>
             <h2>Central de configurações</h2>
             <p>LB Cardans · Unidade Ribeirão Preto</p>
           </div>
@@ -1737,6 +1745,7 @@ function ConfiguracoesAdmin() {
       </section>
 
       <div className={styles.settings_workspace}>
+        {/* Navegação das configurações */}
         <aside className={styles.settings_nav}>
           <div className={styles.nav_heading}>
             <span>Preferências</span>
@@ -1783,6 +1792,7 @@ function ConfiguracoesAdmin() {
           </div>
         </aside>
 
+        {/* Formulário da seção selecionada */}
         <form
           id="admin-settings-form"
           className={styles.settings_form}

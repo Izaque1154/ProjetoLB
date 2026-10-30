@@ -31,6 +31,11 @@ Users.init({
             len: [10, 11]
         }
     },
+    endereco: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
+    },
     senha: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false

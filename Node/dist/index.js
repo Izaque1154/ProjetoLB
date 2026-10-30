@@ -16,14 +16,17 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const path_1 = __importDefault(require("path"));
 const banco_1 = __importDefault(require("./config/banco"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const cartRoutes_1 = __importDefault(require("./routes/cartRoutes"));
 const budgetRoutes_1 = __importDefault(require("./routes/budgetRoutes"));
 require("./models/servicos");
+require("./models/solicitacaoOrcamento");
 require("./models/orcamentos");
 require("./models/carrinho_itens");
 require("./models/orcamentoItens");
+require("./models/associations");
 const itens_1 = require("./itens/itens");
 const servicos_1 = require("./itens/servicos");
 const usuario_1 = require("./models/usuario");
@@ -32,13 +35,17 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
+const diretorioUploadsOrcamentos = path_1.default.resolve(process.cwd(), "dist", "uploads", "orcamentos");
+const diretorioUploadsSolicitacoes = path_1.default.resolve(process.cwd(), "uploads", "solicitacoes-orcamento");
+app.use("/uploads/solicitacoes-orcamento", express_1.default.static(diretorioUploadsSolicitacoes));
+app.use("/uploads", express_1.default.static(diretorioUploadsOrcamentos));
 app.use("/auth", authRoutes_1.default);
 app.use("/cart", cartRoutes_1.default);
 app.use('/budget', budgetRoutes_1.default);
@@ -48,20 +55,26 @@ function startServer() {
         try {
             yield banco_1.default.authenticate();
             console.log("Conexao com o banco de dados bem-sucedida!");
-            yield banco_1.default.sync({ alter: true });
+            // Cria somente tabelas ausentes. Alterações estruturais ficam nas migrations.
+            yield banco_1.default.sync();
             console.log("Tabelas sincronizadas com sucesso!");
             //usuário admin
             const hash = yield bcrypt_1.default.hash("123456", 10);
-            yield usuario_1.User.findOrCreate({ where: { email: "bizin1237@gmail.com" },
+            const enderecoAdmin = "Avenida dos Cardans, 765 - Centro, São Paulo - SP";
+            const [admin] = yield usuario_1.User.findOrCreate({ where: { email: "bizin1237@gmail.com" },
                 defaults: {
                     nome: "Izaque",
                     email: "bizin1237@gmail.com",
                     telefone: "21998765786",
+                    endereco: enderecoAdmin,
                     senha: hash,
                     verificado: true,
                     role: "admin"
                 }
             });
+            if (!admin.endereco) {
+                yield admin.update({ endereco: enderecoAdmin });
+            }
             yield (0, servicos_1.seedServicos)();
             console.log("Serviços sincronizados com sucesso!");
             yield (0, itens_1.seedProdutos)();

@@ -20,7 +20,7 @@ const validateLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         loginSchema.parse(req.body);
     }
     catch (error) {
-        return res.status(400).json({ erro: error });
+        return res.status(400).json({ erro: error, message: "Erro de validação" });
     }
     next();
 });

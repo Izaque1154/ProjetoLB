@@ -1,40 +1,59 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "../config/banco";
+import { ORCAMENTO_STATUS, OrcamentoStatus } from "../types/budget";
 
-interface OrcamentoAttributes {
+export interface OrcamentoAttributes {
     id: number;
+    solicitacaoId: number | null;
     usuarioId: number;
-    produtoId?: number | null;
-    servicoId?: number | null;
-    nome: string;
-    telefone: string;
-    veiculo: string;
-    descricao: string;
-    urgencia?: string;
-    status: string;
-    respostaAdmin?: string | null;
-    placa?: string | null;
-    chassi?: string | null ;
-    foto?: string | null;
+    veiculo: string | null;
+    placa: string | null;
+    chassi: string | null;
+    quilometragem: number | null;
+    respostaAdmin: string | null;
+    frete: number | null;
+    desconto: number | null;
+    prazoEntrega: string | null;
+    garantia: string | null;
+    valorTotal: number | string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
-interface OrcamentoCreationAttributes extends Optional<OrcamentoAttributes, "id" | "produtoId" | "servicoId" | "respostaAdmin" | "foto"> {}
+interface OrcamentoCreationAttributes extends Optional<
+    OrcamentoAttributes,
+    "id" | 
+    "respostaAdmin" | 
+    "valorTotal" | 
+    "frete" | 
+    "desconto" | 
+    "prazoEntrega" | 
+    "garantia" | 
+    "createdAt" | 
+    "updatedAt" | 
+    'solicitacaoId' | 
+    "veiculo" |
+    "placa" |
+    "chassi" |
+    "quilometragem" 
+> {}
 
 class Orcamento extends Model<OrcamentoAttributes, OrcamentoCreationAttributes> implements OrcamentoAttributes {
     public id!: number;
+    public solicitacaoId!: number;
     public usuarioId!: number;
-    public produtoId!: number | null;
-    public servicoId!: number | null;
-    public nome!: string;
-    public telefone!: string;
-    public veiculo!: string;
-    public descricao!: string;
-    public urgencia!: string;
-    public status!: string;
-    public respostaAdmin!: string | null;
+    public veiculo!: string | null;
     public placa!: string | null;
     public chassi!: string | null;
-    public foto!: string | null;
+    public quilometragem!: number | null;
+    public respostaAdmin!: string | null;
+    public valorTotal!: number | string;
+    public frete!: number | null;
+    public desconto!: number | null;
+    public prazoEntrega!: string | null;
+    public garantia!: string | null;
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
 }
 
 Orcamento.init({
@@ -45,68 +64,77 @@ Orcamento.init({
         primaryKey: true,
         autoIncrement: true
     },
+    solicitacaoId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        unique: true,
+        references: {
+            model: "solicitacoes_orcamento",
+            key: "id"
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT"
+    },
     usuarioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: "usuarios",
             key: "id"
-        }
-    },
-    produtoId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: "produtos",
-            key: "id"
-        }
-    },
-    servicoId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: "servicos",
-            key: "id"
-        }
-    },
-    nome: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    telefone: {
-        type: DataTypes.STRING,
-        allowNull: false
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
     },
     veiculo: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    descricao: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    urgencia: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    respostaAdmin: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(150),
         allowNull: true
     },
     placa: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: true
     },
     chassi: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: true
     },
-    foto: {
-        type: DataTypes.STRING,
+    quilometragem: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    respostaAdmin: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    valorTotal: {
+        type: DataTypes.DECIMAL(12, 2),
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+            min: 0
+        }
+    },
+    frete: {
+        type: DataTypes.DECIMAL(12, 2),
+        allowNull: true,
+        defaultValue: 0,
+        validate: {
+            min: 0
+        }
+    },
+    desconto: {
+        type: DataTypes.DECIMAL(12, 2),
+        allowNull: true,
+        defaultValue: 0,
+        validate: {
+            min: 0
+        }
+    },
+    prazoEntrega: {
+        type: DataTypes.STRING(100),
+        allowNull: true
+    },
+    garantia: {
+        type: DataTypes.STRING(100),
         allowNull: true
     }
 },{

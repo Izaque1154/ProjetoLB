@@ -18,7 +18,8 @@ const carrinho_1 = __importDefault(require("../models/carrinho"));
 const produtos_1 = require("../models/produtos");
 //Carrinho
 const carrinho = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idUser = Number(req.user.id);
+    var _a;
+    const idUser = Number((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
     const { peca } = req.body;
     if (!idUser || peca === undefined || peca === null) {
         return res.status(404).json({ erro: "token invalido" });
@@ -43,7 +44,8 @@ const carrinho = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.carrinho = carrinho;
 //Função para consultar o carrinho
 const itemCarrinho = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idUser = Number(req.user.id);
+    var _a;
+    const idUser = Number((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
     const { peca } = req.body;
     if (!idUser || peca === undefined || peca === null) {
         return res.status(404).json({ erro: "token invalido" });
@@ -68,7 +70,8 @@ const itemCarrinho = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.itemCarrinho = itemCarrinho;
 //Função para buscar item no carrinho
 const buscarCarrinho = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idUser = Number(req.user.id);
+    var _a;
+    const idUser = Number((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
     if (!idUser) {
         return res.status(404).json({ erro: "Token invalido" });
     }
@@ -85,7 +88,8 @@ const buscarCarrinho = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.buscarCarrinho = buscarCarrinho;
 //Excluir item no carrinho
 const excluir = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idUser = Number(req.user.id);
+    var _a;
+    const idUser = Number((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
     const { peca } = req.body;
     if (!idUser || idUser === null) {
         return res.status(404).json({ erro: "Token invalido" });
@@ -103,7 +107,8 @@ const excluir = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.excluir = excluir;
 //Comprar item no carrinho
 const comprar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idUser = Number(req.user.id);
+    var _a;
+    const idUser = Number((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
     if (!idUser || idUser === null) {
         return res.status(404).json({ erro: "Token invalido" });
     }

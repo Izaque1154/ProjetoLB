@@ -24,7 +24,7 @@ const isProd = process.env.NODE_ENV === "production";
 //Funções de autenticação
 //Função registrar usuário
 const registrarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nome, email, telefone, senha, confirmar } = req.body;
+    const { nome, email, telefone, endereco, senha, confirmar } = req.body;
     try {
         if (senha !== confirmar) {
             return res.status(400).json({ erro: 'As senhas não coincidem' });
@@ -35,6 +35,7 @@ const registrarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, functio
             nome,
             email,
             telefone,
+            endereco: (endereco === null || endereco === void 0 ? void 0 : endereco.trim()) || null,
             senha: hash,
             verificado: false,
         });
@@ -137,7 +138,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         };
         const secret = process.env.SECRET;
         const options = {
-            "expiresIn": "24h",
+            "expiresIn": "9h",
             "algorithm": "HS256"
         };
         const token = jsonwebtoken_1.default.sign(payload, secret, options);

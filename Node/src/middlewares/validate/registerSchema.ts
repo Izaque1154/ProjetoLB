@@ -5,6 +5,7 @@ const registerSchema = z.object({
     nome: z.string().min(2).max(100),
     email: z.email(),
     telefone: z.string().min(10).max(15),
+    endereco: z.string().trim().max(255).optional().nullable(),
     senha: z.string().min(6),
     confirmar: z.string().min(6)
 })

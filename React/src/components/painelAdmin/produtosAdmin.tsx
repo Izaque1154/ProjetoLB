@@ -26,6 +26,7 @@ import {
 } from "react-icons/fi";
 import styles from "../css/cssAdmin/produtosAdmin.module.css";
 
+// Tipos e contratos usados na gestão do catálogo de produtos.
 type ProductStatus = "Ativo" | "Baixo estoque" | "Sem estoque" | "Destaque";
 type StockFilter = "todos" | "disponivel" | "baixo" | "sem-estoque";
 type AlertTone = "warning" | "danger" | "info";
@@ -73,6 +74,7 @@ interface StockAlert {
   tone: AlertTone;
 }
 
+// Produtos de exemplo exibidos na listagem e no painel de detalhes.
 const products: Product[] = [
   {
     id: "cc-5153x",
@@ -86,7 +88,8 @@ const products: Product[] = [
     cost: 180,
     status: "Ativo",
     image: "/imagens/tornearia/cruzetaCardan/img01.jpg",
-    description: "Cruzeta de alta resistência para cardans, projetada para transmissão de torque com máxima durabilidade e desempenho.",
+    description:
+      "Cruzeta de alta resistência para cardans, projetada para transmissão de torque com máxima durabilidade e desempenho.",
     manufacturer: "Spicer",
     barcode: "7898561234567",
     unit: "Unidade",
@@ -99,7 +102,8 @@ const products: Product[] = [
       "Material: aço-liga",
       "Acabamento: temperado",
     ],
-    notes: "Produto original Spicer. Garantia de 6 meses contra defeitos de fabricação.",
+    notes:
+      "Produto original Spicer. Garantia de 6 meses contra defeitos de fabricação.",
   },
   {
     id: "rc-30",
@@ -113,14 +117,21 @@ const products: Product[] = [
     cost: 148,
     status: "Baixo estoque",
     image: "/imagens/tornearia/rolamentoCardan/img01.jpg",
-    description: "Mancal central com rolamento blindado e suporte em borracha para reduzir vibrações do conjunto cardan.",
+    description:
+      "Mancal central com rolamento blindado e suporte em borracha para reduzir vibrações do conjunto cardan.",
     manufacturer: "SKF",
     barcode: "7898561234574",
     unit: "Unidade",
     compatibility: "Toyota Hilux 2.8 Diesel 2016+",
     location: "A-03-01",
-    specifications: ["Diâmetro interno: 30 mm", "Rolamento blindado", "Borracha de alta densidade", "Aplicação dianteira"],
-    notes: "Recomenda-se verificar alinhamento e balanceamento do cardan durante a instalação.",
+    specifications: [
+      "Diâmetro interno: 30 mm",
+      "Rolamento blindado",
+      "Borracha de alta densidade",
+      "Aplicação dianteira",
+    ],
+    notes:
+      "Recomenda-se verificar alinhamento e balanceamento do cardan durante a instalação.",
   },
   {
     id: "fc-8f",
@@ -134,14 +145,21 @@ const products: Product[] = [
     cost: 315,
     status: "Sem estoque",
     image: "/imagens/tornearia/flange/img01.jpg",
-    description: "Flange de acoplamento reforçada para linha pesada, usinada para garantir encaixe preciso e transmissão uniforme.",
+    description:
+      "Flange de acoplamento reforçada para linha pesada, usinada para garantir encaixe preciso e transmissão uniforme.",
     manufacturer: "Dana",
     barcode: "7898561234581",
     unit: "Unidade",
     compatibility: "Mercedes-Benz Atego 1419 / 1719",
     location: "B-01-02",
-    specifications: ["Fixação: 8 furos", "Aço SAE 1045", "Usinagem CNC", "Tratamento anticorrosivo"],
-    notes: "Item temporariamente indisponível. Reposição solicitada ao fornecedor.",
+    specifications: [
+      "Fixação: 8 furos",
+      "Aço SAE 1045",
+      "Usinagem CNC",
+      "Tratamento anticorrosivo",
+    ],
+    notes:
+      "Item temporariamente indisponível. Reposição solicitada ao fornecedor.",
   },
   {
     id: "ld-40",
@@ -155,14 +173,21 @@ const products: Product[] = [
     cost: 238,
     status: "Ativo",
     image: "/imagens/tornearia/colunaDirecao/img01.jpg",
-    description: "Luva estriada para compensação axial do cardan, com ajuste preciso e resistência a cargas elevadas.",
+    description:
+      "Luva estriada para compensação axial do cardan, com ajuste preciso e resistência a cargas elevadas.",
     manufacturer: "Meritor",
     barcode: "7898561234598",
     unit: "Unidade",
     compatibility: "Volvo FH 440 / 460 / 500 / 540",
     location: "B-02-04",
-    specifications: ["Estriado: 40 mm", "Aço cementado", "Tolerância H7", "Lubrificação por graxeira"],
-    notes: "Aplicar graxa de alta pressão antes da montagem e respeitar o alinhamento das marcações.",
+    specifications: [
+      "Estriado: 40 mm",
+      "Aço cementado",
+      "Tolerância H7",
+      "Lubrificação por graxeira",
+    ],
+    notes:
+      "Aplicar graxa de alta pressão antes da montagem e respeitar o alinhamento das marcações.",
   },
   {
     id: "pc-1410",
@@ -176,14 +201,21 @@ const products: Product[] = [
     cost: 215,
     status: "Baixo estoque",
     image: "/imagens/tornearia/barraCurta/img01.jpg",
-    description: "Ponteira usinada para conjuntos cardan da linha pesada, com alta resistência à torção e encaixe controlado.",
+    description:
+      "Ponteira usinada para conjuntos cardan da linha pesada, com alta resistência à torção e encaixe controlado.",
     manufacturer: "Spicer",
     barcode: "7898561234604",
     unit: "Unidade",
     compatibility: "Scania P / G / R série 6x2",
     location: "B-03-02",
-    specifications: ["Comprimento: 141 mm", "Estriado externo", "Aço SAE 8640", "Dureza: 58-62 HRC"],
-    notes: "Estoque abaixo do mínimo. Nova compra recomendada para manter o giro da oficina.",
+    specifications: [
+      "Comprimento: 141 mm",
+      "Estriado externo",
+      "Aço SAE 8640",
+      "Dureza: 58-62 HRC",
+    ],
+    notes:
+      "Estoque abaixo do mínimo. Nova compra recomendada para manter o giro da oficina.",
   },
   {
     id: "ms-35",
@@ -197,14 +229,21 @@ const products: Product[] = [
     cost: 156,
     status: "Sem estoque",
     image: "/imagens/tornearia/rolamentoCardan/img02.jpg",
-    description: "Conjunto de mancal e suporte para estabilização do eixo cardan em veículos comerciais leves.",
+    description:
+      "Conjunto de mancal e suporte para estabilização do eixo cardan em veículos comerciais leves.",
     manufacturer: "INA",
     barcode: "7898561234611",
     unit: "Unidade",
     compatibility: "Iveco Daily 35S14 / 45S17",
     location: "A-03-04",
-    specifications: ["Diâmetro interno: 35 mm", "Suporte reforçado", "Rolamento selado", "Borracha antivibração"],
-    notes: "Produto sem saldo disponível. Pedido de reposição em análise pelo setor de compras.",
+    specifications: [
+      "Diâmetro interno: 35 mm",
+      "Suporte reforçado",
+      "Rolamento selado",
+      "Borracha antivibração",
+    ],
+    notes:
+      "Produto sem saldo disponível. Pedido de reposição em análise pelo setor de compras.",
   },
   {
     id: "kr-5",
@@ -218,14 +257,21 @@ const products: Product[] = [
     cost: 96,
     status: "Destaque",
     image: "/imagens/freio/kitRolamentoRoda/img01.jpg",
-    description: "Kit de manutenção preventiva com componentes selecionados para revisão de conjuntos cardan.",
+    description:
+      "Kit de manutenção preventiva com componentes selecionados para revisão de conjuntos cardan.",
     manufacturer: "LB Cardans",
     barcode: "7898561234628",
     unit: "Kit",
     compatibility: "Aplicações universais sob conferência",
     location: "C-01-01",
-    specifications: ["Anéis de vedação", "Travas de segurança", "Lubrificante técnico", "Embalagem individual"],
-    notes: "Conferir medidas e aplicação antes da venda. Produto com alta rotatividade.",
+    specifications: [
+      "Anéis de vedação",
+      "Travas de segurança",
+      "Lubrificante técnico",
+      "Embalagem individual",
+    ],
+    notes:
+      "Conferir medidas e aplicação antes da venda. Produto com alta rotatividade.",
   },
   {
     id: "ec-01",
@@ -239,14 +285,21 @@ const products: Product[] = [
     cost: 890,
     status: "Baixo estoque",
     image: "/imagens/tornearia/cardan/img01.jpg",
-    description: "Eixo cardan dianteiro montado e balanceado, pronto para instalação em aplicações 4x4.",
+    description:
+      "Eixo cardan dianteiro montado e balanceado, pronto para instalação em aplicações 4x4.",
     manufacturer: "Dana",
     barcode: "7898561234635",
     unit: "Unidade",
     compatibility: "Ford Ranger 4x4 2012+",
     location: "D-01-01",
-    specifications: ["Conjunto balanceado", "Cruzetas instaladas", "Flanges usinadas", "Pintura eletrostática"],
-    notes: "Peça fornecida balanceada. Evitar impactos e armazenar na posição horizontal.",
+    specifications: [
+      "Conjunto balanceado",
+      "Cruzetas instaladas",
+      "Flanges usinadas",
+      "Pintura eletrostática",
+    ],
+    notes:
+      "Peça fornecida balanceada. Evitar impactos e armazenar na posição horizontal.",
   },
   {
     id: "td-20",
@@ -260,14 +313,21 @@ const products: Product[] = [
     cost: 124,
     status: "Ativo",
     image: "/imagens/tornearia/barraLonga/img01.jpg",
-    description: "Terminal deslizante com tratamento térmico para compensação de curso e redução de folgas no conjunto.",
+    description:
+      "Terminal deslizante com tratamento térmico para compensação de curso e redução de folgas no conjunto.",
     manufacturer: "Spicer",
     barcode: "7898561234642",
     unit: "Unidade",
     compatibility: "Volkswagen Amarok 2.0 / 3.0 4Motion",
     location: "B-04-03",
-    specifications: ["Curso útil: 82 mm", "Estriado de precisão", "Aço tratado", "Vedação contra contaminantes"],
-    notes: "Verificar folga do tubo e condição da coifa durante a substituição.",
+    specifications: [
+      "Curso útil: 82 mm",
+      "Estriado de precisão",
+      "Aço tratado",
+      "Vedação contra contaminantes",
+    ],
+    notes:
+      "Verificar folga do tubo e condição da coifa durante a substituição.",
   },
   {
     id: "gf-28",
@@ -281,13 +341,19 @@ const products: Product[] = [
     cost: 165,
     status: "Ativo",
     image: "/imagens/tornearia/flange/img02.jpg",
-    description: "Garfo para cruzeta com alojamentos usinados e geometria reforçada para trabalho severo.",
+    description:
+      "Garfo para cruzeta com alojamentos usinados e geometria reforçada para trabalho severo.",
     manufacturer: "LB Cardans",
     barcode: "7898561234659",
     unit: "Unidade",
     compatibility: "Agrale Marruá AM100 / AM200",
     location: "C-02-03",
-    specifications: ["Copo: 28 mm", "Aço forjado", "Usinagem CNC", "Controle dimensional individual"],
+    specifications: [
+      "Copo: 28 mm",
+      "Aço forjado",
+      "Usinagem CNC",
+      "Controle dimensional individual",
+    ],
     notes: "Produto fabricado sob controle dimensional interno.",
   },
   {
@@ -302,14 +368,21 @@ const products: Product[] = [
     cost: 38,
     status: "Baixo estoque",
     image: "/imagens/tornearia/cruzetaCardan/img03.jpg",
-    description: "Conjunto de parafusos, porcas travantes e arruelas para fixação segura de flanges cardan.",
+    description:
+      "Conjunto de parafusos, porcas travantes e arruelas para fixação segura de flanges cardan.",
     manufacturer: "LB Cardans",
     barcode: "7898561234666",
     unit: "Kit",
     compatibility: "Flanges de linha pesada com 8 furos",
     location: "C-01-04",
-    specifications: ["12 componentes", "Classe 10.9", "Porcas autotravantes", "Acabamento zincado"],
-    notes: "Utilizar torquímetro e seguir o aperto recomendado para a aplicação.",
+    specifications: [
+      "12 componentes",
+      "Classe 10.9",
+      "Porcas autotravantes",
+      "Acabamento zincado",
+    ],
+    notes:
+      "Utilizar torquímetro e seguir o aperto recomendado para a aplicação.",
   },
   {
     id: "cd-210",
@@ -323,32 +396,92 @@ const products: Product[] = [
     cost: 1380,
     status: "Sem estoque",
     image: "/imagens/tornearia/cardan/img03.jpg",
-    description: "Conjunto cardan completo com flanges, cruzetas e balanceamento dinâmico certificado.",
+    description:
+      "Conjunto cardan completo com flanges, cruzetas e balanceamento dinâmico certificado.",
     manufacturer: "Dana",
     barcode: "7898561234673",
     unit: "Unidade",
     compatibility: "Chevrolet S10 2.8 4x4 2017+",
     location: "D-01-02",
-    specifications: ["Comprimento: 1.420 mm", "Balanceamento dinâmico", "Cruzetas lubrificáveis", "Pintura anticorrosiva"],
-    notes: "Disponível sob encomenda. Prazo médio de fornecimento de 7 dias úteis.",
+    specifications: [
+      "Comprimento: 1.420 mm",
+      "Balanceamento dinâmico",
+      "Cruzetas lubrificáveis",
+      "Pintura anticorrosiva",
+    ],
+    notes:
+      "Disponível sob encomenda. Prazo médio de fornecimento de 7 dias úteis.",
   },
 ];
 
+// Conteúdo dos painéis de ações rápidas e alertas de estoque.
 const quickActions: QuickAction[] = [
-  { icon: FiPlus, title: "Cadastrar novo produto", description: "Adicionar novo item ao catálogo" },
-  { icon: FiRefreshCw, title: "Atualizar estoque", description: "Ajustar quantidades em estoque" },
-  { icon: FiEdit2, title: "Editar produto", description: "Alterar informações do produto" },
-  { icon: FiUploadCloud, title: "Importar catálogo", description: "Importar produtos via planilha" },
+  {
+    icon: FiPlus,
+    title: "Cadastrar novo produto",
+    description: "Adicionar novo item ao catálogo",
+  },
+  {
+    icon: FiRefreshCw,
+    title: "Atualizar estoque",
+    description: "Ajustar quantidades em estoque",
+  },
+  {
+    icon: FiEdit2,
+    title: "Editar produto",
+    description: "Alterar informações do produto",
+  },
+  {
+    icon: FiUploadCloud,
+    title: "Importar catálogo",
+    description: "Importar produtos via planilha",
+  },
 ];
 
 const stockAlerts: StockAlert[] = [
-  { productId: "pc-1410", icon: FiArchive, title: "Estoque baixo", description: "8 unidades restantes", badge: "Baixo", tone: "warning" },
-  { productId: "fc-8f", icon: FiAlertTriangle, title: "Sem estoque", description: "Reposição necessária", badge: "Urgente", tone: "danger" },
-  { productId: "ms-35", icon: FiAlertTriangle, title: "Sem estoque", description: "Reposição necessária", badge: "Urgente", tone: "danger" },
-  { productId: "ec-01", icon: FiArchive, title: "Estoque baixo", description: "6 unidades restantes", badge: "Baixo", tone: "warning" },
-  { productId: "rc-30", icon: FiRefreshCw, title: "Reposição sugerida", description: "Estoque abaixo do ideal", badge: "Reposição", tone: "info" },
+  {
+    productId: "pc-1410",
+    icon: FiArchive,
+    title: "Estoque baixo",
+    description: "8 unidades restantes",
+    badge: "Baixo",
+    tone: "warning",
+  },
+  {
+    productId: "fc-8f",
+    icon: FiAlertTriangle,
+    title: "Sem estoque",
+    description: "Reposição necessária",
+    badge: "Urgente",
+    tone: "danger",
+  },
+  {
+    productId: "ms-35",
+    icon: FiAlertTriangle,
+    title: "Sem estoque",
+    description: "Reposição necessária",
+    badge: "Urgente",
+    tone: "danger",
+  },
+  {
+    productId: "ec-01",
+    icon: FiArchive,
+    title: "Estoque baixo",
+    description: "6 unidades restantes",
+    badge: "Baixo",
+    tone: "warning",
+  },
+  {
+    productId: "rc-30",
+    icon: FiRefreshCw,
+    title: "Reposição sugerida",
+    description: "Estoque abaixo do ideal",
+    badge: "Reposição",
+    tone: "info",
+  },
 ];
 
+// Configurações de formatação e filtros iniciais.
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
@@ -360,6 +493,7 @@ const initialFilters: ProductFilters = {
   search: "",
 };
 
+// Auxiliares de apresentação e filtragem dos produtos.
 function getStatusClass(status: ProductStatus) {
   const classes: Record<ProductStatus, string> = {
     Ativo: styles.status_active,
@@ -373,42 +507,64 @@ function getStatusClass(status: ProductStatus) {
 
 function matchesStockFilter(product: Product, filter: StockFilter) {
   if (filter === "disponivel") return product.stock > product.minimumStock;
-  if (filter === "baixo") return product.stock > 0 && product.stock <= product.minimumStock;
+  if (filter === "baixo")
+    return product.stock > 0 && product.stock <= product.minimumStock;
   if (filter === "sem-estoque") return product.stock === 0;
   return true;
 }
 
 function ProdutosAdmin() {
-  const [draftFilters, setDraftFilters] = useState<ProductFilters>(initialFilters);
-  const [activeFilters, setActiveFilters] = useState<ProductFilters>(initialFilters);
+  // Estado dos filtros, seleção e paginação.
+  const [draftFilters, setDraftFilters] =
+    useState<ProductFilters>(initialFilters);
+  const [activeFilters, setActiveFilters] =
+    useState<ProductFilters>(initialFilters);
   const [selectedProductId, setSelectedProductId] = useState(products[0].id);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(9);
 
+  // Opções e produtos calculados conforme os filtros ativos.
   const categoryOptions = useMemo(
-    () => [...new Set(products.map((product) => product.category))].sort((a, b) => a.localeCompare(b, "pt-BR")),
+    () =>
+      [...new Set(products.map((product) => product.category))].sort((a, b) =>
+        a.localeCompare(b, "pt-BR"),
+      ),
     [],
   );
 
   const filteredProducts = useMemo(() => {
-    const normalizedSearch = activeFilters.search.trim().toLocaleLowerCase("pt-BR");
+    const normalizedSearch = activeFilters.search
+      .trim()
+      .toLocaleLowerCase("pt-BR");
 
     return products.filter((product) => {
-      const matchesCategory = activeFilters.category === "todas" || product.category === activeFilters.category;
+      const matchesCategory =
+        activeFilters.category === "todas" ||
+        product.category === activeFilters.category;
       const matchesStock = matchesStockFilter(product, activeFilters.stock);
-      const searchableText = `${product.name} ${product.code} ${product.category} ${product.application}`.toLocaleLowerCase("pt-BR");
-      const matchesSearch = !normalizedSearch || searchableText.includes(normalizedSearch);
+      const searchableText =
+        `${product.name} ${product.code} ${product.category} ${product.application}`.toLocaleLowerCase(
+          "pt-BR",
+        );
+      const matchesSearch =
+        !normalizedSearch || searchableText.includes(normalizedSearch);
 
       return matchesCategory && matchesStock && matchesSearch;
     });
   }, [activeFilters]);
 
+  // Paginação e produto atualmente selecionado.
   const pageCount = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
   const safeCurrentPage = Math.min(currentPage, pageCount);
   const pageStart = (safeCurrentPage - 1) * pageSize;
-  const visibleProducts = filteredProducts.slice(pageStart, pageStart + pageSize);
-  const selectedProduct = products.find((product) => product.id === selectedProductId) ?? products[0];
+  const visibleProducts = filteredProducts.slice(
+    pageStart,
+    pageStart + pageSize,
+  );
+  const selectedProduct =
+    products.find((product) => product.id === selectedProductId) ?? products[0];
 
+  // Ações de filtro, paginação e seleção.
   function handleFilterSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setActiveFilters(draftFilters);
@@ -424,10 +580,15 @@ function ProdutosAdmin() {
     setSelectedProductId(productId);
   }
 
+  // Estrutura visual da página.
   return (
     <div className={styles.catalog_grid}>
       <div className={styles.main_column}>
-        <section className={`${styles.panel} ${styles.catalog_panel}`} aria-labelledby="product-list-title">
+        {/* Listagem, filtros e paginação dos produtos */}
+        <section
+          className={`${styles.panel} ${styles.catalog_panel}`}
+          aria-labelledby="product-list-title"
+        >
           <header className={styles.panel_header}>
             <h2 id="product-list-title">Lista de Produtos</h2>
 
@@ -449,11 +610,18 @@ function ProdutosAdmin() {
               <select
                 id="product-category"
                 value={draftFilters.category}
-                onChange={(event) => setDraftFilters((filters) => ({ ...filters, category: event.target.value }))}
+                onChange={(event) =>
+                  setDraftFilters((filters) => ({
+                    ...filters,
+                    category: event.target.value,
+                  }))
+                }
               >
                 <option value="todas">Todas</option>
                 {categoryOptions.map((category) => (
-                  <option value={category} key={category}>{category}</option>
+                  <option value={category} key={category}>
+                    {category}
+                  </option>
                 ))}
               </select>
             </label>
@@ -463,7 +631,12 @@ function ProdutosAdmin() {
               <select
                 id="product-stock"
                 value={draftFilters.stock}
-                onChange={(event) => setDraftFilters((filters) => ({ ...filters, stock: event.target.value as StockFilter }))}
+                onChange={(event) =>
+                  setDraftFilters((filters) => ({
+                    ...filters,
+                    stock: event.target.value as StockFilter,
+                  }))
+                }
               >
                 <option value="todos">Todos</option>
                 <option value="disponivel">Disponível</option>
@@ -480,7 +653,12 @@ function ProdutosAdmin() {
                 type="search"
                 placeholder="Buscar por nome, código ou aplicação..."
                 value={draftFilters.search}
-                onChange={(event) => setDraftFilters((filters) => ({ ...filters, search: event.target.value }))}
+                onChange={(event) =>
+                  setDraftFilters((filters) => ({
+                    ...filters,
+                    search: event.target.value,
+                  }))
+                }
               />
             </label>
 
@@ -506,10 +684,22 @@ function ProdutosAdmin() {
               </thead>
               <tbody>
                 {visibleProducts.map((product) => (
-                  <tr className={product.id === selectedProduct.id ? styles.selected_row : undefined} key={product.id}>
+                  <tr
+                    className={
+                      product.id === selectedProduct.id
+                        ? styles.selected_row
+                        : undefined
+                    }
+                    key={product.id}
+                  >
                     <td>
                       <div className={styles.product_cell}>
-                        <img className={styles.product_thumbnail} src={product.image} alt="" loading="lazy" />
+                        <img
+                          className={styles.product_thumbnail}
+                          src={product.image}
+                          alt=""
+                          loading="lazy"
+                        />
                         <strong>{product.name}</strong>
                       </div>
                     </td>
@@ -517,9 +707,15 @@ function ProdutosAdmin() {
                     <td>{product.category}</td>
                     <td>{product.application}</td>
                     <td className={styles.numeric_cell}>{product.stock} un</td>
-                    <td className={styles.numeric_cell}>{currencyFormatter.format(product.price)}</td>
+                    <td className={styles.numeric_cell}>
+                      {currencyFormatter.format(product.price)}
+                    </td>
                     <td>
-                      <span className={`${styles.status_badge} ${getStatusClass(product.status)}`}>{product.status}</span>
+                      <span
+                        className={`${styles.status_badge} ${getStatusClass(product.status)}`}
+                      >
+                        {product.status}
+                      </span>
                     </td>
                     <td>
                       <div className={styles.row_actions}>
@@ -545,7 +741,9 @@ function ProdutosAdmin() {
                 ))}
                 {visibleProducts.length === 0 && (
                   <tr>
-                    <td className={styles.empty_state} colSpan={8}>Nenhum produto encontrado para os filtros selecionados.</td>
+                    <td className={styles.empty_state} colSpan={8}>
+                      Nenhum produto encontrado para os filtros selecionados.
+                    </td>
                   </tr>
                 )}
               </tbody>
@@ -559,7 +757,10 @@ function ProdutosAdmin() {
                 : `Mostrando ${pageStart + 1} a ${Math.min(pageStart + pageSize, filteredProducts.length)} de ${filteredProducts.length} produtos`}
             </span>
 
-            <nav className={styles.pagination} aria-label="Paginação de produtos">
+            <nav
+              className={styles.pagination}
+              aria-label="Paginação de produtos"
+            >
               <button
                 type="button"
                 aria-label="Página anterior"
@@ -568,33 +769,46 @@ function ProdutosAdmin() {
               >
                 <FiChevronLeft aria-hidden="true" />
               </button>
-              {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
-                <button
-                  className={page === safeCurrentPage ? styles.active_page : undefined}
-                  type="button"
-                  aria-current={page === safeCurrentPage ? "page" : undefined}
-                  onClick={() => setCurrentPage(page)}
-                  key={page}
-                >
-                  {page}
-                </button>
-              ))}
+              {Array.from({ length: pageCount }, (_, index) => index + 1).map(
+                (page) => (
+                  <button
+                    className={
+                      page === safeCurrentPage ? styles.active_page : undefined
+                    }
+                    type="button"
+                    aria-current={page === safeCurrentPage ? "page" : undefined}
+                    onClick={() => setCurrentPage(page)}
+                    key={page}
+                  >
+                    {page}
+                  </button>
+                ),
+              )}
               <button
                 type="button"
                 aria-label="Próxima página"
                 disabled={safeCurrentPage === pageCount}
-                onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))}
+                onClick={() =>
+                  setCurrentPage((page) => Math.min(pageCount, page + 1))
+                }
               >
                 <FiChevronRight aria-hidden="true" />
               </button>
             </nav>
 
-            <label className={styles.page_size_control} htmlFor="product-page-size">
-              <span className={styles.visually_hidden}>Produtos por página</span>
+            <label
+              className={styles.page_size_control}
+              htmlFor="product-page-size"
+            >
+              <span className={styles.visually_hidden}>
+                Produtos por página
+              </span>
               <select
                 id="product-page-size"
                 value={pageSize}
-                onChange={(event) => handlePageSizeChange(Number(event.target.value))}
+                onChange={(event) =>
+                  handlePageSizeChange(Number(event.target.value))
+                }
               >
                 <option value={9}>9 por página</option>
                 <option value={18}>18 por página</option>
@@ -604,26 +818,44 @@ function ProdutosAdmin() {
           </footer>
         </section>
 
-        <section className={`${styles.panel} ${styles.details_panel}`} aria-labelledby="product-details-title">
+        {/* Informações detalhadas do produto selecionado */}
+        <section
+          className={`${styles.panel} ${styles.details_panel}`}
+          aria-labelledby="product-details-title"
+        >
           <header className={styles.section_header}>
             <div className={styles.section_heading}>
               <FiPackage aria-hidden="true" />
-              <h2 id="product-details-title">Detalhes do Produto Selecionado</h2>
+              <h2 id="product-details-title">
+                Detalhes do Produto Selecionado
+              </h2>
             </div>
-            <button className={styles.icon_button} type="button" title="Editar produto" aria-label={`Editar ${selectedProduct.name}`}>
+            <button
+              className={styles.icon_button}
+              type="button"
+              title="Editar produto"
+              aria-label={`Editar ${selectedProduct.name}`}
+            >
               <FiEdit2 aria-hidden="true" />
             </button>
           </header>
 
           <div className={styles.product_details_grid}>
-            <section className={styles.product_overview} aria-labelledby="selected-product-name">
+            <section
+              className={styles.product_overview}
+              aria-labelledby="selected-product-name"
+            >
               <div className={styles.detail_image_frame}>
                 <img src={selectedProduct.image} alt={selectedProduct.name} />
               </div>
               <div className={styles.product_intro}>
                 <div className={styles.product_title_row}>
                   <h3 id="selected-product-name">{selectedProduct.name}</h3>
-                  <span className={`${styles.status_badge} ${getStatusClass(selectedProduct.status)}`}>{selectedProduct.status}</span>
+                  <span
+                    className={`${styles.status_badge} ${getStatusClass(selectedProduct.status)}`}
+                  >
+                    {selectedProduct.status}
+                  </span>
                 </div>
                 <p>{selectedProduct.description}</p>
                 <dl className={styles.product_meta}>
@@ -646,8 +878,13 @@ function ProdutosAdmin() {
               </div>
             </section>
 
-            <section className={styles.detail_column} aria-labelledby="catalog-data-title">
-              <h3 className={styles.visually_hidden} id="catalog-data-title">Dados de catálogo</h3>
+            <section
+              className={styles.detail_column}
+              aria-labelledby="catalog-data-title"
+            >
+              <h3 className={styles.visually_hidden} id="catalog-data-title">
+                Dados de catálogo
+              </h3>
               <dl className={styles.detail_list}>
                 <div>
                   <FiLayers aria-hidden="true" />
@@ -676,22 +913,51 @@ function ProdutosAdmin() {
               </button>
             </section>
 
-            <section className={`${styles.detail_column} ${styles.inventory_column}`} aria-labelledby="inventory-data-title">
-              <h3 className={styles.visually_hidden} id="inventory-data-title">Preço e estoque</h3>
+            <section
+              className={`${styles.detail_column} ${styles.inventory_column}`}
+              aria-labelledby="inventory-data-title"
+            >
+              <h3 className={styles.visually_hidden} id="inventory-data-title">
+                Preço e estoque
+              </h3>
               <span className={styles.detail_label}>Preço de venda</span>
-              <strong className={styles.price_value}>{currencyFormatter.format(selectedProduct.price)}</strong>
+              <strong className={styles.price_value}>
+                {currencyFormatter.format(selectedProduct.price)}
+              </strong>
               <dl className={styles.inventory_list}>
-                <div><dt>Custo</dt><dd>{currencyFormatter.format(selectedProduct.cost)}</dd></div>
-                <div><dt>Estoque atual</dt><dd>{selectedProduct.stock} unidades</dd></div>
-                <div><dt>Estoque mínimo</dt><dd>{selectedProduct.minimumStock} unidades</dd></div>
-                <div><dt>Localização</dt><dd><FiMapPin aria-hidden="true" />{selectedProduct.location}</dd></div>
+                <div>
+                  <dt>Custo</dt>
+                  <dd>{currencyFormatter.format(selectedProduct.cost)}</dd>
+                </div>
+                <div>
+                  <dt>Estoque atual</dt>
+                  <dd>{selectedProduct.stock} unidades</dd>
+                </div>
+                <div>
+                  <dt>Estoque mínimo</dt>
+                  <dd>{selectedProduct.minimumStock} unidades</dd>
+                </div>
+                <div>
+                  <dt>Localização</dt>
+                  <dd>
+                    <FiMapPin aria-hidden="true" />
+                    {selectedProduct.location}
+                  </dd>
+                </div>
               </dl>
             </section>
 
-            <section className={styles.detail_column} aria-labelledby="specification-title">
-              <h3 className={styles.detail_label} id="specification-title">Especificações</h3>
+            <section
+              className={styles.detail_column}
+              aria-labelledby="specification-title"
+            >
+              <h3 className={styles.detail_label} id="specification-title">
+                Especificações
+              </h3>
               <ul className={styles.specification_list}>
-                {selectedProduct.specifications.map((specification) => <li key={specification}>{specification}</li>)}
+                {selectedProduct.specifications.map((specification) => (
+                  <li key={specification}>{specification}</li>
+                ))}
               </ul>
               <h3 className={styles.notes_title}>Observações</h3>
               <p className={styles.notes}>{selectedProduct.notes}</p>
@@ -700,8 +966,15 @@ function ProdutosAdmin() {
         </section>
       </div>
 
-      <aside className={styles.side_column} aria-label="Ações e alertas de produtos">
-        <section className={styles.panel} aria-labelledby="product-actions-title">
+      {/* Ações rápidas e alertas do catálogo */}
+      <aside
+        className={styles.side_column}
+        aria-label="Ações e alertas de produtos"
+      >
+        <section
+          className={styles.panel}
+          aria-labelledby="product-actions-title"
+        >
           <header className={styles.side_header}>
             <FiZap aria-hidden="true" />
             <h2 id="product-actions-title">Ações Rápidas</h2>
@@ -710,10 +983,22 @@ function ProdutosAdmin() {
             {quickActions.map((action) => {
               const ActionIcon = action.icon;
               return (
-                <button className={styles.quick_action_item} type="button" key={action.title}>
-                  <span className={styles.quick_action_icon}><ActionIcon aria-hidden="true" /></span>
-                  <span className={styles.quick_action_text}><strong>{action.title}</strong><small>{action.description}</small></span>
-                  <FiChevronRight className={styles.quick_action_arrow} aria-hidden="true" />
+                <button
+                  className={styles.quick_action_item}
+                  type="button"
+                  key={action.title}
+                >
+                  <span className={styles.quick_action_icon}>
+                    <ActionIcon aria-hidden="true" />
+                  </span>
+                  <span className={styles.quick_action_text}>
+                    <strong>{action.title}</strong>
+                    <small>{action.description}</small>
+                  </span>
+                  <FiChevronRight
+                    className={styles.quick_action_arrow}
+                    aria-hidden="true"
+                  />
                 </button>
               );
             })}
@@ -729,7 +1014,9 @@ function ProdutosAdmin() {
           <div className={styles.alert_list}>
             {stockAlerts.map((alert) => {
               const AlertIcon = alert.icon;
-              const product = products.find((item) => item.id === alert.productId);
+              const product = products.find(
+                (item) => item.id === alert.productId,
+              );
               if (!product) return null;
 
               return (

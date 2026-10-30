@@ -6,26 +6,42 @@ import { produtos } from "./produtos";
 import Servico from "./servicos";
 import CarrinhoItens from "./carrinho_itens"
 import OrcamentoIten from "./orcamentoItens";
+import SolicitacaoOrcamento from "./solicitacaoOrcamento";
 
-//Orçamento
+// Solicitações de orçamento
+SolicitacaoOrcamento.belongsTo(User, {
+    foreignKey: "usuarioId",
+    as: "usuario"
+});
+User.hasMany(SolicitacaoOrcamento, {
+    foreignKey: "usuarioId",
+    as: "solicitacoes"
+});
+SolicitacaoOrcamento.belongsTo(Servico, {
+    foreignKey: "servicoId",
+    as: "servico"
+});
+Servico.hasMany(SolicitacaoOrcamento, {
+    foreignKey: "servicoId",
+    as: "solicitacoes"
+});
+
+// Uma solicitação pode gerar no máximo um orçamento.
+SolicitacaoOrcamento.hasOne(Orcamento, {
+    foreignKey: "solicitacaoId",
+    as: "orcamento"
+});
+Orcamento.belongsTo(SolicitacaoOrcamento, {
+    foreignKey: "solicitacaoId",
+    as: "solicitacao"
+});
 Orcamento.belongsTo(User, {
     foreignKey: "usuarioId",
+    as: "usuario"
 });
-Orcamento.belongsTo(produtos, {
-    foreignKey: "produtoId",
-});
-Orcamento.belongsTo(Servico, {
-    foreignKey: "servicoId"
-});
-
 User.hasMany(Orcamento, {
     foreignKey: "usuarioId",
-});
-produtos.hasMany(Orcamento, {
-    foreignKey: "produtoId",
-});
-Servico.hasMany(Orcamento, {
-    foreignKey: "servicoId",
+    as: "orcamentos"
 });
 
 //Carrinho
@@ -54,17 +70,21 @@ CarrinhoItens.belongsTo(produtos, {
 
 //Oçamento Item
 OrcamentoIten.belongsTo(Orcamento, {
-    foreignKey: 'orcamentoId'
+    foreignKey: 'orcamentoId',
+    as: 'orcamento'
 });
 OrcamentoIten.belongsTo(produtos, {
-    foreignKey: 'produtoId'
+    foreignKey: 'produtoId',
+    as: 'produto'
 });
 OrcamentoIten.belongsTo(Servico, {
-    foreignKey: 'servicoId'
+    foreignKey: 'servicoId',
+    as: 'servico'
 });
 
 Orcamento.hasMany(OrcamentoIten, {
     foreignKey: 'orcamentoId',
+    as: 'itens'
 });
 produtos.hasMany(OrcamentoIten, {
     foreignKey: 'produtoId'

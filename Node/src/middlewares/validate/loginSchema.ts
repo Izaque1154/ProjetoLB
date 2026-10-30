@@ -11,7 +11,7 @@ export const validateLogin = async (req: Request, res: Response, next: NextFunct
     try{
         loginSchema.parse(req.body);
     } catch (error) {
-        return res.status(400).json({ erro: error});
+        return res.status(400).json({ erro: error, message: "Erro de validação" });
     }
     next();
 }

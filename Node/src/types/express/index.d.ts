@@ -1,6 +1,4 @@
-import { JwtPayload } from 'jsonwebtoken';
-
-
+import type { TokenPayload } from "../../interfaces/interfaceAuth";
 
 declare global {
   namespace Express {
@@ -9,3 +7,5 @@ declare global {
     }
   }
 }
+
+export {};

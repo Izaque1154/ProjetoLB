@@ -23,11 +23,11 @@ OrcamentoIten.init({
             key: 'id'
         },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onDelete: "SET NULL",
     },
     produtoId: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'produtos',
             key: 'id'
@@ -37,21 +37,29 @@ OrcamentoIten.init({
     },
     servicoId: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'servicos',
             key: 'id'
         },
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
     },
     quantidade: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1,
+        validate: {
+            isInt: true,
+            min: 1
+        }
     },
     precoUnitario: {
-        type: sequelize_1.DataTypes.DECIMAL,
-        allowNull: false
+        type: sequelize_1.DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        validate: {
+            min: 0
+        }
     },
     descricao: {
         type: sequelize_1.DataTypes.STRING,

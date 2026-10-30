@@ -14,7 +14,7 @@ const isProd = process.env.NODE_ENV === "production";
 
     //Função registrar usuário
 export const registrarUsuario = async (req: Request, res: Response): Promise<any>  => {
-    const { nome, email, telefone, senha, confirmar } = req.body;
+    const { nome, email, telefone, endereco, senha, confirmar } = req.body;
 
     try{
         if(senha !== confirmar) {
@@ -26,6 +26,7 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<any
             nome,
             email,
             telefone,
+            endereco: endereco?.trim() || null,
             senha: hash,
             verificado: false,
     });
@@ -133,7 +134,7 @@ export const login = async (req: Request, res: Response):Promise<any> => {
         };
         const secret = process.env.SECRET as string;
         const options: SignOptions = {
-            "expiresIn": "24h",
+            "expiresIn": "9h",
             "algorithm": "HS256"
         } ;
         const token = jwt.sign(payload, secret, options);

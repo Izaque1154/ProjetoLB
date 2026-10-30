@@ -1,42 +1,45 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import styles from "./css/Oficina.module.css"
+import styles from "./css/Oficina.module.css";
 import { useLocation } from "react-router-dom";
 
+function Oficina() {
+  // Estado da listagem e dados de navegação/pesquisa.
+  const [filtrados, setFiltrados] = useState<any[]>([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-
-function Oficina(){
-  const [filtrados, setFiltrados] = useState<any[]>([])
-  const navigate = useNavigate()
-  const location = useLocation()
-  
-  //React Hooks e instancias
-
+  // Normaliza os textos usados no filtro de pesquisa.
   function removerAcentos(texto: string): string {
-  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
 
-  useEffect(() =>{
-    setFiltrados(info)
-  }, [])
-  useEffect(() =>{
-    if(!location){
-        return
-      } else if (typeof location.state !== "string" || !location.state.trim()){
-        setFiltrados(info)
-        return 
+  // Inicialização e atualização dos produtos filtrados.
+  useEffect(() => {
+    setFiltrados(info);
+  }, []);
+  useEffect(() => {
+    if (!location) {
+      return;
+    } else if (typeof location.state !== "string" || !location.state.trim()) {
+      setFiltrados(info);
+      return;
     }
-    setFiltrados(info.filter((item) =>{
-      return removerAcentos(item.titulo.toLowerCase()).includes(removerAcentos(location.state.toLowerCase()))
-    }))
-    console.log(filtrados)
-  }, [location])
+    setFiltrados(
+      info.filter((item) => {
+        return removerAcentos(item.titulo.toLowerCase()).includes(
+          removerAcentos(location.state.toLowerCase()),
+        );
+      }),
+    );
+    console.log(filtrados);
+  }, [location]);
 
+  // Limites usados para controlar os títulos das categorias.
+  const maior: number = Math.max(...filtrados.map((p) => p.id));
+  const menor: number = Math.min(...filtrados.map((p) => p.id));
 
-   const maior: number = Math.max(...filtrados.map(p => p.id));
-   const menor: number = Math.min(...filtrados.map(p => p.id));
-   
-
+  // Catálogo exibido na oficina.
   const info: any[] = [
     { id: 0, titulo: "Barra longa de direção", preco: "587,99R$" },
     { id: 1, titulo: "Barra curta de direção", preco: "486,89R$" },
@@ -77,60 +80,71 @@ function Oficina(){
     { id: 36, titulo: "Amortecedor Dianteiro", preco: "489,90R$" },
     { id: 37, titulo: "Amortecedor Traseiro", preco: "457,79R$" },
     { id: 38, titulo: "Coxim do Amortecedor", preco: "119,90R$" },
-  ]
-    return(
-        <div className={styles.container}>
-            <main className={styles.main}>
-              {filtrados.length !== 0? 
-                <div className={styles.imagens}>
-                  {
-                    menor < 21?
-                    <h1 className={styles.hTornearia}>Tornearia</h1>:
-                    null
-                  }
-                    {
-                        filtrados.map((src, i) => (
-                            src.id < 21? 
-                              <div className={styles.grade} onClick={() => navigate(`/peca/${src.id}`)} key={i}>
-                                  <div className={styles.tImagem}>
-                                      <img src={`${import.meta.env.BASE_URL}imagens/tornearia/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem}/>
-                                  </div>
-                                  <div className={styles.tInfo}>
-                                      <h5 className={styles.tTitulo}>{src.titulo}</h5>
-                                      <h6 className={styles.tPreco}>{src.preco}</h6>
-                                      <h6 className={styles.frete}>Frete Grátis</h6>
-                                  </div>
-                              </div>:
-                            null
-                        ))
-                    }
-                    {
-                      maior >=21 ?
-                      <h1 className={styles.fh1}>Freio</h1>:
-                      null
-                    }
-                    {
-                        filtrados.map((src, i) => (
-                            src.id >= 21?
-                        <div className={styles.grade} onClick={() => navigate(`/peca/${src.id}`)} key={i}>
-                                  <div className={styles.tImagem}>
-                                      <img src={`${import.meta.env.BASE_URL}imagens/freio/img${src.id}.jpg`} alt={`imagem${src.id}`} className={styles.gradeItem}/>
-                                  </div>
-                                  <div className={styles.tInfo}>
-                                      <h5 className={styles.tTitulo}>{src.titulo}</h5>
-                                      <h6 className={styles.tPreco}>{src.preco}</h6>
-                                      <h6 className={styles.frete}>Frete Grátis</h6>
-                                  </div>
-                              </div>:
-                        null
-                        ))
-                    }
-                </div>:
-                <h1 className={styles.nItem}>Nenhum item encontrado</h1>
-                  }
-            </main>
-        </div>
-    )
+  ];
+  // Renderização.
+  return (
+    <div className={styles.container}>
+      <main className={styles.main}>
+        {filtrados.length !== 0 ? (
+          <div className={styles.imagens}>
+            {/* Produtos de tornearia. */}
+            {menor < 21 ? (
+              <h1 className={styles.hTornearia}>Tornearia</h1>
+            ) : null}
+            {filtrados.map((src, i) =>
+              src.id < 21 ? (
+                <div
+                  className={styles.grade}
+                  onClick={() => navigate(`/peca/${src.id}`)}
+                  key={i}
+                >
+                  <div className={styles.tImagem}>
+                    <img
+                      src={`${import.meta.env.BASE_URL}imagens/tornearia/img${src.id}.jpg`}
+                      alt={`imagem${src.id}`}
+                      className={styles.gradeItem}
+                    />
+                  </div>
+                  <div className={styles.tInfo}>
+                    <h5 className={styles.tTitulo}>{src.titulo}</h5>
+                    <h6 className={styles.tPreco}>{src.preco}</h6>
+                    <h6 className={styles.frete}>Frete Grátis</h6>
+                  </div>
+                </div>
+              ) : null,
+            )}
+
+            {/* Produtos de freio. */}
+            {maior >= 21 ? <h1 className={styles.fh1}>Freio</h1> : null}
+            {filtrados.map((src, i) =>
+              src.id >= 21 ? (
+                <div
+                  className={styles.grade}
+                  onClick={() => navigate(`/peca/${src.id}`)}
+                  key={i}
+                >
+                  <div className={styles.tImagem}>
+                    <img
+                      src={`${import.meta.env.BASE_URL}imagens/freio/img${src.id}.jpg`}
+                      alt={`imagem${src.id}`}
+                      className={styles.gradeItem}
+                    />
+                  </div>
+                  <div className={styles.tInfo}>
+                    <h5 className={styles.tTitulo}>{src.titulo}</h5>
+                    <h6 className={styles.tPreco}>{src.preco}</h6>
+                    <h6 className={styles.frete}>Frete Grátis</h6>
+                  </div>
+                </div>
+              ) : null,
+            )}
+          </div>
+        ) : (
+          <h1 className={styles.nItem}>Nenhum item encontrado</h1>
+        )}
+      </main>
+    </div>
+  );
 }
 
-export default Oficina
+export default Oficina;

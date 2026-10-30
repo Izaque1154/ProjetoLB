@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./components/css/cssAdmin/appAdmin.module.css";
 import api, { apiRoutes } from "./services/api";
-import { useNavigate } from "react-router-dom";
 
+// Metadados usados pela navegação lateral e pelo cabeçalho administrativo.
 const adminPages = [
   {
     path: "dashboard",
@@ -53,34 +53,84 @@ const adminPages = [
 export default function LayoutAdmin() {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentPage =
-    adminPages.find(({ path }) =>
-      decodeURI(location.pathname).endsWith(`/admin/${path}`),
-    ) ?? adminPages[0];
+  const [acessoValidado, setAcessoValidado] = useState(false);
 
+  const decodedPath = decodeURI(location.pathname);
+  const isEditingBudget =
+    decodedPath.includes("/admin/editarOrcamentos/") ||
+    decodedPath.includes("/admin/fazerOrcamento/");
+  const isViewingRequest = decodedPath.includes("/admin/verSolicitacao/");
+  const isBudgetFlow =
+    isEditingBudget ||
+    isViewingRequest ||
+    decodedPath.endsWith("/admin/orçamentos");
+
+  const currentPage = isViewingRequest
+    ? {
+        title: "Visualizar Solicitação",
+        subtitle:
+          "Confira os dados enviados pelo cliente antes de criar o orçamento",
+      }
+    : isEditingBudget
+      ? {
+          title: "Editar Orçamento",
+          subtitle: "Altere os campos do orçamento selecionado",
+        }
+      : (adminPages.find(({ path }) =>
+          decodedPath.endsWith(`/admin/${path}`),
+        ) ?? adminPages[0]);
+
+  // Confirma a permissão administrativa antes de montar as páginas protegidas.
   useEffect(() => {
+    let componenteAtivo = true;
+
     api
       .post(apiRoutes.auth.admin, {})
-      .then((res) => console.log(res))
-      .catch(() => console.log("opa"));
-  }, []);
+      .then(() => {
+        if (componenteAtivo) {
+          setAcessoValidado(true);
+        }
+      })
+      .catch(() => {
+        navigate("/login", {
+          replace: true,
+          state: { from: location.pathname },
+        });
+      });
+
+    return () => {
+      componenteAtivo = false;
+    };
+  }, [location.pathname, navigate]);
+
+  if (!acessoValidado) {
+    return <main>Validando acesso administrativo...</main>;
+  }
 
   return (
     <div className={styles.admin_layout}>
+      {/* Navegação principal do painel. */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebar_brand}>
           <div className={styles.brand_logo}>Logo</div>
           <div className={styles.brand_name}>LB Cardans</div>
         </div>
 
-        <nav className={styles.sidebar_nav} aria-label="Navegação administrativa">
+        <nav
+          className={styles.sidebar_nav}
+          aria-label="Navegação administrativa"
+        >
           {adminPages.map((page) => (
             <NavLink
               key={page.path}
               to={page.path}
-              className={({ isActive }) =>
-                `${styles.nav_item} ${isActive ? styles.nav_item_active : ""}`
-              }
+              className={({ isActive }) => {
+                const isBudgetPage = page.path === "orçamentos" && isBudgetFlow;
+
+                return `${styles.nav_item} ${
+                  isActive || isBudgetPage ? styles.nav_item_active : ""
+                }`;
+              }}
             >
               {page.label}
             </NavLink>
@@ -98,6 +148,7 @@ export default function LayoutAdmin() {
       </aside>
 
       <div className={styles.admin_area}>
+        {/* Cabeçalho contextual da página ativa. */}
         <header className={styles.admin_header}>
           <div className={styles.header_left}>
             <button
@@ -129,7 +180,10 @@ export default function LayoutAdmin() {
               Sino
             </button>
 
-            <button className={styles.user_profile} onClick={() => navigate('/admin/configurações')}>
+            <button
+              className={`${styles.user_profile} bg-dark border-primary rounded-4 p-1`}
+              onClick={() => navigate("/admin/configurações")}
+            >
               <div className={styles.user_avatar}>A</div>
 
               <div className={styles.user_info}>
@@ -140,6 +194,7 @@ export default function LayoutAdmin() {
           </div>
         </header>
 
+        {/* Conteúdo da rota administrativa selecionada. */}
         <main className={styles.admin_main}>
           <Outlet />
         </main>

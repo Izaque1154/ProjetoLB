@@ -7,7 +7,14 @@ const multer_1 = __importDefault(require("multer"));
 const upload = (0, multer_1.default)({
     storage: multer_1.default.memoryStorage(),
     limits: {
-        fileSize: 5 * 1024 * 1024, // Limite de tamanho do arquivo (5MB)
+        fileSize: 10 * 1024 * 1024,
+    },
+    fileFilter: (_req, file, callback) => {
+        if (!file.mimetype.startsWith("image/")) {
+            callback(new Error("Apenas arquivos de imagem são permitidos!"));
+            return;
+        }
+        callback(null, true);
     }
 });
 exports.default = upload;

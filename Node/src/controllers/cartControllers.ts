@@ -5,7 +5,7 @@ import {Response, Request} from "express"
 
 //Carrinho
 export const carrinho = async(req: Request, res: Response): Promise<any> =>{
-    const idUser: number = Number(req.user.id);
+    const idUser: number = Number(req.user?.id);
     const { peca } = req.body;
     if (!idUser || peca === undefined || peca === null){
         return res.status(404).json({erro: "token invalido"});
@@ -27,7 +27,7 @@ export const carrinho = async(req: Request, res: Response): Promise<any> =>{
 
 //Função para consultar o carrinho
 export const itemCarrinho =  async(req: Request, res: Response): Promise<any> =>{
-    const idUser: number = Number(req.user.id);
+    const idUser: number = Number(req.user?.id);
     const {peca} = req.body;
     if (!idUser || peca === undefined || peca === null){
         return res.status(404).json({erro: "token invalido"});
@@ -47,7 +47,7 @@ export const itemCarrinho =  async(req: Request, res: Response): Promise<any> =>
 
 //Função para buscar item no carrinho
 export const buscarCarrinho = async(req: Request, res: Response): Promise<any> =>{
-    const idUser: number = Number(req.user.id);
+    const idUser: number = Number(req.user?.id);
      
     if(!idUser){
         return res.status(404).json({erro: "Token invalido"});
@@ -62,7 +62,7 @@ export const buscarCarrinho = async(req: Request, res: Response): Promise<any> =
 
 //Excluir item no carrinho
 export const excluir = async(req: Request, res: Response): Promise<any> =>{
-    const idUser: number = Number(req.user.id);
+    const idUser: number = Number(req.user?.id);
     const {peca} = req.body;
     
     if(!idUser || idUser === null){
@@ -78,7 +78,7 @@ export const excluir = async(req: Request, res: Response): Promise<any> =>{
 
 //Comprar item no carrinho
 export const comprar = async(req: Request, res: Response): Promise<any> =>{
-    const idUser: number = Number(req.user.id);
+    const idUser: number = Number(req.user?.id);
     
     if(!idUser || idUser === null){
         return res.status(404).json({erro: "Token invalido"});

@@ -23,11 +23,15 @@ import Servico from "../components/servico";
 import Sobre from "../components/sobre";
 import Verificar from "../components/Verificar";
 import OrcamentoCliente from "../components/orcamento";
+import EditarOrcamento from "../components/painelAdmin/editarOrcamento";
+import VerSolicitacao from "../components/painelAdmin/verSolicitacao";
 
 const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
 
+// Árvore central de navegação da aplicação.
 const router = createBrowserRouter(
   [
+    // Páginas públicas com cabeçalho e rodapé.
     {
       element: <Layout />,
       children: [
@@ -56,11 +60,12 @@ const router = createBrowserRouter(
           element: <Carrinho />,
         },
         {
-          path: '/orçamento',
-          element: <OrcamentoCliente/>
+          path: "/orçamento",
+          element: <OrcamentoCliente />,
         },
       ],
     },
+    // Fluxos auxiliares exibidos no layout simplificado.
     {
       element: <LayoutLimpo />,
       children: [
@@ -94,6 +99,7 @@ const router = createBrowserRouter(
         },
       ],
     },
+    // Painel administrativo e suas subseções.
     {
       path: "/admin",
       element: <LayoutAdmin />,
@@ -130,8 +136,17 @@ const router = createBrowserRouter(
           path: "clientes",
           element: <ClientesAdmin />,
         },
+        {
+          path: 'fazerOrcamento/:id',
+          element: <EditarOrcamento/>
+        },
+        {
+          path: 'verSolicitacao/:id',
+          element: <VerSolicitacao/>
+        }
       ],
     },
+    // Redirecionamento para rotas desconhecidas.
     {
       path: "*",
       element: <Navigate to="/" replace />,

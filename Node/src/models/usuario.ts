@@ -6,6 +6,7 @@ interface UsuarioAtributos {
     nome: string;
     email: string;
     telefone: string;
+    endereco: string | null;
     senha: string;
     token: string | null;
     expiracao: Date | null;
@@ -13,13 +14,14 @@ interface UsuarioAtributos {
     role: string;
 }
 
-interface UsuarioCreationAtributos extends Optional<UsuarioAtributos, "token" | "expiracao" | "verificado" | "role" | "id"> {}
+interface UsuarioCreationAtributos extends Optional<UsuarioAtributos, "token" | "expiracao" | "verificado" | "role" | "endereco" | "id"> {}
 
 class Users extends Model<UsuarioAtributos, UsuarioCreationAtributos> implements UsuarioAtributos {
     public id!: number;
     public nome!: string;
     public email!: string;
     public telefone!: string;
+    public endereco!: string | null;
     public senha!: string;
     public token!: string | null;
     public expiracao!: Date | null;
@@ -49,6 +51,11 @@ Users.init({
         validate: {
             len: [10, 11]
         }
+    },
+    endereco: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
     },
     senha: {
         type: DataTypes.STRING,
